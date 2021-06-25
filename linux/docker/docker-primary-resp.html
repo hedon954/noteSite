@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Docker 镜像私有仓库 | Hedon</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/noteSite/assets/css/0.styles.ba40e1a3.css" as="style"><link rel="preload" href="/noteSite/assets/js/app.9e334bd8.js" as="script"><link rel="preload" href="/noteSite/assets/js/2.bb55410c.js" as="script"><link rel="preload" href="/noteSite/assets/js/16.0af6d6ce.js" as="script"><link rel="prefetch" href="/noteSite/assets/js/10.c0cc0c05.js"><link rel="prefetch" href="/noteSite/assets/js/11.5d292eb0.js"><link rel="prefetch" href="/noteSite/assets/js/12.2eb84ae4.js"><link rel="prefetch" href="/noteSite/assets/js/13.b366c6e4.js"><link rel="prefetch" href="/noteSite/assets/js/14.988ed146.js"><link rel="prefetch" href="/noteSite/assets/js/15.e3802c24.js"><link rel="prefetch" href="/noteSite/assets/js/17.6ce42ac1.js"><link rel="prefetch" href="/noteSite/assets/js/18.a418b0e5.js"><link rel="prefetch" href="/noteSite/assets/js/19.a20c686f.js"><link rel="prefetch" href="/noteSite/assets/js/20.a187b156.js"><link rel="prefetch" href="/noteSite/assets/js/21.8e12d7c1.js"><link rel="prefetch" href="/noteSite/assets/js/22.10c3e874.js"><link rel="prefetch" href="/noteSite/assets/js/23.651c93f0.js"><link rel="prefetch" href="/noteSite/assets/js/3.6616c552.js"><link rel="prefetch" href="/noteSite/assets/js/4.fa83c5fa.js"><link rel="prefetch" href="/noteSite/assets/js/5.9c192d2d.js"><link rel="prefetch" href="/noteSite/assets/js/6.744a911e.js"><link rel="prefetch" href="/noteSite/assets/js/7.de41a641.js"><link rel="prefetch" href="/noteSite/assets/js/8.4a56222c.js"><link rel="prefetch" href="/noteSite/assets/js/9.74432f9d.js">
+    <link rel="stylesheet" href="/noteSite/assets/css/0.styles.ba40e1a3.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/noteSite/" class="home-link router-link-active"><img src="/noteSite/images/hedon.png" alt="Hedon" class="logo"> <span class="site-name can-hide">Hedon</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/golang/" class="nav-link">
+  Golang
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link router-link-active">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/java/" class="nav-link">
+  Java
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/language/chinese/" class="nav-link">
+  Chinese
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/language/english.html" class="nav-link">
+  English
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/hedon954" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/golang/" class="nav-link">
+  Golang
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link router-link-active">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/java/" class="nav-link">
+  Java
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/language/chinese/" class="nav-link">
+  Chinese
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/language/english.html" class="nav-link">
+  English
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/hedon954" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>基础</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/linux/shell/shell.html" class="sidebar-link">Shell 脚本</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Docker</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/linux/docker/docker-introduction.html" class="sidebar-link">Docker 介绍</a></li><li><a href="/noteSite/linux/docker/docker-install.html" class="sidebar-link">Docker 安装</a></li><li><a href="/noteSite/linux/docker/docker-image.html" class="sidebar-link">Docker 镜像</a></li><li><a href="/noteSite/linux/docker/docker-container.html" class="sidebar-link">Docker 容器</a></li><li><a href="/noteSite/linux/docker/docker-network.html" class="sidebar-link">Docker 网络</a></li><li><a href="/noteSite/linux/docker/dockerfile.html" class="sidebar-link">Dockerfile</a></li><li><a href="/noteSite/linux/docker/docker-primary-resp.html" aria-current="page" class="active sidebar-link">Docker 镜像私有仓库</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-primary-resp.html#一、registry" class="sidebar-link">一、registry</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-primary-resp.html#_1-仓库搭建" class="sidebar-link">1. 仓库搭建</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-primary-resp.html#_2-上传镜像" class="sidebar-link">2. 上传镜像</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-primary-resp.html#_3-下载镜像" class="sidebar-link">3. 下载镜像</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-primary-resp.html#_4-设置认证" class="sidebar-link">4. 设置认证</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-primary-resp.html#二、harbor" class="sidebar-link">二、harbor</a></li></ul></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Kubernetes</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/linux/k8s/k8s-introduction.html" class="sidebar-link">Kubernetes 简介</a></li><li><a href="/noteSite/linux/k8s/k8s-concept.html" class="sidebar-link">Kubernetes 名词</a></li><li><a href="/noteSite/linux/k8s/k8s-architecture.html" class="sidebar-link">Kubernetes 集群</a></li><li><a href="/noteSite/linux/k8s/k8s-pod.html" class="sidebar-link">Pod</a></li><li><a href="/noteSite/linux/k8s/k8s-deployment.html" class="sidebar-link">Deployment</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="docker-镜像私有仓库"><a href="#docker-镜像私有仓库" class="header-anchor">#</a> Docker 镜像私有仓库</h1> <p>在 Docker 中，当我们执行 <code>docker pull xxx</code> 的时候 ，它实际上是从 <code>hub.docker.com</code> 这个地址去查找，这就是 Docker 公司为我们提供的公共仓库。在工作中，我们不可能把企业项目 push 到公有仓库进行管理。所以为了更好的管理镜像，Docker 不仅提供了一个中央仓库，同时也允许我们搭建本地私有仓库。</p> <p>Docker 容器镜像仓库分类：</p> <ul><li>公网仓库：docker hub</li> <li>私网仓库：registry、harbor</li></ul> <h2 id="一、registry"><a href="#一、registry" class="header-anchor">#</a> 一、registry</h2> <h3 id="_1-仓库搭建"><a href="#_1-仓库搭建" class="header-anchor">#</a> 1. 仓库搭建</h3> <ol><li>拉取 registry 容器镜像</li> <li>创建 registry 仓库容器</li> <li>测试</li></ol> <p><strong>1.1 拉取 registry 容器镜像</strong></p> <div class="language- extra-class"><pre class="language-text"><code>docker pull registry
+</code></pre></div><p><strong>1.2 创建 registry 仓库容器</strong></p> <div class="language- extra-class"><pre class="language-text"><code>1. 创建持久化存储，将容器镜像存储目录 /var/lib/registry 挂载到本地 /opt/myregistry 下：
+
+mkdir /opt/myregistry
+
+2. 创建 registry 容器
+
+docker run -d -p 5000:5000 -v /var/lib/registry:/opt/myregistry --restart=always registry:latest
+
+3. 查看容器是否运行
+
+docker ps
+
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+6b20b55fe6f8        registry:latest     &quot;/entrypoint.sh /etc…&quot;   2 minutes ago       Up 2 minutes        0.0.0.0:5000-&gt;5000/tcp   busy_mclean
+</code></pre></div><p><strong>1.3 测试容器应用</strong></p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# curl http://0.0.0.0:5000/v2/_catalog{&quot;repositories&quot;:[]}
+</code></pre></div><p>显示仓库中没有任何镜像。</p> <h3 id="_2-上传镜像"><a href="#_2-上传镜像" class="header-anchor">#</a> 2. 上传镜像</h3> <ol><li>设置 docker 仓库为 registry 本地仓库</li> <li>给需要存储的镜像打 tag</li> <li>上传镜像到 registry 仓库</li></ol> <p>查看本地镜像：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker images
+REPOSITORY                                      TAG                 IMAGE ID            CREATED             SIZE
+goweb_app                                       latest              62879d6fbd56        26 minutes ago      894 MB
+centos-httpd                                    v1                  2c4280de642e        About an hour ago   209 MB
+docker.io/golang                                latest              b09f7387a719        2 weeks ago         862 MB
+docker.elastic.co/elasticsearch/elasticsearch   7.12.1              41dc8ea0f139        2 months ago        851 MB
+docker.io/registry                              latest              1fd8e1b0bb7e        2 months ago        26.2 MB
+docker.io/centos                                latest              300e315adb2f        6 months ago        209 MB
+</code></pre></div><center>演示：将 **goweb_app** 上传到 registry 仓库</center> <p><strong>2.1 设置 docker 仓库为 registry 本地仓库</strong></p> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> 1. 修改 docker 进程启动文件，修改其启动方式，目的是为了让其通过 docker 配置文件启动</span>
+
+[root@VM-12-10-centos ~]# sed -i.bak '/^ExecStart=/c\ExecStart=\/usr\/bin\/dockerd' /usr/lib/systemd/system/docker.service
+
+<span class="token title important"><span class="token punctuation">#</span> 2. 设置 Docker 守护进程的配置文件 /etc/docker/daemon.json，默认没有该文件</span>
+[root@VM-12-10-centos ~]# cat /etc/docker/daemon.json 
+{
+ &quot;insecure-registries&quot;: [&quot;http://0.0.0.0:5000&quot;]
+}
+insecure-registries 指定非安全的仓库地址，多个用逗号隔开
+
+<span class="token title important"><span class="token punctuation">#</span> 3. 重启docker生效配置文件</span>
+[root@VM-12-10-centos <span class="token strike"><span class="token punctuation">~</span><span class="token content">]# systemctl daemon-reload
+[root@VM-12-10-centos </span><span class="token punctuation">~</span></span>]# systemctl restart docker
+</code></pre></div><p><strong>2.2 给需要存储的镜像打 tag</strong></p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker tag goweb_app:latest 0.0.0.0:5000/goweb_app:v1
+</code></pre></div><p><strong>2.3 上传镜像到 registry 仓库</strong></p> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> 1. 上传镜像docker push 0.0.0.0:5000/goweb_app:v1# 2. 查看上传[root@VM-12-10-centos ~]# curl http://0.0.0.0:5000/v2/_catalog{&quot;repositories&quot;:[&quot;centos_nginx&quot;]}</span>
+</code></pre></div><h3 id="_3-下载镜像"><a href="#_3-下载镜像" class="header-anchor">#</a> 3. 下载镜像</h3> <ol><li>设置 docker 仓库为 registry 本地仓库</li> <li>拉取镜像到本地</li></ol> <p><strong>3.1 设置 docker 仓库为 registry 本地仓库</strong></p> <p>同 2.2</p> <p><strong>3.2 拉取镜像</strong></p> <div class="language- extra-class"><pre class="language-text"><code>docker pull 0.0.0.0:5000/goweb_app:v1
+</code></pre></div><h3 id="_4-设置认证"><a href="#_4-设置认证" class="header-anchor">#</a> 4. 设置认证</h3> <ol><li>安装需要认证的包</li> <li>创建存放认证信息的文件</li> <li>创建认证信息</li> <li>创建带认证的registry容器</li> <li>指定仓库地址</li> <li>登录认证</li></ol> <p><strong>4.1 安装需要认证的包</strong></p> <div class="language- extra-class"><pre class="language-text"><code>yum -y install httpd-tools
+</code></pre></div><p><strong>4.2 创建存放认证信息的文件</strong></p> <div class="language- extra-class"><pre class="language-text"><code>mkdir -p /opt/registry-var/auth
+</code></pre></div><p><strong>4.3 创建认证信息</strong></p> <div class="language- extra-class"><pre class="language-text"><code>htpasswd -Bbn hedon 123456 &gt;&gt; /opt/registry-var/auth/htpasswd
+</code></pre></div><p><strong>4.4 创建带认证的 registry 容器</strong></p> <div class="language- extra-class"><pre class="language-text"><code>docker run -d -p 10000:5000 --restart=always --name registry \
+-v  /opt/registry-var/auth:/auth \
+-v /opt/myregistry:/var/lib/registry \
+-e &quot;REGISTRY_AUTH=htpasswd&quot; \
+-e &quot;REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm&quot; \
+-e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
+registry:latest
+</code></pre></div><p><strong>4.5 指定仓库地址</strong></p> <div class="language- extra-class"><pre class="language-text"><code>cat /etc/docker/daemon.json 
+{
+ &quot;insecure-registries&quot;: [&quot;http://0.0.0.0:5000&quot;,&quot;http://0.0.0.0:10000&quot;]
+}
+</code></pre></div><p><strong>4.6 登录认证</strong></p> <div class="language- extra-class"><pre class="language-text"><code>docker login 0.0.0.0:10000
+Username：hedon
+Password：123456
+</code></pre></div><h2 id="二、harbor"><a href="#二、harbor" class="header-anchor">#</a> 二、harbor</h2> <p>略。</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">6/24/2021, 6:09:13 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/noteSite/linux/docker/dockerfile.html" class="prev">
+        Dockerfile
+      </a></span> <span class="next"><a href="/noteSite/linux/k8s/k8s-introduction.html">
+        Kubernetes 简介
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/noteSite/assets/js/app.9e334bd8.js" defer></script><script src="/noteSite/assets/js/2.bb55410c.js" defer></script><script src="/noteSite/assets/js/16.0af6d6ce.js" defer></script>
+  </body>
+</html>

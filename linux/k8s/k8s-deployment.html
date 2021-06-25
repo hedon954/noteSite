@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Deployment | Hedon</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/noteSite/assets/css/0.styles.ba40e1a3.css" as="style"><link rel="preload" href="/noteSite/assets/js/app.9e334bd8.js" as="script"><link rel="preload" href="/noteSite/assets/js/2.bb55410c.js" as="script"><link rel="preload" href="/noteSite/assets/js/20.a187b156.js" as="script"><link rel="prefetch" href="/noteSite/assets/js/10.c0cc0c05.js"><link rel="prefetch" href="/noteSite/assets/js/11.5d292eb0.js"><link rel="prefetch" href="/noteSite/assets/js/12.2eb84ae4.js"><link rel="prefetch" href="/noteSite/assets/js/13.b366c6e4.js"><link rel="prefetch" href="/noteSite/assets/js/14.988ed146.js"><link rel="prefetch" href="/noteSite/assets/js/15.e3802c24.js"><link rel="prefetch" href="/noteSite/assets/js/16.0af6d6ce.js"><link rel="prefetch" href="/noteSite/assets/js/17.6ce42ac1.js"><link rel="prefetch" href="/noteSite/assets/js/18.a418b0e5.js"><link rel="prefetch" href="/noteSite/assets/js/19.a20c686f.js"><link rel="prefetch" href="/noteSite/assets/js/21.8e12d7c1.js"><link rel="prefetch" href="/noteSite/assets/js/22.10c3e874.js"><link rel="prefetch" href="/noteSite/assets/js/23.651c93f0.js"><link rel="prefetch" href="/noteSite/assets/js/3.6616c552.js"><link rel="prefetch" href="/noteSite/assets/js/4.fa83c5fa.js"><link rel="prefetch" href="/noteSite/assets/js/5.9c192d2d.js"><link rel="prefetch" href="/noteSite/assets/js/6.744a911e.js"><link rel="prefetch" href="/noteSite/assets/js/7.de41a641.js"><link rel="prefetch" href="/noteSite/assets/js/8.4a56222c.js"><link rel="prefetch" href="/noteSite/assets/js/9.74432f9d.js">
+    <link rel="stylesheet" href="/noteSite/assets/css/0.styles.ba40e1a3.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/noteSite/" class="home-link router-link-active"><img src="/noteSite/images/hedon.png" alt="Hedon" class="logo"> <span class="site-name can-hide">Hedon</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/golang/" class="nav-link">
+  Golang
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link router-link-active">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/java/" class="nav-link">
+  Java
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/language/chinese/" class="nav-link">
+  Chinese
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/language/english.html" class="nav-link">
+  English
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/hedon954" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/golang/" class="nav-link">
+  Golang
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link router-link-active">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/java/" class="nav-link">
+  Java
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/language/chinese/" class="nav-link">
+  Chinese
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/language/english.html" class="nav-link">
+  English
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/hedon954" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>基础</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/linux/shell/shell.html" class="sidebar-link">Shell 脚本</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Docker</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/linux/docker/docker-introduction.html" class="sidebar-link">Docker 介绍</a></li><li><a href="/noteSite/linux/docker/docker-install.html" class="sidebar-link">Docker 安装</a></li><li><a href="/noteSite/linux/docker/docker-image.html" class="sidebar-link">Docker 镜像</a></li><li><a href="/noteSite/linux/docker/docker-container.html" class="sidebar-link">Docker 容器</a></li><li><a href="/noteSite/linux/docker/docker-network.html" class="sidebar-link">Docker 网络</a></li><li><a href="/noteSite/linux/docker/dockerfile.html" class="sidebar-link">Dockerfile</a></li><li><a href="/noteSite/linux/docker/docker-primary-resp.html" class="sidebar-link">Docker 镜像私有仓库</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Kubernetes</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/linux/k8s/k8s-introduction.html" class="sidebar-link">Kubernetes 简介</a></li><li><a href="/noteSite/linux/k8s/k8s-concept.html" class="sidebar-link">Kubernetes 名词</a></li><li><a href="/noteSite/linux/k8s/k8s-architecture.html" class="sidebar-link">Kubernetes 集群</a></li><li><a href="/noteSite/linux/k8s/k8s-pod.html" class="sidebar-link">Pod</a></li><li><a href="/noteSite/linux/k8s/k8s-deployment.html" aria-current="page" class="active sidebar-link">Deployment</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/linux/k8s/k8s-deployment.html#一、创建-deployment" class="sidebar-link">一、创建 Deployment</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/k8s/k8s-deployment.html#二、更新-deployment" class="sidebar-link">二、更新 Deployment</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/k8s/k8s-deployment.html#三、回滚-deployment" class="sidebar-link">三、回滚 Deployment</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/k8s/k8s-deployment.html#四、缩放-deployment" class="sidebar-link">四、缩放 Deployment</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/k8s/k8s-deployment.html#五、暂停、恢复-deployment" class="sidebar-link">五、暂停、恢复 Deployment</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/k8s/k8s-deployment.html#六、deployment-状态" class="sidebar-link">六、Deployment 状态</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="deployment"><a href="#deployment" class="header-anchor">#</a> Deployment</h1> <p>一个 <em>Deployment</em> 为 Pod 和 ReplicaSet 提供声明式的更新能力。</p> <p>你负责描述 Deployment 中的 <strong>目标状态</strong>，而 Deployment 控制器（Controller）以受控速率更改实际状态， 使其变为期望状态。你可以定义 Deployment 以创建新的 ReplicaSet，或删除现有 Deployment， 并通过新的 Deployment 收养其资源。</p> <h2 id="一、创建-deployment"><a href="#一、创建-deployment" class="header-anchor">#</a> 一、创建 Deployment</h2> <p>下面是 Deployment 示例。其中创建了一个 ReplicaSet，负责启动三个 <code>nginx</code> Pods：</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>deployment
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">3</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>1.14.2
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+</code></pre></div><p>在该例中：</p> <ul><li><p>创建名为 <code>nginx-deployment</code>（由 <code>.metadata.name</code> 字段标明）的 Deployment。</p></li> <li><p>该 Deployment 创建三个（由 <code>replicas</code> 字段标明）Pod 副本。</p></li> <li><p><code>selector</code> 字段定义 Deployment 如何查找要管理的 Pods。 在这里，你选择在 Pod 模板中定义的标签（<code>app: nginx</code>）。 不过，更复杂的选择规则是也可能的，只要 Pod 模板本身满足所给规则即可。</p> <blockquote><p><strong>说明：</strong></p> <p><code>spec.selector.matchLabels</code> 字段是 <code>{key,value}</code> 键值对映射。 在 <code>matchLabels</code> 映射中的每个 <code>{key,value}</code> 映射等效于 <code>matchExpressions</code> 中的一个元素， 即其 <code>key</code> 字段是 “key”，<code>operator</code> 为 “In”，<code>values</code> 数组仅包含 “value”。 在 <code>matchLabels</code> 和 <code>matchExpressions</code> 中给出的所有条件都必须满足才能匹配。</p></blockquote></li></ul> <p>字段包含以下子字段：</p> <ul><li>Pod 被使用 <code>labels</code> 字段打上 <code>app: nginx</code> 标签。</li> <li>Pod 模板规约（即 <code>.template.spec</code> 字段）指示 Pods 运行一个 <code>nginx</code> 容器， 该容器运行版本为 1.14.2 的 <code>nginx</code> <a href="https://hub.docker.com/" target="_blank" rel="noopener noreferrer">Docker Hub<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>镜像。</li> <li>创建一个容器并使用 <code>name</code> 字段将其命名为 <code>nginx</code>。</li></ul> <p><strong>1. 确保 k8s 已启动</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ kubectl cluster-info
+Kubernetes control plane is running at https://kubernetes.docker.internal:6443
+CoreDNS is running at https://kubernetes.docker.internal:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+</code></pre></div><p>有返回一个链接的话，就说明 k8s 已经启动了。</p> <p><strong>2. 编写上述 yaml 文件，命名为 nginx-deployment.yaml</strong></p> <p><strong>3. 运行以下命令创建 Deployment</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ kubectl apply -f nginx-deployment.yaml
+deployment.apps/nginx-deployment created
+</code></pre></div><p><strong>4. 查看当前拥有的 Deployment</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ kubectl get deployments
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   3/3     3            3           4m
+</code></pre></div><p>在检查集群中的 Deployment 时，所显示的字段有：</p> <ul><li><code>NAME</code> 列出了集群中 Deployment 的名称。</li> <li><code>READY</code> 显示应用程序的可用的 <em>副本</em> 数。显示的模式是“就绪个数/期望个数”。</li> <li><code>UP-TO-DATE</code> 显示为了达到期望状态已经更新的副本数。</li> <li><code>AVAILABLE</code> 显示应用可供用户使用的副本数。</li> <li><code>AGE</code> 显示应用程序运行的时间。</li></ul> <p>请注意期望副本数是根据 <code>.spec.replicas</code> 字段设置 3。</p> <p><strong>5. 查看 Deployment 上线状态</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ kubectl rollout status deployment/nginx-deployment
+deployment &quot;nginx-deployment&quot; successfully rolled out
+</code></pre></div><p><strong>6. 查看由 Deployment 创建的 ReplicaSet</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ deployments % kubectl get rs
+NAME                          DESIRED   CURRENT   READY   AGE
+nginx-deployment-66b6c48dd5   3         3         3       7m29s
+</code></pre></div><p>ReplicaSet 输出中包含以下字段：</p> <ul><li><code>NAME</code> 列出名字空间中 ReplicaSet 的名称；</li> <li><code>DESIRED</code> 显示应用的期望副本个数，即在创建 Deployment 时所定义的值。 此为期望状态；</li> <li><code>CURRENT</code> 显示当前运行状态中的副本个数；</li> <li><code>READY</code> 显示应用中有多少副本可以为用户提供服务；</li> <li><code>AGE</code> 显示应用已经运行的时间长度。</li></ul> <blockquote><p><strong>注意：</strong></p> <p>ReplicaSet 的名称始终被格式化为<code>[Deployment名称]-[随机字符串]</code>。 其中的随机字符串是使用 pod-template-hash 作为种子随机生成的。</p></blockquote> <p><strong>7. 查看每个 Pod 自动生成的标签</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ kubectl get pod --show-labels
+NAME                                READY   STATUS    RESTARTS   AGE     LABELS
+nginx-deployment-66b6c48dd5-98kch   1/1     Running   0          8m24s   app=nginx,pod-template-hash=66b6c48dd5
+nginx-deployment-66b6c48dd5-nzmvs   1/1     Running   0          8m24s   app=nginx,pod-template-hash=66b6c48dd5
+nginx-deployment-66b6c48dd5-wrdt7   1/1     Running   0          8m24s   app=nginx,pod-template-hash=66b6c48dd5
+</code></pre></div><blockquote><p><strong>注意：</strong></p> <p>要避免集群中重复定义 label 。</p></blockquote> <h2 id="二、更新-deployment"><a href="#二、更新-deployment" class="header-anchor">#</a> 二、更新 Deployment</h2> <blockquote><p>仅当 Deployment Pod 模板（即 <code>.spec.template</code>）发生改变时，例如模板的标签或容器镜像被更新， 才会触发 Deployment 上线。 其他更新（如对 Deployment 执行扩缩容的操作）不会触发上线动作。</p></blockquote> <p><strong>1. 更新 nginx Pod 以使用 <code>nginx:1.16.1</code> 镜像，而不是 <code>nginx:1.14.2</code></strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1 --record
+deployment.apps/nginx-deployment image updated
+</code></pre></div><p><strong>2. 查看上线状态</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ kubectl rollout status deployment/nginx-deployment
+deployment &quot;nginx-deployment&quot; successfully rolled out
+</code></pre></div><p><strong>3. 查询 RS 状态</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ deployments % kubectl get rs
+NAME                          DESIRED   CURRENT   READY   AGE
+nginx-deployment-559d658b74   3         3         3       94s
+nginx-deployment-66b6c48dd5   0         0         0       14m
+</code></pre></div><p>可以看到 Deployment 通过创建新的 ReplicaSet 并将其扩容到 3 个副本并将旧 ReplicaSet 缩容到 0 个副本完成了 Pod 的更新操作。</p> <p><strong>4. 查看 Pod 状态</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ deployments % kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-559d658b74-2wvkr   1/1     Running   0          2m15s
+nginx-deployment-559d658b74-4z4dv   1/1     Running   0          109s
+nginx-deployment-559d658b74-j4dm9   1/1     Running   0          105s
+</code></pre></div><p>可以看到只显示新的 Pod。</p> <p>下次要更新这些 Pods 时，只需再次更新 <strong>Deployment Pod 模板</strong>即可。</p> <p>Deployment 可确保在更新时仅关闭一定数量的 Pod。默认情况下，它确保至少所需 Pods <strong>75%</strong> 处于运行状态（最大不可用比例为 25%）。</p> <p>Deployment 还确保仅所创建 Pod 数量只可能比期望 Pods 数高一点点。 默认情况下，它可确保启动的 Pod 个数比期望个数最多多出 25%（最大峰值 25%）。</p> <blockquote><p>例如，如果仔细查看上述 Deployment ，将看到它首先创建了一个新的 Pod，然后删除了一些旧的 Pods， 并创建了新的 Pods。它不会杀死老 Pods，直到有足够的数量新的 Pods 已经出现。 在足够数量的旧 Pods 被杀死前并没有创建新 Pods。它确保至少 2 个 Pod 可用，同时最多总共 4 个 Pod 可用。</p></blockquote> <p><strong>5. 查看 Deployment 的详细信息</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ kubectl describe deployment/nginx-deployment
+Name:                   nginx-deployment
+Namespace:              default
+CreationTimestamp:      Thu, 24 Jun 2021 11:19:19 +0800
+Labels:                 app=nginx
+Annotations:            deployment.kubernetes.io/revision: 2
+                        kubernetes.io/change-cause: kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1 --record=true
+Selector:               app=nginx
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx
+  Containers:
+   nginx:
+    Image:        nginx:1.16.1
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  &lt;none&gt;
+    Mounts:       &lt;none&gt;
+  Volumes:        &lt;none&gt;
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  &lt;none&gt;
+NewReplicaSet:   nginx-deployment-559d658b74 (3/3 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  16m    deployment-controller  Scaled up replica set nginx-deployment-66b6c48dd5 to 3
+  Normal  ScalingReplicaSet  3m57s  deployment-controller  Scaled up replica set nginx-deployment-559d658b74 to 1
+  Normal  ScalingReplicaSet  3m31s  deployment-controller  Scaled down replica set nginx-deployment-66b6c48dd5 to 2
+  Normal  ScalingReplicaSet  3m31s  deployment-controller  Scaled up replica set nginx-deployment-559d658b74 to 2
+  Normal  ScalingReplicaSet  3m27s  deployment-controller  Scaled down replica set nginx-deployment-66b6c48dd5 to 1
+  Normal  ScalingReplicaSet  3m27s  deployment-controller  Scaled up replica set nginx-deployment-559d658b74 to 3
+  Normal  ScalingReplicaSet  3m22s  deployment-controller  Scaled down replica set nginx-deployment-66b6c48dd5 to 0
+</code></pre></div><h2 id="三、回滚-deployment"><a href="#三、回滚-deployment" class="header-anchor">#</a> 三、回滚 Deployment</h2> <blockquote><p>Deployment 被触发上线时，系统就会创建 Deployment 的新的修订版本。</p> <p>这意味着仅当 Deployment 的 Pod 模板（<code>.spec.template</code>）发生更改时，才会创建新修订版本 -- 例如，模板的标签或容器镜像发生变化。</p> <p>其他更新，如 Deployment 的扩缩容操作不会创建 Deployment 修订版本。</p> <p>这是为了方便同时执行手动缩放或自动缩放。</p> <p>换言之，当你回滚到较早的修订版本时，<strong>只有 Deployment 的 Pod 模板部分会被回滚</strong>。</p></blockquote> <p><strong>1. 故意错设 nginx 版本为 1.161</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ deployments % kubectl set image deployment/nginx-deployment nginx=nginx:1.161 --record
+deployment.apps/nginx-deployment image updated
+</code></pre></div><p><strong>2. 查看上线状态</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ deployments % kubectl rollout status deployment/nginx-deployment
+Waiting for deployment &quot;nginx-deployment&quot; rollout to finish: 1 out of 3 new replicas have been updated...
+</code></pre></div><p>此时会发现上线进程一直处于停滞状态。按 <code>Command + C</code> 退出。</p> <p><strong>3. 查看 RS 状态</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ deployments % kubectl get rs
+NAME                          DESIRED   CURRENT   READY   AGE
+nginx-deployment-559d658b74   3         3         3       27m
+nginx-deployment-66b6c48dd5   0         0         0       40m
+nginx-deployment-66bc5d6c8    1         1         0       107s
+</code></pre></div><p>可以看到旧的副本有两个（<code>nginx-deployment-1564180365</code> 和 <code>nginx-deployment-2035384211</code>）， 新的副本有 1 个（<code>nginx-deployment-3066724191</code>）。</p> <p><strong>4. 查看 Pod 状态</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ deployments % kubectl get pods
+NAME                                READY   STATUS         RESTARTS   AGE
+nginx-deployment-559d658b74-2wvkr   1/1     Running        0          28m
+nginx-deployment-559d658b74-4z4dv   1/1     Running        0          27m
+nginx-deployment-559d658b74-j4dm9   1/1     Running        0          27m
+nginx-deployment-66bc5d6c8-d94kw    0/1     ErrImagePull   0          2m31s
+</code></pre></div><p>可以注意到新 ReplicaSet 所创建的 1 个 Pod 卡顿在镜像拉取循环中。</p> <blockquote><p>Deployment 控制器自动停止有问题的上线过程，并停止对新的 ReplicaSet 扩容。 这行为取决于所指定的 rollingUpdate 参数（具体为 <code>maxUnavailable</code>）。 默认情况下，Kubernetes 将此值设置为 25%。</p></blockquote> <p><strong>5. 查看 Deployment 详细信息</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ deployments % kubectl describe deployment/nginx-deployment
+Name:                   nginx-deployment
+Namespace:              default
+CreationTimestamp:      Thu, 24 Jun 2021 11:19:19 +0800
+Labels:                 app=nginx
+Annotations:            deployment.kubernetes.io/revision: 3
+                        kubernetes.io/change-cause: kubectl set image deployment/nginx-deployment nginx=nginx:1.161 --record=true
+Selector:               app=nginx
+Replicas:               3 desired | 1 updated | 4 total | 3 available | 1 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx
+  Containers:
+   nginx:
+    Image:        nginx:1.161
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  &lt;none&gt;
+    Mounts:       &lt;none&gt;
+  Volumes:        &lt;none&gt;
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    ReplicaSetUpdated
+OldReplicaSets:  nginx-deployment-559d658b74 (3/3 replicas created)
+NewReplicaSet:   nginx-deployment-66bc5d6c8 (1/1 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  41m    deployment-controller  Scaled up replica set nginx-deployment-66b6c48dd5 to 3
+  Normal  ScalingReplicaSet  28m    deployment-controller  Scaled up replica set nginx-deployment-559d658b74 to 1
+  Normal  ScalingReplicaSet  28m    deployment-controller  Scaled down replica set nginx-deployment-66b6c48dd5 to 2
+  Normal  ScalingReplicaSet  28m    deployment-controller  Scaled up replica set nginx-deployment-559d658b74 to 2
+  Normal  ScalingReplicaSet  28m    deployment-controller  Scaled down replica set nginx-deployment-66b6c48dd5 to 1
+  Normal  ScalingReplicaSet  28m    deployment-controller  Scaled up replica set nginx-deployment-559d658b74 to 3
+  Normal  ScalingReplicaSet  28m    deployment-controller  Scaled down replica set nginx-deployment-66b6c48dd5 to 0
+  Normal  ScalingReplicaSet  3m22s  deployment-controller  Scaled up replica set nginx-deployment-66bc5d6c8 to 1
+</code></pre></div><p>可以看到有一个 unavailable 的 ReplicaSet。下面来进行回滚。</p> <p><strong>6. 检查 Deployment 上线历史</strong></p> <div class="language- extra-class"><pre class="language-text"><code>$ deployments % kubectl rollout history deployment/nginx-deployment
+deployment.apps/nginx-deployment
+REVISION  CHANGE-CAUSE
+1         &lt;none&gt;
+2         kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1 --record=true
+3         kubectl set image deployment/nginx-deployment nginx=nginx:1.161 --record=true
+</code></pre></div><h2 id="四、缩放-deployment"><a href="#四、缩放-deployment" class="header-anchor">#</a> 四、缩放 Deployment</h2> <h2 id="五、暂停、恢复-deployment"><a href="#五、暂停、恢复-deployment" class="header-anchor">#</a> 五、暂停、恢复 Deployment</h2> <h2 id="六、deployment-状态"><a href="#六、deployment-状态" class="header-anchor">#</a> 六、Deployment 状态</h2></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">6/24/2021, 6:26:53 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/noteSite/linux/k8s/k8s-pod.html" class="prev">
+        Pod
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/noteSite/assets/js/app.9e334bd8.js" defer></script><script src="/noteSite/assets/js/2.bb55410c.js" defer></script><script src="/noteSite/assets/js/20.a187b156.js" defer></script>
+  </body>
+</html>

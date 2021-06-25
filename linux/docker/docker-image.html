@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Docker 镜像 | Hedon</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/noteSite/assets/css/0.styles.ba40e1a3.css" as="style"><link rel="preload" href="/noteSite/assets/js/app.9e334bd8.js" as="script"><link rel="preload" href="/noteSite/assets/js/2.bb55410c.js" as="script"><link rel="preload" href="/noteSite/assets/js/12.2eb84ae4.js" as="script"><link rel="prefetch" href="/noteSite/assets/js/10.c0cc0c05.js"><link rel="prefetch" href="/noteSite/assets/js/11.5d292eb0.js"><link rel="prefetch" href="/noteSite/assets/js/13.b366c6e4.js"><link rel="prefetch" href="/noteSite/assets/js/14.988ed146.js"><link rel="prefetch" href="/noteSite/assets/js/15.e3802c24.js"><link rel="prefetch" href="/noteSite/assets/js/16.0af6d6ce.js"><link rel="prefetch" href="/noteSite/assets/js/17.6ce42ac1.js"><link rel="prefetch" href="/noteSite/assets/js/18.a418b0e5.js"><link rel="prefetch" href="/noteSite/assets/js/19.a20c686f.js"><link rel="prefetch" href="/noteSite/assets/js/20.a187b156.js"><link rel="prefetch" href="/noteSite/assets/js/21.8e12d7c1.js"><link rel="prefetch" href="/noteSite/assets/js/22.10c3e874.js"><link rel="prefetch" href="/noteSite/assets/js/23.651c93f0.js"><link rel="prefetch" href="/noteSite/assets/js/3.6616c552.js"><link rel="prefetch" href="/noteSite/assets/js/4.fa83c5fa.js"><link rel="prefetch" href="/noteSite/assets/js/5.9c192d2d.js"><link rel="prefetch" href="/noteSite/assets/js/6.744a911e.js"><link rel="prefetch" href="/noteSite/assets/js/7.de41a641.js"><link rel="prefetch" href="/noteSite/assets/js/8.4a56222c.js"><link rel="prefetch" href="/noteSite/assets/js/9.74432f9d.js">
+    <link rel="stylesheet" href="/noteSite/assets/css/0.styles.ba40e1a3.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/noteSite/" class="home-link router-link-active"><img src="/noteSite/images/hedon.png" alt="Hedon" class="logo"> <span class="site-name can-hide">Hedon</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/golang/" class="nav-link">
+  Golang
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link router-link-active">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/java/" class="nav-link">
+  Java
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/language/chinese/" class="nav-link">
+  Chinese
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/language/english.html" class="nav-link">
+  English
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/hedon954" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/golang/" class="nav-link">
+  Golang
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link router-link-active">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/java/" class="nav-link">
+  Java
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/language/chinese/" class="nav-link">
+  Chinese
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/language/english.html" class="nav-link">
+  English
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/hedon954" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>基础</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/linux/shell/shell.html" class="sidebar-link">Shell 脚本</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Docker</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/linux/docker/docker-introduction.html" class="sidebar-link">Docker 介绍</a></li><li><a href="/noteSite/linux/docker/docker-install.html" class="sidebar-link">Docker 安装</a></li><li><a href="/noteSite/linux/docker/docker-image.html" aria-current="page" class="active sidebar-link">Docker 镜像</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-image.html#_1-镜像拉取" class="sidebar-link">1. 镜像拉取</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-image.html#_2-查看镜像" class="sidebar-link">2. 查看镜像</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-image.html#_3-镜像搜索" class="sidebar-link">3. 镜像搜索</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-image.html#_4-删除镜像" class="sidebar-link">4. 删除镜像</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-image.html#_5-查看镜像详细信息" class="sidebar-link">5. 查看镜像详细信息</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-image.html#_6-保存镜像" class="sidebar-link">6. 保存镜像</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-image.html#_7-载入镜像" class="sidebar-link">7. 载入镜像</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-image.html#_8-查看镜像大小" class="sidebar-link">8. 查看镜像大小</a></li></ul></li><li><a href="/noteSite/linux/docker/docker-container.html" class="sidebar-link">Docker 容器</a></li><li><a href="/noteSite/linux/docker/docker-network.html" class="sidebar-link">Docker 网络</a></li><li><a href="/noteSite/linux/docker/dockerfile.html" class="sidebar-link">Dockerfile</a></li><li><a href="/noteSite/linux/docker/docker-primary-resp.html" class="sidebar-link">Docker 镜像私有仓库</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Kubernetes</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/linux/k8s/k8s-introduction.html" class="sidebar-link">Kubernetes 简介</a></li><li><a href="/noteSite/linux/k8s/k8s-concept.html" class="sidebar-link">Kubernetes 名词</a></li><li><a href="/noteSite/linux/k8s/k8s-architecture.html" class="sidebar-link">Kubernetes 集群</a></li><li><a href="/noteSite/linux/k8s/k8s-pod.html" class="sidebar-link">Pod</a></li><li><a href="/noteSite/linux/k8s/k8s-deployment.html" class="sidebar-link">Deployment</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="docker-镜像"><a href="#docker-镜像" class="header-anchor">#</a> Docker 镜像</h1> <h2 id="_1-镜像拉取"><a href="#_1-镜像拉取" class="header-anchor">#</a> 1. 镜像拉取</h2> <div class="language- extra-class"><pre class="language-text"><code>docker pull 镜像名称:镜像版本
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker pull centos
+Using default tag: latest
+Trying to pull repository docker.io/library/centos ... 
+latest: Pulling from docker.io/library/centos
+7a0437f04f83: Pull complete 
+Digest: sha256:5528e8b1b1719d34604c87e11dcd1c0a20bedf46e83b5632cdeac91b8c04efc1
+Status: Downloaded newer image for docker.io/centos:latest
+</code></pre></div><h2 id="_2-查看镜像"><a href="#_2-查看镜像" class="header-anchor">#</a> 2. 查看镜像</h2> <div class="language- extra-class"><pre class="language-text"><code>docker images
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker images
+REPOSITORY                 TAG                 IMAGE ID            CREATED             SIZE
+elasticsearch              7.12.1              41dc8ea0f139        2 months ago        851 MB
+docker.io/centos           latest              300e315adb2f        6 months ago        209 MB
+</code></pre></div><h2 id="_3-镜像搜索"><a href="#_3-镜像搜索" class="header-anchor">#</a> 3. 镜像搜索</h2> <div class="language- extra-class"><pre class="language-text"><code>docker search 镜像名
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker search nginx
+INDEX       NAME                                 DESCRIPTION    STARS     OFFICIAL   AUTOMATED
+docker.io   docker.io/nginx                      Official...    15034      [OK]       
+docker.io   docker.io/jwilder/nginx-proxy        Automated...   2038                 [OK]
+docker.io   docker.io/richarvey/nginx-php-fpm    Container...   814                  [OK]
+.....
+.....
+.....
+</code></pre></div><h2 id="_4-删除镜像"><a href="#_4-删除镜像" class="header-anchor">#</a> 4. 删除镜像</h2> <div class="language- extra-class"><pre class="language-text"><code>docker rmi 镜像名称或 ID
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker rmi docker.io/nginx
+Untagged: docker.io/nginx:latest
+Untagged: docker.io/nginx@sha256:6d75c99af15565a301e48297fa2d121e15d80ad526f8369c526324f0f7ccb750
+Deleted: sha256:d1a364dc548d5357f0da3268c888e1971bbdb957ee3f028fe7194f1d61c6fdee
+Deleted: sha256:fcc8faba78fe8a1f75025781c8fa1841079b75b54fce8408d039f73a48b7a81b
+Deleted: sha256:a476b265974ace4c857e3d88b358e848f126297a8249840c72d5f5ea1954a4bf
+Deleted: sha256:56722ee1ee7e73a5c6f96ea2959fa442fb4db9f044399bcd939bb0a6eb7919dc
+Deleted: sha256:c657df997c75f6c1a9c5cc683e8e34c6f29e5b4c1dee60b632d3477fd5fdd644
+Deleted: sha256:e9e1f772d2a8dbbeb6a4a4dcb4f0d07ff1c432bf94fac7a2db2216837bf9ec5b
+Deleted: sha256:02c055ef67f5904019f43a41ea5f099996d8e7633749b6e606c400526b2c4b33
+</code></pre></div><h2 id="_5-查看镜像详细信息"><a href="#_5-查看镜像详细信息" class="header-anchor">#</a> 5. 查看镜像详细信息</h2> <div class="language- extra-class"><pre class="language-text"><code>docker inspect 镜像名称或 ID
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker inspect docker.io/centos
+[
+    {
+        &quot;Id&quot;: &quot;sha256:300e315adb2f96afe5f0b2780b87f28ae95231fe3bdd1e16b9ba606307728f55&quot;,
+        &quot;RepoTags&quot;: [
+            &quot;docker.io/centos:latest&quot;
+        ],
+        &quot;RepoDigests&quot;: [
+            &quot;docker.io/centos@sha256:5528e8b1b1719d34604c87e11dcd1c0a20bedf46e83b5632cdeac91b8c04efc1&quot;
+        ],
+        &quot;Parent&quot;: &quot;&quot;,
+        &quot;Comment&quot;: &quot;&quot;,
+        &quot;Created&quot;: &quot;2020-12-08T00:22:53.076477777Z&quot;,
+        &quot;Container&quot;: &quot;395e0bfa7301f73bc994efe15099ea56b8836c608dd32614ac5ae279976d33e4&quot;,
+        &quot;ContainerConfig&quot;: {
+            &quot;Hostname&quot;: &quot;395e0bfa7301&quot;,
+            &quot;Domainname&quot;: &quot;&quot;,
+            &quot;User&quot;: &quot;&quot;,
+            &quot;AttachStdin&quot;: false,
+            &quot;AttachStdout&quot;: false,
+            &quot;AttachStderr&quot;: false,
+            &quot;Tty&quot;: false,
+            &quot;OpenStdin&quot;: false,
+            &quot;StdinOnce&quot;: false,
+            &quot;Env&quot;: [
+                &quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;
+            ],
+            &quot;Cmd&quot;: [
+                &quot;/bin/sh&quot;,
+                &quot;-c&quot;,
+                &quot;#(nop) &quot;,
+                &quot;CMD [\&quot;/bin/bash\&quot;]&quot;
+            ],
+            &quot;Image&quot;: &quot;sha256:6de05bdfbf9a9d403458d10de9e088b6d93d971dd5d48d18b4b6758f4554f451&quot;,
+            &quot;Volumes&quot;: null,
+            &quot;WorkingDir&quot;: &quot;&quot;,
+            &quot;Entrypoint&quot;: null,
+            &quot;OnBuild&quot;: null,
+            &quot;Labels&quot;: {
+                &quot;org.label-schema.build-date&quot;: &quot;20201204&quot;,
+                &quot;org.label-schema.license&quot;: &quot;GPLv2&quot;,
+                &quot;org.label-schema.name&quot;: &quot;CentOS Base Image&quot;,
+                &quot;org.label-schema.schema-version&quot;: &quot;1.0&quot;,
+                &quot;org.label-schema.vendor&quot;: &quot;CentOS&quot;
+            }
+        },
+        &quot;DockerVersion&quot;: &quot;19.03.12&quot;,
+        &quot;Author&quot;: &quot;&quot;,
+        &quot;Config&quot;: {
+            &quot;Hostname&quot;: &quot;&quot;,
+            &quot;Domainname&quot;: &quot;&quot;,
+            &quot;User&quot;: &quot;&quot;,
+            &quot;AttachStdin&quot;: false,
+            &quot;AttachStdout&quot;: false,
+            &quot;AttachStderr&quot;: false,
+            &quot;Tty&quot;: false,
+            &quot;OpenStdin&quot;: false,
+            &quot;StdinOnce&quot;: false,
+            &quot;Env&quot;: [
+                &quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;
+            ],
+            &quot;Cmd&quot;: [
+                &quot;/bin/bash&quot;
+            ],
+            &quot;Image&quot;: &quot;sha256:6de05bdfbf9a9d403458d10de9e088b6d93d971dd5d48d18b4b6758f4554f451&quot;,
+            &quot;Volumes&quot;: null,
+            &quot;WorkingDir&quot;: &quot;&quot;,
+            &quot;Entrypoint&quot;: null,
+            &quot;OnBuild&quot;: null,
+            &quot;Labels&quot;: {
+                &quot;org.label-schema.build-date&quot;: &quot;20201204&quot;,
+                &quot;org.label-schema.license&quot;: &quot;GPLv2&quot;,
+                &quot;org.label-schema.name&quot;: &quot;CentOS Base Image&quot;,
+                &quot;org.label-schema.schema-version&quot;: &quot;1.0&quot;,
+                &quot;org.label-schema.vendor&quot;: &quot;CentOS&quot;
+            }
+        },
+        &quot;Architecture&quot;: &quot;amd64&quot;,
+        &quot;Os&quot;: &quot;linux&quot;,
+        &quot;Size&quot;: 209348104,
+        &quot;VirtualSize&quot;: 209348104,
+        &quot;GraphDriver&quot;: {
+            &quot;Name&quot;: &quot;overlay2&quot;,
+            &quot;Data&quot;: {
+                &quot;MergedDir&quot;: &quot;/var/lib/docker/overlay2/300b2801244e5593bb0ab3091b0f897d4854890afe9664230dec50bd425e5bac/merged&quot;,
+                &quot;UpperDir&quot;: &quot;/var/lib/docker/overlay2/300b2801244e5593bb0ab3091b0f897d4854890afe9664230dec50bd425e5bac/diff&quot;,
+                &quot;WorkDir&quot;: &quot;/var/lib/docker/overlay2/300b2801244e5593bb0ab3091b0f897d4854890afe9664230dec50bd425e5bac/work&quot;
+            }
+        },
+        &quot;RootFS&quot;: {
+            &quot;Type&quot;: &quot;layers&quot;,
+            &quot;Layers&quot;: [
+                &quot;sha256:2653d992f4ef2bfd27f94db643815aa567240c37732cae1405ad1c1309ee9859&quot;
+            ]
+        }
+    }
+]
+</code></pre></div><h2 id="_6-保存镜像"><a href="#_6-保存镜像" class="header-anchor">#</a> 6. 保存镜像</h2> <p>保存镜像为压缩文件。</p> <div class="language- extra-class"><pre class="language-text"><code>docker save -o 生成的压缩文件名 镜像名称或 ID
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker save -o centos.base.tar docker.io/centos 
+[root@VM-12-10-centos ~]# ll
+-rw-------  1 root       root       216535040 Jun 21 10:58 centos.base.tar
+</code></pre></div><h2 id="_7-载入镜像"><a href="#_7-载入镜像" class="header-anchor">#</a> 7. 载入镜像</h2> <p>从压缩文件载入镜像。</p> <div class="language- extra-class"><pre class="language-text"><code>docker load -i 镜像压缩文件名称 镜像名称或 ID
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker load -i centos.base.tar
+Loaded image: docker.io/centos:latest
+</code></pre></div><h2 id="_8-查看镜像大小"><a href="#_8-查看镜像大小" class="header-anchor">#</a> 8. 查看镜像大小</h2> <div class="language- extra-class"><pre class="language-text"><code>docker system df
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker system df
+TYPE                TOTAL               ACTIVE              SIZE                RECLAIMABLE
+Images              2                   1                   850.9 MB            209.3 MB (24%)
+Containers          8                   0                   10.29 MB            10.29 MB (100%)
+Local Volumes       0                   0                   0 B                 0 B
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">6/24/2021, 6:09:13 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/noteSite/linux/docker/docker-install.html" class="prev">
+        Docker 安装
+      </a></span> <span class="next"><a href="/noteSite/linux/docker/docker-container.html">
+        Docker 容器
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/noteSite/assets/js/app.9e334bd8.js" defer></script><script src="/noteSite/assets/js/2.bb55410c.js" defer></script><script src="/noteSite/assets/js/12.2eb84ae4.js" defer></script>
+  </body>
+</html>
