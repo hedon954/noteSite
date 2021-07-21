@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Golang 关键字 type | Hedon</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/noteSite/assets/css/0.styles.0f3b0cbd.css" as="style"><link rel="preload" href="/noteSite/assets/js/app.7bac3382.js" as="script"><link rel="preload" href="/noteSite/assets/js/2.0f8877a4.js" as="script"><link rel="preload" href="/noteSite/assets/js/22.e50be3ee.js" as="script"><link rel="prefetch" href="/noteSite/assets/js/10.a0ab1061.js"><link rel="prefetch" href="/noteSite/assets/js/11.bf2971d6.js"><link rel="prefetch" href="/noteSite/assets/js/12.69fc4da8.js"><link rel="prefetch" href="/noteSite/assets/js/13.d318eeb8.js"><link rel="prefetch" href="/noteSite/assets/js/14.237ed75a.js"><link rel="prefetch" href="/noteSite/assets/js/15.9c6e0227.js"><link rel="prefetch" href="/noteSite/assets/js/16.0aa719b0.js"><link rel="prefetch" href="/noteSite/assets/js/17.16eaaa7d.js"><link rel="prefetch" href="/noteSite/assets/js/18.b15e54ff.js"><link rel="prefetch" href="/noteSite/assets/js/19.99246840.js"><link rel="prefetch" href="/noteSite/assets/js/20.d2b080d1.js"><link rel="prefetch" href="/noteSite/assets/js/21.1a641b96.js"><link rel="prefetch" href="/noteSite/assets/js/23.53b19aa2.js"><link rel="prefetch" href="/noteSite/assets/js/24.34056e2a.js"><link rel="prefetch" href="/noteSite/assets/js/25.9aa3967d.js"><link rel="prefetch" href="/noteSite/assets/js/26.81b0d1ed.js"><link rel="prefetch" href="/noteSite/assets/js/27.17762212.js"><link rel="prefetch" href="/noteSite/assets/js/28.321f403f.js"><link rel="prefetch" href="/noteSite/assets/js/29.b1db98e6.js"><link rel="prefetch" href="/noteSite/assets/js/3.0492e548.js"><link rel="prefetch" href="/noteSite/assets/js/30.0b51f906.js"><link rel="prefetch" href="/noteSite/assets/js/31.113dbeef.js"><link rel="prefetch" href="/noteSite/assets/js/32.f606d7fd.js"><link rel="prefetch" href="/noteSite/assets/js/33.fcbd851c.js"><link rel="prefetch" href="/noteSite/assets/js/34.1f7b6883.js"><link rel="prefetch" href="/noteSite/assets/js/35.a25552e7.js"><link rel="prefetch" href="/noteSite/assets/js/36.3bd1b8c4.js"><link rel="prefetch" href="/noteSite/assets/js/37.b7aa0153.js"><link rel="prefetch" href="/noteSite/assets/js/38.a6cd78cc.js"><link rel="prefetch" href="/noteSite/assets/js/39.fe3ffacc.js"><link rel="prefetch" href="/noteSite/assets/js/4.a61e4cea.js"><link rel="prefetch" href="/noteSite/assets/js/40.11c50347.js"><link rel="prefetch" href="/noteSite/assets/js/41.4f83e56c.js"><link rel="prefetch" href="/noteSite/assets/js/42.d4703cdb.js"><link rel="prefetch" href="/noteSite/assets/js/43.32b753af.js"><link rel="prefetch" href="/noteSite/assets/js/44.8939c15e.js"><link rel="prefetch" href="/noteSite/assets/js/45.9b8c24c4.js"><link rel="prefetch" href="/noteSite/assets/js/46.fddc1d38.js"><link rel="prefetch" href="/noteSite/assets/js/47.e5f6f12f.js"><link rel="prefetch" href="/noteSite/assets/js/48.01d77de9.js"><link rel="prefetch" href="/noteSite/assets/js/49.94366f13.js"><link rel="prefetch" href="/noteSite/assets/js/5.2bccd6df.js"><link rel="prefetch" href="/noteSite/assets/js/50.0a5b1ecb.js"><link rel="prefetch" href="/noteSite/assets/js/51.0ffac392.js"><link rel="prefetch" href="/noteSite/assets/js/52.eedde70c.js"><link rel="prefetch" href="/noteSite/assets/js/53.92d7665d.js"><link rel="prefetch" href="/noteSite/assets/js/54.dbb72027.js"><link rel="prefetch" href="/noteSite/assets/js/55.ddd4434b.js"><link rel="prefetch" href="/noteSite/assets/js/56.ae768fe5.js"><link rel="prefetch" href="/noteSite/assets/js/57.58efc6e0.js"><link rel="prefetch" href="/noteSite/assets/js/58.420f54c3.js"><link rel="prefetch" href="/noteSite/assets/js/59.227201d1.js"><link rel="prefetch" href="/noteSite/assets/js/6.f3d86aa7.js"><link rel="prefetch" href="/noteSite/assets/js/60.ae37c79b.js"><link rel="prefetch" href="/noteSite/assets/js/61.2f0a54d5.js"><link rel="prefetch" href="/noteSite/assets/js/62.d02f5a89.js"><link rel="prefetch" href="/noteSite/assets/js/63.8dbee8dd.js"><link rel="prefetch" href="/noteSite/assets/js/64.f9ef0459.js"><link rel="prefetch" href="/noteSite/assets/js/65.b2f1036c.js"><link rel="prefetch" href="/noteSite/assets/js/66.b0d965ff.js"><link rel="prefetch" href="/noteSite/assets/js/67.8c4e0be7.js"><link rel="prefetch" href="/noteSite/assets/js/7.80f82a7b.js"><link rel="prefetch" href="/noteSite/assets/js/8.0a69b61b.js"><link rel="prefetch" href="/noteSite/assets/js/9.e0258bbc.js">
+    <link rel="stylesheet" href="/noteSite/assets/css/0.styles.0f3b0cbd.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/noteSite/" class="home-link router-link-active"><img src="/noteSite/images/hedon.png" alt="Hedon" class="logo"> <span class="site-name can-hide">Hedon</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link router-link-active">
+  Golang
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link router-link-active">
+  Golang
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>入门</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/backend/golang/01_intro/go_intro.html" class="sidebar-link">Golang 入门简介</a></li><li><a href="/noteSite/backend/golang/01_intro/go_first.html" class="sidebar-link">Golang 入门程序</a></li><li><a href="/noteSite/backend/golang/01_intro/go_cmd.html" class="sidebar-link">go 命令</a></li><li><a href="/noteSite/backend/golang/01_intro/go_modules.html" class="sidebar-link">Go modules</a></li><li><a href="/noteSite/backend/golang/01_intro/go_spec.html" class="sidebar-link">Golang 编码规范</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>基础</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>进阶</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>标准库</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>常用技巧</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="golang-关键字-type"><a href="#golang-关键字-type" class="header-anchor">#</a> Golang 关键字 type</h1> <p>type 是 Go 语法里的重要而且常用的关键字，type 绝不只是对应于 C/C++ 中的 typedef。搞清楚 type 的使用，就容易理解 Go 语言中的核心概念 struct、interface、函数等的使用。</p> <h2 id="一、golang-类型定义"><a href="#一、golang-类型定义" class="header-anchor">#</a> 一、Golang 类型定义</h2> <h3 id="_1-定义结构体"><a href="#_1-定义结构体" class="header-anchor">#</a> 1. 定义结构体</h3> <p>使用 type 可以定义结构体类型：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// 定义结构体</span>
+<span class="token keyword">type</span> person <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+   name <span class="token builtin">string</span> <span class="token comment">// 注意后面不能有逗号</span>
+   age  <span class="token builtin">int</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_2-定义接口"><a href="#_2-定义接口" class="header-anchor">#</a> 2. 定义接口</h3> <p>使用 type 可以定义接口类型：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// 定义接口</span>
+<span class="token keyword">type</span> USB <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+    <span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_3-定义函数"><a href="#_3-定义函数" class="header-anchor">#</a> 3. 定义函数</h3> <p>Go 语言支持函数式编程，可以使用高阶编程语法。一个函数可以作为另一个函数的参数，也可以作为另一个函数的返回值，那么在定义这个高阶函数的时候，如果函数的类型比较复杂，我们可以使用 type 来定义这个函数的类型：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;strconv&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     res1 <span class="token operator">:=</span> <span class="token function">fun1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">res1</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 定义函数</span>
+<span class="token keyword">type</span> my_fun  <span class="token keyword">func</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+
+<span class="token comment">// fun1() 函数的返回值是 my_fun 类型</span>
+<span class="token keyword">func</span> fun1 <span class="token punctuation">(</span><span class="token punctuation">)</span> my_fun<span class="token punctuation">{</span>
+    fun <span class="token operator">:=</span> <span class="token keyword">func</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+        s <span class="token operator">:=</span> strconv<span class="token punctuation">.</span><span class="token function">Itoa</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">+</span> strconv<span class="token punctuation">.</span><span class="token function">Itoa</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> s
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> fun
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="二、golang-类型别名"><a href="#二、golang-类型别名" class="header-anchor">#</a> 二、Golang 类型别名</h2> <p>类型别名的写法为：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">type</span> TypeAlias <span class="token operator">=</span> Type
+</code></pre></div><p>类型别名规定：<strong>TypeAlias 只是 Type 的别名，本质上 TypeAlias 与 Type 是同一个类型</strong>。就像一个孩子小时候有小名、乳名，上学后用学名，英语老师又会给他起英文名，但这些名字都指的是他本人。</p> <p>类型别名是 Go 1.9 版本添加的新功能。主要用于代码升级、迁移中类型的兼容性问题。在 C/C++语言中，代码重构升级可以使用宏快速定义新的一段代码。Go 语言中没有选择加入宏，而是将解决重构中最麻烦的类型名变更问题。</p> <p>在 <font color="orange">Go 1.9</font> 版本之前的内建类型定义的代码是这样写的：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">type</span> <span class="token builtin">byte</span> <span class="token builtin">uint8</span>
+<span class="token keyword">type</span> <span class="token builtin">rune</span> <span class="token builtin">int32</span>
+</code></pre></div><p>而在 <font color="orange">Go 1.9</font> 版本之后变为：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">type</span> <span class="token builtin">byte</span> <span class="token operator">=</span> <span class="token builtin">uint8</span>
+<span class="token keyword">type</span> <span class="token builtin">rune</span> <span class="token operator">=</span> <span class="token builtin">int32</span>
+</code></pre></div><p>这个修改就是配合类型别名而进行的修改。</p> <p>示例：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">var</span> i1 myint
+    <span class="token keyword">var</span> i2 <span class="token operator">=</span> <span class="token number">100</span>
+    i1 <span class="token operator">=</span> <span class="token number">100</span>
+    i1 <span class="token operator">=</span> i2  <span class="token comment">//错误用法，虽然 i1 和 i2 本质上都是 int，但是它们的显式类型的不一样的，不能互相赋值</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">type</span> myint <span class="token builtin">int</span>		<span class="token comment">// 定义新类型 myint</span>
+<span class="token keyword">type</span> myint2 <span class="token operator">=</span> <span class="token builtin">int</span> <span class="token comment">// 不是重新定义类型，只是给 int 起别名</span>
+</code></pre></div><blockquote><p><strong>注意：非自定义类型不能定义方法</strong></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// 定义 time.Duration 的别名为 MyDuration</span>
+<span class="token keyword">type</span> MyDuration <span class="token operator">=</span> time<span class="token punctuation">.</span>Duration
+<span class="token comment">// 为 MyDuration 添加一个函数</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>m MyDuration<span class="token punctuation">)</span> <span class="token function">EasySet</span><span class="token punctuation">(</span>a <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">//cannot define new methods on non-local type time.Duration</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div><p>以上代码报错。报错信息：cannot define new methods on non-local type time.Duration</p> <p>编译器提示：不能在一个非本地的类型 time.Duration 上定义新方法。非本地方法指的就是使用 time.Duration 的代码所在的包，也就是 main 包。因为 time.Duration 是在 time 包中定义的，在 main 包中使用。time.Duration 包与 main 包不在同一个包中，因此不能为不在一个包中的类型定义方法。</p> <p>解决这个问题有下面两种方法：</p> <ul><li>将类型别名改为类型定义： type MyDuration time.Duration，也就是将 MyDuration 从别名改为类型。</li> <li>将 MyDuration 的别名定义放在 time 包中。</li></ul></blockquote></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">7/21/2021, 11:05:07 PM</span></div></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/noteSite/assets/js/app.7bac3382.js" defer></script><script src="/noteSite/assets/js/2.0f8877a4.js" defer></script><script src="/noteSite/assets/js/22.e50be3ee.js" defer></script>
+  </body>
+</html>
