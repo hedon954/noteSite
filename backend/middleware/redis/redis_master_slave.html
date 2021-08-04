@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>七、Redis 主从复制 | Hedon</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/noteSite/favicon.ico">
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/noteSite/assets/css/0.styles.0f3b0cbd.css" as="style"><link rel="preload" href="/noteSite/assets/js/app.fa3bd094.js" as="script"><link rel="preload" href="/noteSite/assets/js/2.0f8877a4.js" as="script"><link rel="preload" href="/noteSite/assets/js/46.2a58d424.js" as="script"><link rel="prefetch" href="/noteSite/assets/js/10.6dba027b.js"><link rel="prefetch" href="/noteSite/assets/js/100.d9f357e3.js"><link rel="prefetch" href="/noteSite/assets/js/101.35e7576d.js"><link rel="prefetch" href="/noteSite/assets/js/102.df9795fc.js"><link rel="prefetch" href="/noteSite/assets/js/103.04c9f4ce.js"><link rel="prefetch" href="/noteSite/assets/js/104.ee4fbad2.js"><link rel="prefetch" href="/noteSite/assets/js/105.09d55b66.js"><link rel="prefetch" href="/noteSite/assets/js/106.e9889ecb.js"><link rel="prefetch" href="/noteSite/assets/js/107.52fb76ac.js"><link rel="prefetch" href="/noteSite/assets/js/108.f646f283.js"><link rel="prefetch" href="/noteSite/assets/js/109.f4734ccc.js"><link rel="prefetch" href="/noteSite/assets/js/11.82b5bb56.js"><link rel="prefetch" href="/noteSite/assets/js/110.f200002a.js"><link rel="prefetch" href="/noteSite/assets/js/111.0a1bd0b1.js"><link rel="prefetch" href="/noteSite/assets/js/112.8474c968.js"><link rel="prefetch" href="/noteSite/assets/js/113.ec9152cf.js"><link rel="prefetch" href="/noteSite/assets/js/114.88e68040.js"><link rel="prefetch" href="/noteSite/assets/js/115.e4850f38.js"><link rel="prefetch" href="/noteSite/assets/js/116.2b34f42a.js"><link rel="prefetch" href="/noteSite/assets/js/117.2a2b2a08.js"><link rel="prefetch" href="/noteSite/assets/js/12.4c375597.js"><link rel="prefetch" href="/noteSite/assets/js/13.434b5f1e.js"><link rel="prefetch" href="/noteSite/assets/js/14.be57eb4c.js"><link rel="prefetch" href="/noteSite/assets/js/15.637c455d.js"><link rel="prefetch" href="/noteSite/assets/js/16.d13a0516.js"><link rel="prefetch" href="/noteSite/assets/js/17.dc997ec6.js"><link rel="prefetch" href="/noteSite/assets/js/18.bb5ca668.js"><link rel="prefetch" href="/noteSite/assets/js/19.167701f3.js"><link rel="prefetch" href="/noteSite/assets/js/20.3b8f80ce.js"><link rel="prefetch" href="/noteSite/assets/js/21.70d9c212.js"><link rel="prefetch" href="/noteSite/assets/js/22.c8731325.js"><link rel="prefetch" href="/noteSite/assets/js/23.f3a8b970.js"><link rel="prefetch" href="/noteSite/assets/js/24.b7d9368e.js"><link rel="prefetch" href="/noteSite/assets/js/25.04e60bfa.js"><link rel="prefetch" href="/noteSite/assets/js/26.56edd2e6.js"><link rel="prefetch" href="/noteSite/assets/js/27.f59ddf00.js"><link rel="prefetch" href="/noteSite/assets/js/28.f6f1a60d.js"><link rel="prefetch" href="/noteSite/assets/js/29.a724de47.js"><link rel="prefetch" href="/noteSite/assets/js/3.2a76c98b.js"><link rel="prefetch" href="/noteSite/assets/js/30.92bc43cd.js"><link rel="prefetch" href="/noteSite/assets/js/31.119f41e0.js"><link rel="prefetch" href="/noteSite/assets/js/32.057e8e8d.js"><link rel="prefetch" href="/noteSite/assets/js/33.e5bb48d0.js"><link rel="prefetch" href="/noteSite/assets/js/34.93ba1e3a.js"><link rel="prefetch" href="/noteSite/assets/js/35.75974898.js"><link rel="prefetch" href="/noteSite/assets/js/36.ed42c5df.js"><link rel="prefetch" href="/noteSite/assets/js/37.eb6ed968.js"><link rel="prefetch" href="/noteSite/assets/js/38.203de39c.js"><link rel="prefetch" href="/noteSite/assets/js/39.e5f5ed63.js"><link rel="prefetch" href="/noteSite/assets/js/4.a61e4cea.js"><link rel="prefetch" href="/noteSite/assets/js/40.fb7cf63e.js"><link rel="prefetch" href="/noteSite/assets/js/41.4e8c4489.js"><link rel="prefetch" href="/noteSite/assets/js/42.317152b0.js"><link rel="prefetch" href="/noteSite/assets/js/43.37cd8075.js"><link rel="prefetch" href="/noteSite/assets/js/44.d10f7550.js"><link rel="prefetch" href="/noteSite/assets/js/45.fa98f145.js"><link rel="prefetch" href="/noteSite/assets/js/47.b1b2e751.js"><link rel="prefetch" href="/noteSite/assets/js/48.768717ec.js"><link rel="prefetch" href="/noteSite/assets/js/49.4619f347.js"><link rel="prefetch" href="/noteSite/assets/js/5.2bccd6df.js"><link rel="prefetch" href="/noteSite/assets/js/50.fb98b948.js"><link rel="prefetch" href="/noteSite/assets/js/51.6f26f0bd.js"><link rel="prefetch" href="/noteSite/assets/js/52.e9bad76c.js"><link rel="prefetch" href="/noteSite/assets/js/53.b5acbdda.js"><link rel="prefetch" href="/noteSite/assets/js/54.5f4c85d2.js"><link rel="prefetch" href="/noteSite/assets/js/55.e826ace3.js"><link rel="prefetch" href="/noteSite/assets/js/56.2e653dd8.js"><link rel="prefetch" href="/noteSite/assets/js/57.3a39aabc.js"><link rel="prefetch" href="/noteSite/assets/js/58.84d9923f.js"><link rel="prefetch" href="/noteSite/assets/js/59.5de1a25b.js"><link rel="prefetch" href="/noteSite/assets/js/6.f3d86aa7.js"><link rel="prefetch" href="/noteSite/assets/js/60.a8750b99.js"><link rel="prefetch" href="/noteSite/assets/js/61.d99b69b7.js"><link rel="prefetch" href="/noteSite/assets/js/62.a54804a2.js"><link rel="prefetch" href="/noteSite/assets/js/63.272ecd9a.js"><link rel="prefetch" href="/noteSite/assets/js/64.2d337d3a.js"><link rel="prefetch" href="/noteSite/assets/js/65.c52f0dd1.js"><link rel="prefetch" href="/noteSite/assets/js/66.60c25604.js"><link rel="prefetch" href="/noteSite/assets/js/67.a7c78d70.js"><link rel="prefetch" href="/noteSite/assets/js/68.8f5bd7e5.js"><link rel="prefetch" href="/noteSite/assets/js/69.3375555f.js"><link rel="prefetch" href="/noteSite/assets/js/7.1f09a238.js"><link rel="prefetch" href="/noteSite/assets/js/70.3b63b79a.js"><link rel="prefetch" href="/noteSite/assets/js/71.c0780040.js"><link rel="prefetch" href="/noteSite/assets/js/72.0812143f.js"><link rel="prefetch" href="/noteSite/assets/js/73.025b1b4a.js"><link rel="prefetch" href="/noteSite/assets/js/74.dfdf4a65.js"><link rel="prefetch" href="/noteSite/assets/js/75.562c496e.js"><link rel="prefetch" href="/noteSite/assets/js/76.0288efa2.js"><link rel="prefetch" href="/noteSite/assets/js/77.d3b09dcd.js"><link rel="prefetch" href="/noteSite/assets/js/78.d0e89efa.js"><link rel="prefetch" href="/noteSite/assets/js/79.98ed3cc8.js"><link rel="prefetch" href="/noteSite/assets/js/8.70e86b67.js"><link rel="prefetch" href="/noteSite/assets/js/80.5671962a.js"><link rel="prefetch" href="/noteSite/assets/js/81.4ab0570b.js"><link rel="prefetch" href="/noteSite/assets/js/82.d2e34914.js"><link rel="prefetch" href="/noteSite/assets/js/83.7915eaa4.js"><link rel="prefetch" href="/noteSite/assets/js/84.1d199ee5.js"><link rel="prefetch" href="/noteSite/assets/js/85.9e1f4db4.js"><link rel="prefetch" href="/noteSite/assets/js/86.b0dfabf1.js"><link rel="prefetch" href="/noteSite/assets/js/87.aaf342de.js"><link rel="prefetch" href="/noteSite/assets/js/88.62e6d956.js"><link rel="prefetch" href="/noteSite/assets/js/89.82ea1f5e.js"><link rel="prefetch" href="/noteSite/assets/js/9.312839b3.js"><link rel="prefetch" href="/noteSite/assets/js/90.8d36fe05.js"><link rel="prefetch" href="/noteSite/assets/js/91.e917ab7f.js"><link rel="prefetch" href="/noteSite/assets/js/92.bd6ee213.js"><link rel="prefetch" href="/noteSite/assets/js/93.337f6109.js"><link rel="prefetch" href="/noteSite/assets/js/94.94cf44b5.js"><link rel="prefetch" href="/noteSite/assets/js/95.d64f399c.js"><link rel="prefetch" href="/noteSite/assets/js/96.f03e73fc.js"><link rel="prefetch" href="/noteSite/assets/js/97.87916b56.js"><link rel="prefetch" href="/noteSite/assets/js/98.b536f1cc.js"><link rel="prefetch" href="/noteSite/assets/js/99.a301d980.js">
+    <link rel="stylesheet" href="/noteSite/assets/css/0.styles.0f3b0cbd.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/noteSite/" class="home-link router-link-active"><img src="/noteSite/images/hedon.png" alt="Hedon" class="logo"> <span class="site-name can-hide">Hedon</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link router-link-active">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link router-link-active">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Redis</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/backend/middleware/redis/redis_intro.html" class="sidebar-link">一、Redis 快速入门</a></li><li><a href="/noteSite/backend/middleware/redis/redis_dataType.html" class="sidebar-link">二、Redis 数据类型</a></li><li><a href="/noteSite/backend/middleware/redis/redis_store.html" class="sidebar-link">三、Redis 持久化</a></li><li><a href="/noteSite/backend/middleware/redis/redis_client.html" class="sidebar-link">四、Redis 客户端</a></li><li><a href="/noteSite/backend/middleware/redis/redis_cache.html" class="sidebar-link">五、Redis 缓存</a></li><li><a href="/noteSite/backend/middleware/redis/redis_better.html" class="sidebar-link">六、Redis 性能优化</a></li><li><a href="/noteSite/backend/middleware/redis/redis_master_slave.html" aria-current="page" class="active sidebar-link">七、Redis 主从复制</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_1-主从复制" class="sidebar-link">1. 主从复制</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_2-环境搭建" class="sidebar-link">2. 环境搭建</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_2-1-准备环境" class="sidebar-link">2.1 准备环境</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_2-2-下载-redis" class="sidebar-link">2.2 下载 Redis</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_2-3-创建配置-数据-日志目录" class="sidebar-link">2.3 创建配置/数据/日志目录</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_2-4-新建配置文件" class="sidebar-link">2.4 新建配置文件</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_2-5-启动-redis" class="sidebar-link">2.5 启动 Redis</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_2-6-查看集群状态" class="sidebar-link">2.6 查看集群状态</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_2-7-测试集群功能" class="sidebar-link">2.7 测试集群功能</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_3-原理剖析" class="sidebar-link">3. 原理剖析</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_3-1-info-replication-信息详解" class="sidebar-link">3.1 info replication 信息详解</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_3-2-复制流程" class="sidebar-link">3.2 复制流程</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_3-3-主从复制异步性" class="sidebar-link">3.3 主从复制异步性</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_3-4-过期-key-处理" class="sidebar-link">3.4 过期 key 处理</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_3-5-加速复制" class="sidebar-link">3.5 加速复制</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_4-故障处理" class="sidebar-link">4. 故障处理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_4-1-主从数据一致性" class="sidebar-link">4.1 主从数据一致性</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_4-2-数据延迟" class="sidebar-link">4.2 数据延迟</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_4-3-脏数据" class="sidebar-link">4.3 脏数据</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_4-4-数据安全性" class="sidebar-link">4.4 数据安全性</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_5-性能优化" class="sidebar-link">5. 性能优化</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_5-1-规避全量复制" class="sidebar-link">5.1 规避全量复制</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_master_slave.html#_5-2-规避复制风暴" class="sidebar-link">5.2 规避复制风暴</a></li></ul></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Redis 实战</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="七、redis-主从复制"><a href="#七、redis-主从复制" class="header-anchor">#</a> 七、Redis 主从复制</h1> <h2 id="_1-主从复制"><a href="#_1-主从复制" class="header-anchor">#</a> 1. 主从复制</h2> <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gt4j7qj8uxj31bq0u0mzu.jpg" alt="image-20210804100921407"></p> <ul><li>Master：负责写</li> <li>Slave：负责读</li></ul> <h2 id="_2-环境搭建"><a href="#_2-环境搭建" class="header-anchor">#</a> 2. 环境搭建</h2> <h3 id="_2-1-准备环境"><a href="#_2-1-准备环境" class="header-anchor">#</a> 2.1 准备环境</h3> <table><thead><tr><th>IP</th> <th>角色</th> <th>操作系统</th></tr></thead> <tbody><tr><td>172.16.58.200</td> <td>redis-master</td> <td>CentOS 7</td></tr> <tr><td>172.16.58.201</td> <td>redis-slave1</td> <td>CentOS 7</td></tr> <tr><td>172.16.58.202</td> <td>redis-slave2</td> <td>CentOS 7</td></tr></tbody></table> <h3 id="_2-2-下载-redis"><a href="#_2-2-下载-redis" class="header-anchor">#</a> 2.2 下载 Redis</h3> <p>分别在三台机器上下载 Redis：<a href="/noteSite/backend/middleware/redis/redis_intro.html#_2-2-安装-redis">Redis 安装</a></p> <h3 id="_2-3-创建配置-数据-日志目录"><a href="#_2-3-创建配置-数据-日志目录" class="header-anchor">#</a> 2.3 创建配置/数据/日志目录</h3> <p>分别在三台机器上运行以下命令：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 创建配置目录</span>
+<span class="token function">mkdir</span> -p /usr/local/redis/conf
+<span class="token comment"># 创建数据目录</span>
+<span class="token function">mkdir</span> -p /usr/local/redis/data
+<span class="token comment"># 创建日志目录</span>
+<span class="token function">mkdir</span> -p /usr/local/redis/log
+</code></pre></div><h3 id="_2-4-新建配置文件"><a href="#_2-4-新建配置文件" class="header-anchor">#</a> 2.4 新建配置文件</h3> <p>三台机器都创建一份新的 <code>redis.conf</code></p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">vim</span> /usr/local/redis/conf/redis.conf
+</code></pre></div><p><code>redis-master</code> 写下以下内容：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 放行 IP 访问限制</span>
+<span class="token builtin class-name">bind</span> <span class="token number">0.0</span>.0.0
+<span class="token comment"># 后台启动</span>
+daemonize <span class="token function">yes</span>
+<span class="token comment"># 日志存储目录及日志名</span>
+logfile <span class="token string">&quot;/usr/local/redis/log/redis.log&quot;</span>
+<span class="token comment"># rdb 数据文件名</span>
+dbfilename dump.rdb
+<span class="token comment"># aof 模式开启和 aof 数据文件名</span>
+appendonly <span class="token function">yes</span>
+appendfilename <span class="token string">&quot;appendonly.aof&quot;</span>
+<span class="token comment"># rdb 数据文件和 aof 数据文件的存储目录</span>
+<span class="token function">dir</span> /usr/local/redis/data
+<span class="token comment"># 设置密码</span>
+requirepass <span class="token number">123456</span>
+<span class="token comment"># 从节点访问主节点密码（必须与 requirepass 一致）</span>
+masterauth <span class="token number">123456</span>
+<span class="token comment"># 从节点只读模式</span>
+replica-read-only <span class="token function">yes</span>
+</code></pre></div><p><code>redis-slave1</code> 和 <code>redis-slave2</code> 写下以下内容：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 放行 IP 访问限制</span>
+<span class="token builtin class-name">bind</span> <span class="token number">0.0</span>.0.0
+<span class="token comment"># 后台启动</span>
+daemonize <span class="token function">yes</span>
+<span class="token comment"># 日志存储目录及日志名</span>
+logfile <span class="token string">&quot;/usr/local/redis/log/redis.log&quot;</span>
+<span class="token comment"># rdb 数据文件名</span>
+dbfilename dump.rdb
+<span class="token comment"># aof 模式开启和 aof 数据文件名</span>
+appendonly <span class="token function">yes</span>
+appendfilename <span class="token string">&quot;appendonly.aof&quot;</span>
+<span class="token comment"># rdb 数据文件和 aof 数据文件的存储目录</span>
+<span class="token function">dir</span> /usr/local/redis/data
+<span class="token comment"># 设置密码</span>
+requirepass <span class="token number">123456</span>
+<span class="token comment"># 从节点访问主节点密码（必须与 requirepass 一致）</span>
+masterauth <span class="token number">123456</span>
+<span class="token comment"># 从节点只读模式</span>
+replica-read-only <span class="token function">yes</span>
+<span class="token comment"># 从节点属于哪个指定主节点</span>
+slaveof <span class="token number">172.16</span>.58.200 <span class="token number">6379</span>
+</code></pre></div><h3 id="_2-5-启动-redis"><a href="#_2-5-启动-redis" class="header-anchor">#</a> 2.5 启动 Redis</h3> <p>在三台机器上都启动 Redis</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 先看看之前有没有运行 redis</span>
+<span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">grep</span> redis
+<span class="token comment"># 杀死进程</span>
+<span class="token function">kill</span> -9 PID
+<span class="token comment"># 启动新 redis</span>
+redis-server /usr/local/redis/conf/redis.conf
+<span class="token comment"># 检查 redis 启动情况</span>
+<span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">grep</span> redis
+</code></pre></div><h3 id="_2-6-查看集群状态"><a href="#_2-6-查看集群状态" class="header-anchor">#</a> 2.6 查看集群状态</h3> <p>核心命令：<code>info replication</code></p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 在 redis-master 节点上连接 redis</span>
+redis-cli -a <span class="token number">123456</span>
+
+<span class="token comment"># 查看 redis 集群信息</span>
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>&gt;</span> info replication
+<span class="token comment"># 输出</span>
+role:master
+connected_slaves:2
+slave0:ip<span class="token operator">=</span><span class="token number">172.16</span>.58.201,port<span class="token operator">=</span><span class="token number">6379</span>,state<span class="token operator">=</span>online,offset<span class="token operator">=</span><span class="token number">168</span>,lag<span class="token operator">=</span><span class="token number">1</span>
+slave1:ip<span class="token operator">=</span><span class="token number">172.16</span>.58.202,port<span class="token operator">=</span><span class="token number">6379</span>,state<span class="token operator">=</span>online,offset<span class="token operator">=</span><span class="token number">168</span>,lag<span class="token operator">=</span><span class="token number">1</span>
+master_replid:84c5932a0eab5b1eae6bb1721dbfecb1dc91e925
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:168
+second_repl_offset:-1
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:1
+repl_backlog_histlen:168
+</code></pre></div><h3 id="_2-7-测试集群功能"><a href="#_2-7-测试集群功能" class="header-anchor">#</a> 2.7 测试集群功能</h3> <ul><li><p>redis-master</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 可写</span>
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>&gt;</span> <span class="token builtin class-name">set</span> username zhangsan
+OK
+<span class="token comment"># 可读</span>
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>&gt;</span> get username
+<span class="token string">&quot;zhangsan&quot;</span>
+</code></pre></div></li> <li><p>redis-slave1 &amp; redis-slave2</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 读得到 zhangsan，说明主从复制成功</span>
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>&gt;</span> get username
+<span class="token string">&quot;zhangsan&quot;</span>
+<span class="token comment"># 写不了，因为从节点只能读</span>
+<span class="token number">127.0</span>.0.1:637<span class="token operator"><span class="token file-descriptor important">9</span>&gt;</span> <span class="token builtin class-name">set</span> username lisi
+<span class="token punctuation">(</span>error<span class="token punctuation">)</span> READONLY You can't <span class="token function">write</span> against a <span class="token builtin class-name">read</span> only replica.
+</code></pre></div></li></ul> <h2 id="_3-原理剖析"><a href="#_3-原理剖析" class="header-anchor">#</a> 3. 原理剖析</h2> <h3 id="_3-1-info-replication-信息详解"><a href="#_3-1-info-replication-信息详解" class="header-anchor">#</a> 3.1 info replication 信息详解</h3> <table><thead><tr><th>角色</th> <th>属性名</th> <th>属性值</th> <th>属性描述</th></tr></thead> <tbody><tr><td>通用配置</td> <td>role</td> <td>master丨slave</td> <td>节点的角色</td></tr> <tr><td></td> <td>repl_backlog_active</td> <td>1</td> <td>复制缓冲区状态</td></tr> <tr><td></td> <td>repl_backlog_size</td> <td>1048576</td> <td>复制缓冲区尺寸（单位：字节）</td></tr> <tr><td></td> <td>repl_backlog_firstbyte_offset</td> <td>1</td> <td>复制缓冲区起始偏移量，标识当前缓冲区可用范围</td></tr> <tr><td></td> <td>repl_backlog_hitslen</td> <td>1</td> <td>复制缓冲区已存有效数据长度</td></tr> <tr><td></td> <td>master_replid</td> <td>84c5932a0eab5b1eae6bb1721dbfecb1dc91e925</td> <td>当前主节点 ID</td></tr> <tr><td></td> <td>master_replid2</td> <td>0000000000000000000000000000000000000000</td> <td>上一任主节点 ID</td></tr> <tr><td></td> <td>master_repl_offset</td> <td>739</td> <td>主节点偏移量</td></tr> <tr><td></td> <td>second_repl_offset</td> <td>-1</td> <td>记录上一个主节点已经写入了偏移量，便于从节点与主节点重新建立连接的时候不需要全量复制</td></tr> <tr><td>主节点</td> <td>connected_slaves</td> <td>2</td> <td>连接的从节点个数</td></tr> <tr><td></td> <td>slave0</td> <td>ip=172.16.58.201,port=6379,state=online,offset=739,lag=1</td> <td>连接的从节点信息</td></tr> <tr><td></td> <td>master_repl_offset</td> <td>739</td> <td>主节点偏移量</td></tr> <tr><td>从节点</td> <td>master_host</td> <td>172.16.58.200</td> <td>主节点 IP</td></tr> <tr><td></td> <td>master_port</td> <td>6379</td> <td>主节点端口</td></tr> <tr><td></td> <td>master_link_status</td> <td>up</td> <td>与主节点的连接状态</td></tr> <tr><td></td> <td>master_last_io_seconds_ago</td> <td>10</td> <td>主节点最后与从节点的通信时间间隔，单位是秒</td></tr> <tr><td></td> <td>master_sync_in_progress</td> <td>0</td> <td>从节点是否正在全量同步主节点 RDB 文件</td></tr> <tr><td></td> <td>slave_repl_offset</td> <td>128</td> <td>从节点复制偏移量</td></tr> <tr><td></td> <td>slave_priority</td> <td>100</td> <td>从节点选举优先级</td></tr> <tr><td></td> <td>slave_read_only</td> <td>1</td> <td>从节点是否只读</td></tr> <tr><td></td> <td>connected_slaves</td> <td>0</td> <td>连接的从节点个数</td></tr></tbody></table> <h3 id="_3-2-复制流程"><a href="#_3-2-复制流程" class="header-anchor">#</a> 3.2 复制流程</h3> <h4 id="_3-2-1-日志分析"><a href="#_3-2-1-日志分析" class="header-anchor">#</a> 3.2.1 日志分析</h4> <ul><li><p>查看 <code>redis-master</code> 日志</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">tail</span> -f -n <span class="token number">800</span> /usr/local/redis/log/redis.log
+</code></pre></div></li> <li><p>关注下面日志</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 主节点已就绪，等待从节点连接</span>
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:00:49.285 * Ready to accept connections
+<span class="token comment"># 172.16.58.201:6379 redis-slave1 节点发起 sync 全量复制请求</span>
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:28.358 * Replica <span class="token number">172.16</span>.58.201:6379 asks <span class="token keyword">for</span> synchronization
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:28.358 * Full resync requested by replica <span class="token number">172.16</span>.58.201:6379
+<span class="token comment"># 创建缓冲区，新建一个新的 replication id</span>
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:28.358 * Replication backlog created, my new replication IDs are <span class="token string">'84c5932a0eab5b1eae6bb1721dbfecb1dc91e925'</span> and <span class="token string">'0000000000000000000000000000000000000000'</span>
+<span class="token comment"># 使用 bgsave 将数据写到磁盘</span>
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:28.358 * Starting BGSAVE <span class="token keyword">for</span> SYNC with target: disk
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:28.359 * Background saving started by pid <span class="token number">21738</span>
+<span class="token comment"># 写完</span>
+<span class="token number">21738</span>:C 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:28.360 * DB saved on disk
+<span class="token comment"># 写了多少数据</span>
+<span class="token number">21738</span>:C 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:28.360 * RDB: <span class="token number">0</span> MB of memory used by copy-on-write
+<span class="token comment"># 退出写数据</span>
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:28.420 * Background saving terminated with success
+<span class="token comment"># 172.16.58.201:6379 redis-slave1 全量复制完成</span>
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:28.421 * Synchronization with replica <span class="token number">172.16</span>.58.201:6379 succeeded
+<span class="token comment"># 172.16.58.202:6379 redis-slave2 节点请求全量复制请求</span>
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:29.443 * Replica <span class="token number">172.16</span>.58.202:6379 asks <span class="token keyword">for</span> synchronization
+<span class="token comment"># 下面同理</span>
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:29.443 * Full resync requested by replica <span class="token number">172.16</span>.58.202:6379
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:29.443 * Starting BGSAVE <span class="token keyword">for</span> SYNC with target: disk
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:29.444 * Background saving started by pid <span class="token number">21747</span>
+<span class="token number">21747</span>:C 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:29.445 * DB saved on disk
+<span class="token number">21747</span>:C 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:29.445 * RDB: <span class="token number">0</span> MB of memory used by copy-on-write
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:29.524 * Background saving terminated with success
+<span class="token number">21279</span>:M 03 Aug <span class="token number">2021</span> <span class="token number">20</span>:02:29.525 * Synchronization with replica <span class="token number">172.16</span>.58.202:6379 succeeded
+</code></pre></div></li></ul> <h4 id="_3-2-2-全量复制"><a href="#_3-2-2-全量复制" class="header-anchor">#</a> 3.2.2 全量复制</h4> <ul><li>全量复制一般是 Slave 刚开始连接 Master 后做的数据同步过程。</li></ul> <p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gt4mekgohtj31j70u0mzt.jpg" alt="image-20210804115942670"></p> <h4 id="_3-2-3-增量复制"><a href="#_3-2-3-增量复制" class="header-anchor">#</a> 3.2.3 增量复制</h4> <ul><li>增量复制是  Slave 初始后开始正常工作时 Master 发生写操作时同步到 Slave 的过程。</li> <li>从节点与主节点发生短暂失联后重新连接，也会根据 <code>master_repl_offset</code> 和 <code>second_repl_offset</code> 进行增量复制。</li> <li>复制过程就是 Master 每执行一个写命令就会去 Slave 发送相同的写命令，Slave 接收并执行收到的写命令。</li></ul> <h3 id="_3-3-主从复制异步性"><a href="#_3-3-主从复制异步性" class="header-anchor">#</a> 3.3 主从复制异步性</h3> <ul><li>主从复制对于 Master 是非阻塞的，当 Slave 在进行主从复制同步过程中，Master 仍然可以处理外界的访问请求。</li> <li>主从复制对于 Slave 是非阻塞的，当 Slave 在进行蛀虫复制过程中也可以接收外界的查询请求，<strong>只不过这时候 Slave 可能返回以前的老数据</strong>。</li></ul> <h3 id="_3-4-过期-key-处理"><a href="#_3-4-过期-key-处理" class="header-anchor">#</a> 3.4 过期 key 处理</h3> <ul><li>Slave 不会让 key 过期，而是等待 Master 让 key 过期。当 Master 让 key 过期时，它会合成一个 del 命令并传输到所有的 Slave。</li></ul> <h3 id="_3-5-加速复制"><a href="#_3-5-加速复制" class="header-anchor">#</a> 3.5 加速复制</h3> <ul><li>默认情况下，Master 节点接收 SYNC 命令后执行 bgsave 操作，将数据先保存到磁盘，如果磁盘性能差，那么写入磁盘会消耗大量性能，因为在 Redis 2.8.18 后进行改进，可以设置无需写入磁盘直接发送 RDB 快照给 Slave，加速复制。</li> <li>修改配置：<code>repli-diskless-sync yes</code> （默认是 no）</li></ul> <h2 id="_4-故障处理"><a href="#_4-故障处理" class="header-anchor">#</a> 4. 故障处理</h2> <h3 id="_4-1-主从数据一致性"><a href="#_4-1-主从数据一致性" class="header-anchor">#</a> 4.1 主从数据一致性</h3> <ul><li>主从网络延时
+<ul><li>主多从少：部分重同步</li> <li>主少从多：全量复制</li></ul></li></ul> <h3 id="_4-2-数据延迟"><a href="#_4-2-数据延迟" class="header-anchor">#</a> 4.2 数据延迟</h3> <ul><li>编写外部程序监听主从节点的复制偏移量，延迟较大时发出报警或通知客户端，切换到主节点或其他节点。</li> <li>设置 Slave 节点 <code>slave-serve-stale-data</code> 为 <code>no</code>，除 <code>INFO</code> 和 <code>SLAVEOF</code> 命令之外的任何请求都会返回一个错误 <code>SYNC with master in progress</code>。</li></ul> <h3 id="_4-3-脏数据"><a href="#_4-3-脏数据" class="header-anchor">#</a> 4.3 脏数据</h3> <p>原因：</p> <ul><li>Redis 删除机制导致（惰性、定时、主动删除等）。</li> <li>从节点可写导致。</li></ul> <p>解决：</p> <ul><li>忽略</li> <li>选择性强制读主，从节点间接变成了备份服务器（只针对某个业务）。</li> <li>从节点只读，规避从节点写入脏数据。</li> <li>目前 Redis 读取数据之前会检查 key 过期时间来决定是否返回数据。</li></ul> <h3 id="_4-4-数据安全性"><a href="#_4-4-数据安全性" class="header-anchor">#</a> 4.4 数据安全性</h3> <p>隐患：</p> <ul><li><p>关闭 Master 持久化会提升性能，同时会带来复制的安全性问题。</p> <img src="https://tva1.sinaimg.cn/large/008i3skNly1gt4nly9034j313g0ea75b.jpg" alt="image-20210804124122680" style="zoom:33%;"></li></ul> <p>解决：</p> <ul><li>开启 Master 持久化。</li> <li>在 Docker 或者脚本中设置 Master 不自动重启。</li></ul> <h2 id="_5-性能优化"><a href="#_5-性能优化" class="header-anchor">#</a> 5. 性能优化</h2> <h3 id="_5-1-规避全量复制"><a href="#_5-1-规避全量复制" class="header-anchor">#</a> 5.1 规避全量复制</h3> <ul><li>第一次全量复制解决方案：低峰时段挂载 Slave。</li> <li>Slave 上已经有 Master 的数据了，可以选举 Slave 为主节点。</li> <li>增大复制缓冲区大小（默认 1M），增加 offset 的命中率，降低全量复制改了。</li></ul> <h3 id="_5-2-规避复制风暴"><a href="#_5-2-规避复制风暴" class="header-anchor">#</a> 5.2 规避复制风暴</h3> <blockquote><p>复制风暴：多个节点同一时段下向 Master 复制请求，导致 Master 压力很大。</p></blockquote> <ul><li>单主节点复制风暴：主节点重启，多从节点全量复制。
+<ul><li>解决：
+<ul><li>此时 Slave 有 Master 的数据了，可以选举 Slave 为主节点。</li> <li>柱状复制结构。</li></ul></li></ul></li> <li>单机多主复制风暴：一台机器上为了充分利用 CPU 资源，部署了多个主节点。
+<ul><li>解决：
+<ul><li>这事花钱能解决，把主节点分散在多台机器上就可以了。</li></ul></li></ul></li></ul> <!----></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">8/4/2021, 12:47:55 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/noteSite/backend/middleware/redis/redis_better.html" class="prev">
+        六、Redis 性能优化
+      </a></span> <span class="next"><a href="/noteSite/backend/middleware/redis/apply/redis_lock.html">
+        Redis 应用丨分布式锁
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/noteSite/assets/js/app.fa3bd094.js" defer></script><script src="/noteSite/assets/js/2.0f8877a4.js" defer></script><script src="/noteSite/assets/js/46.2a58d424.js" defer></script>
+  </body>
+</html>
