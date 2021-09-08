@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Docker 网络 | Hedon</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/noteSite/favicon.ico">
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/noteSite/assets/css/0.styles.0f3b0cbd.css" as="style"><link rel="preload" href="/noteSite/assets/js/app.24fc9801.js" as="script"><link rel="preload" href="/noteSite/assets/js/2.691adf44.js" as="script"><link rel="preload" href="/noteSite/assets/js/130.7152d8af.js" as="script"><link rel="prefetch" href="/noteSite/assets/js/10.9a97bd95.js"><link rel="prefetch" href="/noteSite/assets/js/100.92ff3756.js"><link rel="prefetch" href="/noteSite/assets/js/101.b961d627.js"><link rel="prefetch" href="/noteSite/assets/js/102.f75eebe3.js"><link rel="prefetch" href="/noteSite/assets/js/103.9f29eef3.js"><link rel="prefetch" href="/noteSite/assets/js/104.685d5ae6.js"><link rel="prefetch" href="/noteSite/assets/js/105.8be2e79c.js"><link rel="prefetch" href="/noteSite/assets/js/106.480db75b.js"><link rel="prefetch" href="/noteSite/assets/js/107.3ae52f0e.js"><link rel="prefetch" href="/noteSite/assets/js/108.5136c6f9.js"><link rel="prefetch" href="/noteSite/assets/js/109.00fa7a76.js"><link rel="prefetch" href="/noteSite/assets/js/11.d6449e4b.js"><link rel="prefetch" href="/noteSite/assets/js/110.db9c6c9c.js"><link rel="prefetch" href="/noteSite/assets/js/111.91410c4f.js"><link rel="prefetch" href="/noteSite/assets/js/112.38142bcf.js"><link rel="prefetch" href="/noteSite/assets/js/113.a78fbdf7.js"><link rel="prefetch" href="/noteSite/assets/js/114.779e87b8.js"><link rel="prefetch" href="/noteSite/assets/js/115.8729e847.js"><link rel="prefetch" href="/noteSite/assets/js/116.76804354.js"><link rel="prefetch" href="/noteSite/assets/js/117.1a0b24e1.js"><link rel="prefetch" href="/noteSite/assets/js/118.51d0eda9.js"><link rel="prefetch" href="/noteSite/assets/js/119.3040b1f7.js"><link rel="prefetch" href="/noteSite/assets/js/12.e733a196.js"><link rel="prefetch" href="/noteSite/assets/js/120.5ec306b7.js"><link rel="prefetch" href="/noteSite/assets/js/121.d1006e21.js"><link rel="prefetch" href="/noteSite/assets/js/122.326aa0a1.js"><link rel="prefetch" href="/noteSite/assets/js/123.a2da4635.js"><link rel="prefetch" href="/noteSite/assets/js/124.abc57ded.js"><link rel="prefetch" href="/noteSite/assets/js/125.dea39fe8.js"><link rel="prefetch" href="/noteSite/assets/js/126.6e42b452.js"><link rel="prefetch" href="/noteSite/assets/js/127.017512e2.js"><link rel="prefetch" href="/noteSite/assets/js/128.07d1f923.js"><link rel="prefetch" href="/noteSite/assets/js/129.c4acc6c8.js"><link rel="prefetch" href="/noteSite/assets/js/13.434b5f1e.js"><link rel="prefetch" href="/noteSite/assets/js/131.39c701cd.js"><link rel="prefetch" href="/noteSite/assets/js/132.c500b949.js"><link rel="prefetch" href="/noteSite/assets/js/133.747399e5.js"><link rel="prefetch" href="/noteSite/assets/js/134.2a7ae0c6.js"><link rel="prefetch" href="/noteSite/assets/js/135.781b882c.js"><link rel="prefetch" href="/noteSite/assets/js/136.0fa75b8d.js"><link rel="prefetch" href="/noteSite/assets/js/137.f857b8c3.js"><link rel="prefetch" href="/noteSite/assets/js/138.fe8c125c.js"><link rel="prefetch" href="/noteSite/assets/js/139.e5d9bf59.js"><link rel="prefetch" href="/noteSite/assets/js/14.91f9301c.js"><link rel="prefetch" href="/noteSite/assets/js/140.50fbf4e3.js"><link rel="prefetch" href="/noteSite/assets/js/141.6e5c0697.js"><link rel="prefetch" href="/noteSite/assets/js/142.ef9f6474.js"><link rel="prefetch" href="/noteSite/assets/js/143.026ea3f2.js"><link rel="prefetch" href="/noteSite/assets/js/144.9954d79f.js"><link rel="prefetch" href="/noteSite/assets/js/145.23063f91.js"><link rel="prefetch" href="/noteSite/assets/js/146.0bf7ebb6.js"><link rel="prefetch" href="/noteSite/assets/js/147.f21b59c7.js"><link rel="prefetch" href="/noteSite/assets/js/148.dc68061b.js"><link rel="prefetch" href="/noteSite/assets/js/149.fc3a5d50.js"><link rel="prefetch" href="/noteSite/assets/js/15.47938ffc.js"><link rel="prefetch" href="/noteSite/assets/js/150.e534c38c.js"><link rel="prefetch" href="/noteSite/assets/js/151.4477bf42.js"><link rel="prefetch" href="/noteSite/assets/js/152.87dd1e5b.js"><link rel="prefetch" href="/noteSite/assets/js/153.c22d2496.js"><link rel="prefetch" href="/noteSite/assets/js/154.d6c25c39.js"><link rel="prefetch" href="/noteSite/assets/js/155.ee6a5bcb.js"><link rel="prefetch" href="/noteSite/assets/js/156.3138f0b9.js"><link rel="prefetch" href="/noteSite/assets/js/157.b9cae4d6.js"><link rel="prefetch" href="/noteSite/assets/js/158.64f94b30.js"><link rel="prefetch" href="/noteSite/assets/js/159.482a4b24.js"><link rel="prefetch" href="/noteSite/assets/js/16.c118e0d3.js"><link rel="prefetch" href="/noteSite/assets/js/160.821d070a.js"><link rel="prefetch" href="/noteSite/assets/js/161.23dc1ab4.js"><link rel="prefetch" href="/noteSite/assets/js/162.b417b6a3.js"><link rel="prefetch" href="/noteSite/assets/js/17.8311cdff.js"><link rel="prefetch" href="/noteSite/assets/js/18.d815f23f.js"><link rel="prefetch" href="/noteSite/assets/js/19.13241de9.js"><link rel="prefetch" href="/noteSite/assets/js/20.fdf3ee8c.js"><link rel="prefetch" href="/noteSite/assets/js/21.ed6203ac.js"><link rel="prefetch" href="/noteSite/assets/js/22.e6553a1c.js"><link rel="prefetch" href="/noteSite/assets/js/23.f8f9c155.js"><link rel="prefetch" href="/noteSite/assets/js/24.7382ddd7.js"><link rel="prefetch" href="/noteSite/assets/js/25.333b798b.js"><link rel="prefetch" href="/noteSite/assets/js/26.cce0d974.js"><link rel="prefetch" href="/noteSite/assets/js/27.6a4f4064.js"><link rel="prefetch" href="/noteSite/assets/js/28.3e0d9f6a.js"><link rel="prefetch" href="/noteSite/assets/js/29.8ba6931d.js"><link rel="prefetch" href="/noteSite/assets/js/3.5999c579.js"><link rel="prefetch" href="/noteSite/assets/js/30.1e496c21.js"><link rel="prefetch" href="/noteSite/assets/js/31.63c482b8.js"><link rel="prefetch" href="/noteSite/assets/js/32.e0f9558e.js"><link rel="prefetch" href="/noteSite/assets/js/33.9acbb179.js"><link rel="prefetch" href="/noteSite/assets/js/34.87a908b2.js"><link rel="prefetch" href="/noteSite/assets/js/35.bc27216a.js"><link rel="prefetch" href="/noteSite/assets/js/36.e0a54ae7.js"><link rel="prefetch" href="/noteSite/assets/js/37.66fe3725.js"><link rel="prefetch" href="/noteSite/assets/js/38.29ab7e60.js"><link rel="prefetch" href="/noteSite/assets/js/39.86aa09aa.js"><link rel="prefetch" href="/noteSite/assets/js/4.a61e4cea.js"><link rel="prefetch" href="/noteSite/assets/js/40.40f6c0ad.js"><link rel="prefetch" href="/noteSite/assets/js/41.a115cc5e.js"><link rel="prefetch" href="/noteSite/assets/js/42.a1d44b01.js"><link rel="prefetch" href="/noteSite/assets/js/43.d8046694.js"><link rel="prefetch" href="/noteSite/assets/js/44.03a67dab.js"><link rel="prefetch" href="/noteSite/assets/js/45.8358be5f.js"><link rel="prefetch" href="/noteSite/assets/js/46.fe00ffd7.js"><link rel="prefetch" href="/noteSite/assets/js/47.e80b5b51.js"><link rel="prefetch" href="/noteSite/assets/js/48.d61647f6.js"><link rel="prefetch" href="/noteSite/assets/js/49.2a67648e.js"><link rel="prefetch" href="/noteSite/assets/js/5.2bccd6df.js"><link rel="prefetch" href="/noteSite/assets/js/50.d912ae8f.js"><link rel="prefetch" href="/noteSite/assets/js/51.2894520c.js"><link rel="prefetch" href="/noteSite/assets/js/52.79cf4612.js"><link rel="prefetch" href="/noteSite/assets/js/53.ae6cf3f0.js"><link rel="prefetch" href="/noteSite/assets/js/54.78ff62d1.js"><link rel="prefetch" href="/noteSite/assets/js/55.490e09d0.js"><link rel="prefetch" href="/noteSite/assets/js/56.4ea72d24.js"><link rel="prefetch" href="/noteSite/assets/js/57.dd515189.js"><link rel="prefetch" href="/noteSite/assets/js/58.943efba2.js"><link rel="prefetch" href="/noteSite/assets/js/59.28d04e0a.js"><link rel="prefetch" href="/noteSite/assets/js/6.f3d86aa7.js"><link rel="prefetch" href="/noteSite/assets/js/60.e1b3f1ed.js"><link rel="prefetch" href="/noteSite/assets/js/61.d79fb073.js"><link rel="prefetch" href="/noteSite/assets/js/62.972f97ae.js"><link rel="prefetch" href="/noteSite/assets/js/63.510dab6c.js"><link rel="prefetch" href="/noteSite/assets/js/64.70d17ba5.js"><link rel="prefetch" href="/noteSite/assets/js/65.008b16b8.js"><link rel="prefetch" href="/noteSite/assets/js/66.118ff1b0.js"><link rel="prefetch" href="/noteSite/assets/js/67.917cb0e1.js"><link rel="prefetch" href="/noteSite/assets/js/68.6d5cc5ed.js"><link rel="prefetch" href="/noteSite/assets/js/69.942ee88e.js"><link rel="prefetch" href="/noteSite/assets/js/7.da9921ea.js"><link rel="prefetch" href="/noteSite/assets/js/70.861936b9.js"><link rel="prefetch" href="/noteSite/assets/js/71.8da884c9.js"><link rel="prefetch" href="/noteSite/assets/js/72.48645489.js"><link rel="prefetch" href="/noteSite/assets/js/73.3d731c61.js"><link rel="prefetch" href="/noteSite/assets/js/74.d702e898.js"><link rel="prefetch" href="/noteSite/assets/js/75.e2905a0c.js"><link rel="prefetch" href="/noteSite/assets/js/76.74ff117f.js"><link rel="prefetch" href="/noteSite/assets/js/77.fb857cd8.js"><link rel="prefetch" href="/noteSite/assets/js/78.c8a104ed.js"><link rel="prefetch" href="/noteSite/assets/js/79.c8226dd8.js"><link rel="prefetch" href="/noteSite/assets/js/8.b1ba721d.js"><link rel="prefetch" href="/noteSite/assets/js/80.30822bdb.js"><link rel="prefetch" href="/noteSite/assets/js/81.4caf3898.js"><link rel="prefetch" href="/noteSite/assets/js/82.a3bae02d.js"><link rel="prefetch" href="/noteSite/assets/js/83.c280a426.js"><link rel="prefetch" href="/noteSite/assets/js/84.92c2442d.js"><link rel="prefetch" href="/noteSite/assets/js/85.0a3c5e7d.js"><link rel="prefetch" href="/noteSite/assets/js/86.01e50878.js"><link rel="prefetch" href="/noteSite/assets/js/87.8db830a1.js"><link rel="prefetch" href="/noteSite/assets/js/88.003ef34a.js"><link rel="prefetch" href="/noteSite/assets/js/89.5ffa0238.js"><link rel="prefetch" href="/noteSite/assets/js/9.09db9bdb.js"><link rel="prefetch" href="/noteSite/assets/js/90.dc502e8a.js"><link rel="prefetch" href="/noteSite/assets/js/91.f923e9e3.js"><link rel="prefetch" href="/noteSite/assets/js/92.6c596924.js"><link rel="prefetch" href="/noteSite/assets/js/93.86401fdc.js"><link rel="prefetch" href="/noteSite/assets/js/94.5a9b0dc6.js"><link rel="prefetch" href="/noteSite/assets/js/95.d138495b.js"><link rel="prefetch" href="/noteSite/assets/js/96.45ce2015.js"><link rel="prefetch" href="/noteSite/assets/js/97.1fc4fa5a.js"><link rel="prefetch" href="/noteSite/assets/js/98.ccc65635.js"><link rel="prefetch" href="/noteSite/assets/js/99.cdcea560.js">
+    <link rel="stylesheet" href="/noteSite/assets/css/0.styles.0f3b0cbd.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/noteSite/" class="home-link router-link-active"><img src="/noteSite/images/hedon.png" alt="Hedon" class="logo"> <span class="site-name can-hide">Hedon</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/component/" class="nav-link">
+  计算机组成原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link router-link-active">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/component/" class="nav-link">
+  计算机组成原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link router-link-active">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>基础</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Docker</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/linux/docker/docker-introduction.html" class="sidebar-link">Docker 介绍</a></li><li><a href="/noteSite/linux/docker/docker-install.html" class="sidebar-link">Docker 安装</a></li><li><a href="/noteSite/linux/docker/docker-image.html" class="sidebar-link">Docker 镜像</a></li><li><a href="/noteSite/linux/docker/docker-container.html" class="sidebar-link">Docker 容器</a></li><li><a href="/noteSite/linux/docker/docker-network.html" aria-current="page" class="active sidebar-link">Docker 网络</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-network.html#一、docker-网络" class="sidebar-link">一、Docker 网络</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-network.html#二、docker-网络类型" class="sidebar-link">二、Docker 网络类型</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-network.html#_1-bridge" class="sidebar-link">1. bridge</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-network.html#_2-host" class="sidebar-link">2. host</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-network.html#_3-none" class="sidebar-link">3. none</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-network.html#三、docker-网桥网络" class="sidebar-link">三、Docker 网桥网络</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-network.html#常见问题合集" class="sidebar-link">常见问题合集</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-network.html#四、docker-不同主机间容器通信" class="sidebar-link">四、Docker 不同主机间容器通信</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-network.html#_1-macvlan" class="sidebar-link">1. macvlan</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-network.html#_2-overlay" class="sidebar-link">2. overlay</a></li><li class="sidebar-sub-header"><a href="/noteSite/linux/docker/docker-network.html#常见问题合集-2" class="sidebar-link">常见问题合集：</a></li></ul></li></ul></li><li><a href="/noteSite/linux/docker/dockerfile.html" class="sidebar-link">Dockerfile</a></li><li><a href="/noteSite/linux/docker/docker-primary-resp.html" class="sidebar-link">Docker 镜像私有仓库</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Kubernetes</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>小技巧</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="docker-网络"><a href="#docker-网络" class="header-anchor">#</a> Docker 网络</h1> <h2 id="一、docker-网络"><a href="#一、docker-网络" class="header-anchor">#</a> 一、Docker 网络</h2> <p>Docker 网络主要是解决容器联网问题，也是我们使用容器中最重要的一个环节，如果容器没有网络则无法向网络中提供服务。</p> <p><strong>网络管理命令：docker network</strong></p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker network --helpUsage:	docker network COMMANDManage networksOptions:      --help   Print usageCommands:  connect     Connect a container to a network  create      Create a network  disconnect  Disconnect a container from a network  inspect     Display detailed information on one or more networks  ls          List networks  prune       Remove all unused networks  rm          Remove one or more networksRun 'docker network COMMAND --help' for more information on a command.
+</code></pre></div><h2 id="二、docker-网络类型"><a href="#二、docker-网络类型" class="header-anchor">#</a> 二、Docker 网络类型</h2> <ul><li>bridge</li> <li>host</li> <li>none</li> <li>容器网络或联盟网络</li></ul> <blockquote><p>PS：以下示例均在 Linux 环境下。</p></blockquote> <h3 id="_1-bridge"><a href="#_1-bridge" class="header-anchor">#</a> 1. bridge</h3> <p>桥接网络是指容器通过桥接的方式将容器网卡桥接到宿主机的 <strong>docker0</strong> 网桥，然后再通过宿主机防火墙的 <strong>NAT</strong> 表实现与外网的联系。</p> <p><strong>查看宿主机网卡</strong></p> <p>我们可以使用 <code>ifconfig</code> 来查看宿主机的 <strong>docker0</strong> 网桥：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@zutuanxue ~]# ifconfig 
+# docker0 网桥
+docker0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
+        inet6 fe80::42:c7ff:fe37:8e8  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 02:42:c7:37:08:e8  txqueuelen 0  (Ethernet)
+        RX packets 6618  bytes 277975 (271.4 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 8152  bytes 24675021 (23.5 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+.....省略了本机的网卡信息
+
+# 容器网卡，每创建一个桥接网络的容器就会生成一个对应的网卡
+vethf75a942: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet6 fe80::9085:f5ff:fe34:77b5  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 92:85:f5:34:77:b5  txqueuelen 0  (Ethernet)
+        RX packets 2850  bytes 158484 (154.7 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 3397  bytes 11613136 (11.0 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre></div><p>如果想看更详细的信息，可以使用 <code>ip add show</code> 命令：</p> <div class="language- extra-class"><pre class="language-text"><code>4: docker0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
+    link/ether 02:42:c7:37:08:e8 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::42:c7ff:fe37:8e8/64 scope link 
+       valid_lft forever preferred_lft forever
+</code></pre></div><p>这里的 <strong>vethf75a942@if13</strong> 指的就是容器网卡，V 代表虚拟网卡的意思，eth 以太网卡，f75a942 网卡编号，if13 指的是宿主机网桥（docekr0）的一个端口，对应容器的网卡编号加 1。所以容器内的网卡编号应该是 <strong>eth0@if14</strong>。</p> <p>在容器中执行命令 <code>ip add show</code> 也可以看到：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@zutuanxue ~]# docker exec centos1 ip add show
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+13: eth0@if14: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
+    link/ether 02:42:ac:11:00:03 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 172.17.0.3/16 brd 172.17.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+</code></pre></div><p><strong>查看宿主机防火墙的 NAT 表内容</strong></p> <p>使用 <code>iptables -t nat -L</code> 命令可以查看宿主机防火墙的 NAT 表内容：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@zutuanxue ~]# iptables -t nat -LChain PREROUTING (policy ACCEPT)target     prot opt source               destination         DOCKER     all  --  anywhere             anywhere             ADDRTYPE match dst-type LOCALChain INPUT (policy ACCEPT)target     prot opt source               destination         Chain OUTPUT (policy ACCEPT)target     prot opt source               destination         DOCKER     all  --  anywhere            !loopback/8           ADDRTYPE match dst-type LOCALChain POSTROUTING (policy ACCEPT)target     prot opt source               destination         MASQUERADE  all  --  172.17.0.0/16        anywhere            Chain DOCKER (2 references)target     prot opt source               destination         RETURN     all  --  anywhere             anywhere   
+</code></pre></div><p><strong>查看容器网卡和 docker0 网卡的桥接信息</strong></p> <p>使用 <code>brctl show</code> 可以查看容器网卡和 docker0 网卡的桥接信息：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@zutuanxue ~]# brctl show
+bridge name	bridge id		STP enabled	interfaces
+docker0		8000.0242c73708e8	no		vethf75a942
+</code></pre></div><p>如果 <code>brctl command not found</code>，则需要先安装以太网管理工具：</p> <div class="language- extra-class"><pre class="language-text"><code>yum install bridge-utils
+</code></pre></div><h3 id="_2-host"><a href="#_2-host" class="header-anchor">#</a> 2. host</h3> <p>容器和真机共用网卡及对应的端口，缺点就是同一个端口只能宿主机或者某个容器使用，其他容器不能用。</p> <h3 id="_3-none"><a href="#_3-none" class="header-anchor">#</a> 3. none</h3> <p>容器仅有 lo 网卡，是一个不能联网的本地容器。</p> <h2 id="三、docker-网桥网络"><a href="#三、docker-网桥网络" class="header-anchor">#</a> 三、Docker 网桥网络</h2> <p>不同的服务容器组应用不同的网桥，避免同一网络内容器太多，保持容器网络独立性。</p> <p>关于新网桥联网问题：创建网桥后，宿主机会自动帮你做 NAT，所以不用担心联网问题。</p> <h5 id="_1-查看网络"><a href="#_1-查看网络" class="header-anchor">#</a> 1. 查看网络</h5> <div class="language- extra-class"><pre class="language-text"><code>docker network ls
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+4bcb191d2317        bridge              bridge              local
+1ba893b67e39        host                host                local
+2cfd6854663b        none                null                local
+</code></pre></div><h5 id="_2-创建网桥"><a href="#_2-创建网桥" class="header-anchor">#</a> 2. 创建网桥</h5> <div class="language- extra-class"><pre class="language-text"><code>docker network create -d bridge --subnet .... --gateway ...  网桥名
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker network create -d bridge --subnet 192.168.1.0/24 --gateway 192.168.1.1 mydocker0
+966b7623db05c978c01d448ddf81088333ea065cf71863f716f19677108cf9e9
+[root@VM-12-10-centos ~]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+4bcb191d2317        bridge              bridge              local
+1ba893b67e39        host                host                local
+966b7623db05        mydocker0           bridge              local
+2cfd6854663b        none                null                local
+</code></pre></div><h5 id="_3-修改网桥名字"><a href="#_3-修改网桥名字" class="header-anchor">#</a> 3. 修改网桥名字</h5> <div class="language- extra-class"><pre class="language-text"><code>1、关闭新建网桥[root@zutuanxue ~]# ip link set dev br-6a410e27b66e down2、修改名字[root@zutuanxue ~]# ip link set dev br-6a410e27b66e name  mydocker03、启动网桥[root@zutuanxue ~]# ip link set dev mydocker0 up4、重启docker服务[root@zutuanxue ~]# systemctl restart docker
+</code></pre></div><h5 id="_4-删除未使用的网桥"><a href="#_4-删除未使用的网桥" class="header-anchor">#</a> 4. 删除未使用的网桥</h5> <div class="language- extra-class"><pre class="language-text"><code>docker network prune
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@VM-12-10-centos ~]# docker network prune
+WARNING! This will remove all networks not used by at least one container.
+Are you sure you want to continue? [y/N] y
+Deleted Networks:
+mydocker0
+</code></pre></div><h5 id="_5-删除某个网桥"><a href="#_5-删除某个网桥" class="header-anchor">#</a> 5. 删除某个网桥</h5> <p>注意：不能被活动容器占用。</p> <div class="language- extra-class"><pre class="language-text"><code>docker network rm 网桥名
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@zutuanxue ~]# docker network rm docker100docker100
+</code></pre></div><h5 id="_6-容器连接到网桥"><a href="#_6-容器连接到网桥" class="header-anchor">#</a> 6. 容器连接到网桥</h5> <div class="language- extra-class"><pre class="language-text"><code>docker network connect 网桥名 容器名
+</code></pre></div><p>示例：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@zutuanxue ~]# docker network connect docker1 centos1
+</code></pre></div><p>发现 centos1 容器多了一块网卡，使用的正是 docker1 的网段：</p> <div class="language- extra-class"><pre class="language-text"><code>[root@zutuanxue ~]# docker exec centos1 ifconfigeth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500        inet 172.17.0.2  netmask 255.255.0.0  broadcast 172.17.255.255        ether 02:42:ac:11:00:02  txqueuelen 0  (Ethernet)        RX packets 8  bytes 656 (656.0 B)        RX errors 0  dropped 0  overruns 0  frame 0        TX packets 0  bytes 0 (0.0 B)        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0eth1: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500        inet 192.168.1.2  netmask 255.255.255.0  broadcast 192.168.1.255        ether 02:42:c0:a8:01:02  txqueuelen 0  (Ethernet)        RX packets 16  bytes 1312 (1.2 KiB)        RX errors 0  dropped 0  overruns 0  frame 0        TX packets 0  bytes 0 (0.0 B)        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536        inet 127.0.0.1  netmask 255.0.0.0        loop  txqueuelen 1000  (Local Loopback)        RX packets 0  bytes 0 (0.0 B)        RX errors 0  dropped 0  overruns 0  frame 0        TX packets 0  bytes 0 (0.0 B)        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre></div><h5 id="_7-容器断开网桥"><a href="#_7-容器断开网桥" class="header-anchor">#</a> 7. 容器断开网桥</h5> <div class="language- extra-class"><pre class="language-text"><code>docker network disconnect 网桥名 容器名
+</code></pre></div><h3 id="常见问题合集"><a href="#常见问题合集" class="header-anchor">#</a> 常见问题合集</h3> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> 常见问题一：使用改名后的新网桥的容器可能无法解析域名原因：没有配置新网桥的 DNS解决方法：为容器手动配置一个 DNS 地址即可# 常见问题二：Networking will not work[root@zutuanxue ~]# docker run -d --network docker100 --name centos4 baishuming2020/centos_nginxWARNING: IPv4 forwarding is disabled. Networking will not work.67f2c276123c993cd66b9d7a99ba22402331a13f9ea8817e57324a934896b805解决方案: 1. 打开转发[root@zutuanxue ~]# echo &quot;net.ipv4.ip_forward=1&quot; &gt;&gt;  /usr/lib/sysctl.d/00-system.conf2. 重启网络[root@zutuanxue ~]# systemctl restart network</span>
+</code></pre></div><h2 id="四、docker-不同主机间容器通信"><a href="#四、docker-不同主机间容器通信" class="header-anchor">#</a> 四、Docker 不同主机间容器通信</h2> <h3 id="_1-macvlan"><a href="#_1-macvlan" class="header-anchor">#</a> 1. macvlan</h3> <p>在 Docker 中，<strong>macvlan</strong> 是众多 Docker 网络模型中的一种，并且是一种跨主机的网络模型，作为一种驱动启用，Docker macvlan 只支持 <strong>bridge</strong> 模式。</p> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> macvlan 需要一块独立的网卡来进行使用，所以我们需要新添加一块网卡docker network create -d macvlan --subnet=172.16.10.0/24 --gateway=172.16.10.1  -o parent=ens224  mtacvlan-1# -o parent=网卡名称  指定用来给 macvlan 网络使用的物理网卡# 注意，要在所有需要运行 macvlan 的主机上执行这条命令，但是要记得更改网关的地址，避免造成 IP 冲突</span>
+</code></pre></div><h3 id="_2-overlay"><a href="#_2-overlay" class="header-anchor">#</a> 2. overlay</h3> <p>在 Docker 中，<strong>overlay</strong> 是众多 Docker 网络模型中的一种，并且是一种跨主机的全局网络模型，有一个数据库专门的来存储网络分配信息，避免 IP 冲突，同时内部还有一个小型的 DNS 我们可以直接通过主机名进行访问。</p> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> 1. consul 服务端：</span>
+docker run -itd -h consul --name consul --restart=always -p 8500:8500 progrium/consul -server -bootstrap
+
+-h 				主机名
+–name 			容器名
+–restart=always 重启策略
+progrium/consul 镜像名称
+-server 		以服务节点启动
+-bootstrap		预期的启动节点数：自举
+
+<span class="token title important"><span class="token punctuation">#</span> 2. 在浏览器内输入 IP地址+端口号 可以看到 web 页面</span>
+
+<span class="token title important"><span class="token punctuation">#</span> 3. 在所有主机上编辑 daemon.json 文件：</span>
+{
+&quot;hosts&quot;: [&quot;tcp://0.0.0.0:2375&quot;,&quot;unix:///var/run/docker.sock&quot;]， 监听相关端口
+&quot;cluster-store&quot;:&quot;consul://192.168.1.150:8500&quot;,		   集群的主机地址
+&quot;cluster-advertise&quot;:&quot;192.168.1.150:2375”		宣告自己的地址 
+}
+
+<span class="token title important"><span class="token punctuation">#</span> 4. 重启 docker 服务</span>
+
+<span class="token title important"><span class="token punctuation">#</span> 5. 创建 overlay 网络（全局网络）：一台主机上创建自动同步</span>
+	docker network create -d overlay overlay-1
+
+<span class="token title important"><span class="token punctuation">#</span> 6. 启动容器测试：</span>
+	docker run -it --name docker-1 --network=overlay-1 centos /bin/bash
+	docker run -it --name docker-2 --network=overlay-1 centos /bin/bash
+
+<span class="token title important"><span class="token punctuation">#</span> 7. 验证：ping docker-1</span>
+</code></pre></div><h3 id="常见问题合集-2"><a href="#常见问题合集-2" class="header-anchor">#</a> 常见问题合集：</h3> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> 场景问题一：各容器内分配的ip之间相互ping不通</span>
+<span class="token list punctuation">-</span> 原因：可能由于防火墙问题引起的，默认 forward 链是d rop状 态，需要打开才可以。
+
+<span class="token list punctuation">-</span> 解决方案:
+执行下面操作，保证 <span class="token code keyword">`INPUT`</span>  <span class="token code keyword">`FORWARD`</span> 链都是 <span class="token code keyword">`ACCEPT`</span> 状态
+
+清除其他规则
+[root@zutuanxue_node1 <span class="token strike"><span class="token punctuation">~</span><span class="token content">]# iptables -P INPUT ACCEPT
+[root@zutuanxue_node1 </span><span class="token punctuation">~</span></span>]# iptables -P FORWARD ACCEPT
+[root@zutuanxue_node1 <span class="token strike"><span class="token punctuation">~</span><span class="token content">]# iptables -F
+[root@zutuanxue_node1 </span><span class="token punctuation">~</span></span>]# iptables -L -n
+
+[root@zutuanxue_node2 <span class="token strike"><span class="token punctuation">~</span><span class="token content">]# iptables -P INPUT ACCEPT
+[root@zutuanxue_node2 </span><span class="token punctuation">~</span></span>]# iptables -P FORWARD ACCEPT
+[root@zutuanxue_node2 <span class="token strike"><span class="token punctuation">~</span><span class="token content">]# iptables -F
+[root@zutuanxue_node2 </span><span class="token punctuation">~</span></span>]# iptables -L -n
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">6/24/2021, 6:09:13 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/noteSite/linux/docker/docker-container.html" class="prev">
+        Docker 容器
+      </a></span> <span class="next"><a href="/noteSite/linux/docker/dockerfile.html">
+        Dockerfile
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/noteSite/assets/js/app.24fc9801.js" defer></script><script src="/noteSite/assets/js/2.691adf44.js" defer></script><script src="/noteSite/assets/js/130.7152d8af.js" defer></script>
+  </body>
+</html>

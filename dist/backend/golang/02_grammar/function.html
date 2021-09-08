@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Golang 函数 | Hedon</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/noteSite/favicon.ico">
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/noteSite/assets/css/0.styles.0f3b0cbd.css" as="style"><link rel="preload" href="/noteSite/assets/js/app.24fc9801.js" as="script"><link rel="preload" href="/noteSite/assets/js/2.691adf44.js" as="script"><link rel="preload" href="/noteSite/assets/js/17.8311cdff.js" as="script"><link rel="prefetch" href="/noteSite/assets/js/10.9a97bd95.js"><link rel="prefetch" href="/noteSite/assets/js/100.92ff3756.js"><link rel="prefetch" href="/noteSite/assets/js/101.b961d627.js"><link rel="prefetch" href="/noteSite/assets/js/102.f75eebe3.js"><link rel="prefetch" href="/noteSite/assets/js/103.9f29eef3.js"><link rel="prefetch" href="/noteSite/assets/js/104.685d5ae6.js"><link rel="prefetch" href="/noteSite/assets/js/105.8be2e79c.js"><link rel="prefetch" href="/noteSite/assets/js/106.480db75b.js"><link rel="prefetch" href="/noteSite/assets/js/107.3ae52f0e.js"><link rel="prefetch" href="/noteSite/assets/js/108.5136c6f9.js"><link rel="prefetch" href="/noteSite/assets/js/109.00fa7a76.js"><link rel="prefetch" href="/noteSite/assets/js/11.d6449e4b.js"><link rel="prefetch" href="/noteSite/assets/js/110.db9c6c9c.js"><link rel="prefetch" href="/noteSite/assets/js/111.91410c4f.js"><link rel="prefetch" href="/noteSite/assets/js/112.38142bcf.js"><link rel="prefetch" href="/noteSite/assets/js/113.a78fbdf7.js"><link rel="prefetch" href="/noteSite/assets/js/114.779e87b8.js"><link rel="prefetch" href="/noteSite/assets/js/115.8729e847.js"><link rel="prefetch" href="/noteSite/assets/js/116.76804354.js"><link rel="prefetch" href="/noteSite/assets/js/117.1a0b24e1.js"><link rel="prefetch" href="/noteSite/assets/js/118.51d0eda9.js"><link rel="prefetch" href="/noteSite/assets/js/119.3040b1f7.js"><link rel="prefetch" href="/noteSite/assets/js/12.e733a196.js"><link rel="prefetch" href="/noteSite/assets/js/120.5ec306b7.js"><link rel="prefetch" href="/noteSite/assets/js/121.d1006e21.js"><link rel="prefetch" href="/noteSite/assets/js/122.326aa0a1.js"><link rel="prefetch" href="/noteSite/assets/js/123.a2da4635.js"><link rel="prefetch" href="/noteSite/assets/js/124.abc57ded.js"><link rel="prefetch" href="/noteSite/assets/js/125.dea39fe8.js"><link rel="prefetch" href="/noteSite/assets/js/126.6e42b452.js"><link rel="prefetch" href="/noteSite/assets/js/127.017512e2.js"><link rel="prefetch" href="/noteSite/assets/js/128.07d1f923.js"><link rel="prefetch" href="/noteSite/assets/js/129.c4acc6c8.js"><link rel="prefetch" href="/noteSite/assets/js/13.434b5f1e.js"><link rel="prefetch" href="/noteSite/assets/js/130.7152d8af.js"><link rel="prefetch" href="/noteSite/assets/js/131.39c701cd.js"><link rel="prefetch" href="/noteSite/assets/js/132.c500b949.js"><link rel="prefetch" href="/noteSite/assets/js/133.747399e5.js"><link rel="prefetch" href="/noteSite/assets/js/134.2a7ae0c6.js"><link rel="prefetch" href="/noteSite/assets/js/135.781b882c.js"><link rel="prefetch" href="/noteSite/assets/js/136.0fa75b8d.js"><link rel="prefetch" href="/noteSite/assets/js/137.f857b8c3.js"><link rel="prefetch" href="/noteSite/assets/js/138.fe8c125c.js"><link rel="prefetch" href="/noteSite/assets/js/139.e5d9bf59.js"><link rel="prefetch" href="/noteSite/assets/js/14.91f9301c.js"><link rel="prefetch" href="/noteSite/assets/js/140.50fbf4e3.js"><link rel="prefetch" href="/noteSite/assets/js/141.6e5c0697.js"><link rel="prefetch" href="/noteSite/assets/js/142.ef9f6474.js"><link rel="prefetch" href="/noteSite/assets/js/143.026ea3f2.js"><link rel="prefetch" href="/noteSite/assets/js/144.9954d79f.js"><link rel="prefetch" href="/noteSite/assets/js/145.23063f91.js"><link rel="prefetch" href="/noteSite/assets/js/146.0bf7ebb6.js"><link rel="prefetch" href="/noteSite/assets/js/147.f21b59c7.js"><link rel="prefetch" href="/noteSite/assets/js/148.dc68061b.js"><link rel="prefetch" href="/noteSite/assets/js/149.fc3a5d50.js"><link rel="prefetch" href="/noteSite/assets/js/15.47938ffc.js"><link rel="prefetch" href="/noteSite/assets/js/150.e534c38c.js"><link rel="prefetch" href="/noteSite/assets/js/151.4477bf42.js"><link rel="prefetch" href="/noteSite/assets/js/152.87dd1e5b.js"><link rel="prefetch" href="/noteSite/assets/js/153.c22d2496.js"><link rel="prefetch" href="/noteSite/assets/js/154.d6c25c39.js"><link rel="prefetch" href="/noteSite/assets/js/155.ee6a5bcb.js"><link rel="prefetch" href="/noteSite/assets/js/156.3138f0b9.js"><link rel="prefetch" href="/noteSite/assets/js/157.b9cae4d6.js"><link rel="prefetch" href="/noteSite/assets/js/158.64f94b30.js"><link rel="prefetch" href="/noteSite/assets/js/159.482a4b24.js"><link rel="prefetch" href="/noteSite/assets/js/16.c118e0d3.js"><link rel="prefetch" href="/noteSite/assets/js/160.821d070a.js"><link rel="prefetch" href="/noteSite/assets/js/161.23dc1ab4.js"><link rel="prefetch" href="/noteSite/assets/js/162.b417b6a3.js"><link rel="prefetch" href="/noteSite/assets/js/18.d815f23f.js"><link rel="prefetch" href="/noteSite/assets/js/19.13241de9.js"><link rel="prefetch" href="/noteSite/assets/js/20.fdf3ee8c.js"><link rel="prefetch" href="/noteSite/assets/js/21.ed6203ac.js"><link rel="prefetch" href="/noteSite/assets/js/22.e6553a1c.js"><link rel="prefetch" href="/noteSite/assets/js/23.f8f9c155.js"><link rel="prefetch" href="/noteSite/assets/js/24.7382ddd7.js"><link rel="prefetch" href="/noteSite/assets/js/25.333b798b.js"><link rel="prefetch" href="/noteSite/assets/js/26.cce0d974.js"><link rel="prefetch" href="/noteSite/assets/js/27.6a4f4064.js"><link rel="prefetch" href="/noteSite/assets/js/28.3e0d9f6a.js"><link rel="prefetch" href="/noteSite/assets/js/29.8ba6931d.js"><link rel="prefetch" href="/noteSite/assets/js/3.5999c579.js"><link rel="prefetch" href="/noteSite/assets/js/30.1e496c21.js"><link rel="prefetch" href="/noteSite/assets/js/31.63c482b8.js"><link rel="prefetch" href="/noteSite/assets/js/32.e0f9558e.js"><link rel="prefetch" href="/noteSite/assets/js/33.9acbb179.js"><link rel="prefetch" href="/noteSite/assets/js/34.87a908b2.js"><link rel="prefetch" href="/noteSite/assets/js/35.bc27216a.js"><link rel="prefetch" href="/noteSite/assets/js/36.e0a54ae7.js"><link rel="prefetch" href="/noteSite/assets/js/37.66fe3725.js"><link rel="prefetch" href="/noteSite/assets/js/38.29ab7e60.js"><link rel="prefetch" href="/noteSite/assets/js/39.86aa09aa.js"><link rel="prefetch" href="/noteSite/assets/js/4.a61e4cea.js"><link rel="prefetch" href="/noteSite/assets/js/40.40f6c0ad.js"><link rel="prefetch" href="/noteSite/assets/js/41.a115cc5e.js"><link rel="prefetch" href="/noteSite/assets/js/42.a1d44b01.js"><link rel="prefetch" href="/noteSite/assets/js/43.d8046694.js"><link rel="prefetch" href="/noteSite/assets/js/44.03a67dab.js"><link rel="prefetch" href="/noteSite/assets/js/45.8358be5f.js"><link rel="prefetch" href="/noteSite/assets/js/46.fe00ffd7.js"><link rel="prefetch" href="/noteSite/assets/js/47.e80b5b51.js"><link rel="prefetch" href="/noteSite/assets/js/48.d61647f6.js"><link rel="prefetch" href="/noteSite/assets/js/49.2a67648e.js"><link rel="prefetch" href="/noteSite/assets/js/5.2bccd6df.js"><link rel="prefetch" href="/noteSite/assets/js/50.d912ae8f.js"><link rel="prefetch" href="/noteSite/assets/js/51.2894520c.js"><link rel="prefetch" href="/noteSite/assets/js/52.79cf4612.js"><link rel="prefetch" href="/noteSite/assets/js/53.ae6cf3f0.js"><link rel="prefetch" href="/noteSite/assets/js/54.78ff62d1.js"><link rel="prefetch" href="/noteSite/assets/js/55.490e09d0.js"><link rel="prefetch" href="/noteSite/assets/js/56.4ea72d24.js"><link rel="prefetch" href="/noteSite/assets/js/57.dd515189.js"><link rel="prefetch" href="/noteSite/assets/js/58.943efba2.js"><link rel="prefetch" href="/noteSite/assets/js/59.28d04e0a.js"><link rel="prefetch" href="/noteSite/assets/js/6.f3d86aa7.js"><link rel="prefetch" href="/noteSite/assets/js/60.e1b3f1ed.js"><link rel="prefetch" href="/noteSite/assets/js/61.d79fb073.js"><link rel="prefetch" href="/noteSite/assets/js/62.972f97ae.js"><link rel="prefetch" href="/noteSite/assets/js/63.510dab6c.js"><link rel="prefetch" href="/noteSite/assets/js/64.70d17ba5.js"><link rel="prefetch" href="/noteSite/assets/js/65.008b16b8.js"><link rel="prefetch" href="/noteSite/assets/js/66.118ff1b0.js"><link rel="prefetch" href="/noteSite/assets/js/67.917cb0e1.js"><link rel="prefetch" href="/noteSite/assets/js/68.6d5cc5ed.js"><link rel="prefetch" href="/noteSite/assets/js/69.942ee88e.js"><link rel="prefetch" href="/noteSite/assets/js/7.da9921ea.js"><link rel="prefetch" href="/noteSite/assets/js/70.861936b9.js"><link rel="prefetch" href="/noteSite/assets/js/71.8da884c9.js"><link rel="prefetch" href="/noteSite/assets/js/72.48645489.js"><link rel="prefetch" href="/noteSite/assets/js/73.3d731c61.js"><link rel="prefetch" href="/noteSite/assets/js/74.d702e898.js"><link rel="prefetch" href="/noteSite/assets/js/75.e2905a0c.js"><link rel="prefetch" href="/noteSite/assets/js/76.74ff117f.js"><link rel="prefetch" href="/noteSite/assets/js/77.fb857cd8.js"><link rel="prefetch" href="/noteSite/assets/js/78.c8a104ed.js"><link rel="prefetch" href="/noteSite/assets/js/79.c8226dd8.js"><link rel="prefetch" href="/noteSite/assets/js/8.b1ba721d.js"><link rel="prefetch" href="/noteSite/assets/js/80.30822bdb.js"><link rel="prefetch" href="/noteSite/assets/js/81.4caf3898.js"><link rel="prefetch" href="/noteSite/assets/js/82.a3bae02d.js"><link rel="prefetch" href="/noteSite/assets/js/83.c280a426.js"><link rel="prefetch" href="/noteSite/assets/js/84.92c2442d.js"><link rel="prefetch" href="/noteSite/assets/js/85.0a3c5e7d.js"><link rel="prefetch" href="/noteSite/assets/js/86.01e50878.js"><link rel="prefetch" href="/noteSite/assets/js/87.8db830a1.js"><link rel="prefetch" href="/noteSite/assets/js/88.003ef34a.js"><link rel="prefetch" href="/noteSite/assets/js/89.5ffa0238.js"><link rel="prefetch" href="/noteSite/assets/js/9.09db9bdb.js"><link rel="prefetch" href="/noteSite/assets/js/90.dc502e8a.js"><link rel="prefetch" href="/noteSite/assets/js/91.f923e9e3.js"><link rel="prefetch" href="/noteSite/assets/js/92.6c596924.js"><link rel="prefetch" href="/noteSite/assets/js/93.86401fdc.js"><link rel="prefetch" href="/noteSite/assets/js/94.5a9b0dc6.js"><link rel="prefetch" href="/noteSite/assets/js/95.d138495b.js"><link rel="prefetch" href="/noteSite/assets/js/96.45ce2015.js"><link rel="prefetch" href="/noteSite/assets/js/97.1fc4fa5a.js"><link rel="prefetch" href="/noteSite/assets/js/98.ccc65635.js"><link rel="prefetch" href="/noteSite/assets/js/99.cdcea560.js">
+    <link rel="stylesheet" href="/noteSite/assets/css/0.styles.0f3b0cbd.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/noteSite/" class="home-link router-link-active"><img src="/noteSite/images/hedon.png" alt="Hedon" class="logo"> <span class="site-name can-hide">Hedon</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/component/" class="nav-link">
+  计算机组成原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link router-link-active">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/component/" class="nav-link">
+  计算机组成原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link router-link-active">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>入门</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>基础</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/backend/golang/02_grammar/data_type.html" class="sidebar-link">Golang 数据类型</a></li><li><a href="/noteSite/backend/golang/02_grammar/flow_control.html" class="sidebar-link">Golang 流程控制</a></li><li><a href="/noteSite/backend/golang/02_grammar/arr_slice.html" class="sidebar-link">Golang 数组和切片</a></li><li><a href="/noteSite/backend/golang/02_grammar/map.html" class="sidebar-link">Golang Map</a></li><li><a href="/noteSite/backend/golang/02_grammar/pointer.html" class="sidebar-link">Golang 指针</a></li><li><a href="/noteSite/backend/golang/02_grammar/struct.html" class="sidebar-link">Golang 结构体</a></li><li><a href="/noteSite/backend/golang/02_grammar/function.html" aria-current="page" class="active sidebar-link">Golang 函数</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#一、golang-函数声明" class="sidebar-link">一、Golang 函数声明</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#二、golang-函数参数" class="sidebar-link">二、Golang 函数参数</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_1-一般参数" class="sidebar-link">1. 一般参数</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_2-可变参数" class="sidebar-link">2. 可变参数</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#三、golang-函数参数传递" class="sidebar-link">三、Golang 函数参数传递</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_1-值传递" class="sidebar-link">1. 值传递</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_2-引用传递" class="sidebar-link">2. 引用传递</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#四、golang-函数返回值" class="sidebar-link">四、Golang 函数返回值</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_1-一个函数可以有多个返回值" class="sidebar-link">1. 一个函数可以有多个返回值</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_2-接收函数的多个返回值" class="sidebar-link">2. 接收函数的多个返回值</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#五、golang-延迟函数" class="sidebar-link">五、Golang 延迟函数</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_1-延迟是什么" class="sidebar-link">1. 延迟是什么</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_2-延迟函数" class="sidebar-link">2. 延迟函数</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_3-延迟方法" class="sidebar-link">3. 延迟方法</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_4-延时参数" class="sidebar-link">4. 延时参数</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_5-逆序输出" class="sidebar-link">5. 逆序输出</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_6-defer-注意点" class="sidebar-link">6. defer 注意点</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_7-defer-原理" class="sidebar-link">7. defer 原理</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#六、golang-匿名函数" class="sidebar-link">六、Golang 匿名函数</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_1-匿名函数" class="sidebar-link">1. 匿名函数</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_2-回调函数" class="sidebar-link">2. 回调函数</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/function.html#_3-闭包" class="sidebar-link">3. 闭包</a></li></ul></li></ul></li><li><a href="/noteSite/backend/golang/02_grammar/method.html" class="sidebar-link">Golang 方法</a></li><li><a href="/noteSite/backend/golang/02_grammar/interface.html" class="sidebar-link">Golang 接口</a></li><li><a href="/noteSite/backend/golang/02_grammar/type.html" class="sidebar-link">Golang 关键字 type</a></li><li><a href="/noteSite/backend/golang/02_grammar/error.html" class="sidebar-link">Golang 异常处理</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>进阶</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>标准库</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>常用技巧</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="golang-函数"><a href="#golang-函数" class="header-anchor">#</a> Golang 函数</h1> <p>对于熟悉 Java 或者其他编程语言的同学来说，对于函数和方法可能有些误解，在 Go 语言中，函数和方法不太一样，有明确的区分。但对于 Java 而已，一般可以认为函数就是方法、方法就是函数。在 Go 语言中，函数是指不属于任何结构体、类型的方法，也就是说，函数是没有接受者的，而方法是有接受者的，我们说的方法要么属于一个结构体，要么属于一个新定义的类型。</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">//函数</span>
+<span class="token keyword">func</span> <span class="token function">hello</span><span class="token punctuation">(</span>c <span class="token operator">*</span>Client<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  
+<span class="token punctuation">}</span>
+
+<span class="token comment">//方法</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>Client<span class="token punctuation">)</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="一、golang-函数声明"><a href="#一、golang-函数声明" class="header-anchor">#</a> 一、Golang 函数声明</h2> <p>函数语法格式：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">funcName</span><span class="token punctuation">(</span>parametername type1<span class="token punctuation">,</span> parametername type2<span class="token punctuation">)</span> <span class="token punctuation">(</span>output1 type1<span class="token punctuation">,</span> output2 type2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//这里是处理逻辑代码</span>
+    <span class="token comment">//返回多个值</span>
+    <span class="token keyword">return</span> value1<span class="token punctuation">,</span> value2
+<span class="token punctuation">}</span>
+</code></pre></div><ul><li>func：函数由 func 开始声明</li> <li>funcName：函数名称，函数名和参数列表一起构成了函数签名
+<ul><li>小写：同一个包内可调用，不同包不可调用</li> <li>大写：不同包内可调用（通过 import 包）</li></ul></li> <li>parametername type：参数列表</li> <li>output type：返回值，Go 语言支持一个函数返回多个值</li></ul> <blockquote><p>注意：Go 程序中至少有一个 main 函数。</p></blockquote> <h2 id="二、golang-函数参数"><a href="#二、golang-函数参数" class="header-anchor">#</a> 二、Golang 函数参数</h2> <p>形式参数：定义函数时，用于接收外部传入的数据，叫做形式参数，简称形参。</p> <p>实际参数：调用函数时，传给形参的实际的数据，叫做实际参数，简称实参。</p> <p>函数调用：</p> <ul><li>函数名称必须匹配</li> <li>实参与形参必须一一对应：顺序，个数，类型</li></ul> <h3 id="_1-一般参数"><a href="#_1-一般参数" class="header-anchor">#</a> 1. 一般参数</h3> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// 两个参数，一个 param1，一个 param2</span>
+<span class="token keyword">func</span> <span class="token function">funcName</span><span class="token punctuation">(</span>param1 type1<span class="token punctuation">,</span> param2<span class="token punctuation">,</span> type2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  	
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 如果 param1 和 param2 类型相同，可以这么写</span>
+<span class="token keyword">func</span> <span class="token function">funcName</span><span class="token punctuation">(</span>param1<span class="token punctuation">,</span> param2 <span class="token keyword">type</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_2-可变参数"><a href="#_2-可变参数" class="header-anchor">#</a> 2. 可变参数</h3> <ul><li>可变参数放在最后面</li></ul> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// 使用 ... （三个点）就可以实现可变参数</span>
+<span class="token keyword">func</span> <span class="token function">funcName</span><span class="token punctuation">(</span>arg<span class="token operator">...</span><span class="token keyword">type</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  	
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="三、golang-函数参数传递"><a href="#三、golang-函数参数传递" class="header-anchor">#</a> 三、Golang 函数参数传递</h2> <h3 id="_1-值传递"><a href="#_1-值传递" class="header-anchor">#</a> 1. 值传递</h3> <p>值传递实际上就是一份拷贝，函数内部对该值的修改，不会影响到函数外部的值，因为它们已经不是同一个东西了。</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+   <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  x <span class="token operator">:=</span> <span class="token number">16</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;修改前 x=&quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>  <span class="token comment">//16</span>
+  <span class="token comment">//调用函数</span>
+  <span class="token function">changeX</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;修改后 x=&quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>  <span class="token comment">//16，没有改变</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">changeX</span><span class="token punctuation">(</span>x <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  x <span class="token operator">=</span> <span class="token number">100</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;修改时 x=&quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span> <span class="token comment">//100</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_2-引用传递"><a href="#_2-引用传递" class="header-anchor">#</a> 2. 引用传递</h3> <p><strong>引用传递本质上也是值传递，只不过这份值是一个指针（地址）。</strong> 所以我们在函数内对这份值的修改，其实不是改这个值，而是去修改这个值所指向的数据，所以是会影响到函数外部的值的。</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	x <span class="token operator">:=</span> <span class="token number">16</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;修改前 x=&quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>  <span class="token comment">//16</span>
+	<span class="token comment">//调用函数</span>
+	<span class="token function">changeX</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>x<span class="token punctuation">)</span>  <span class="token comment">//传地址</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;修改后 x=&quot;</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>  <span class="token comment">//100，改变了</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">changeX</span><span class="token punctuation">(</span>x <span class="token operator">*</span><span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token operator">*</span>x <span class="token operator">=</span> <span class="token number">100</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;修改时 x=&quot;</span><span class="token punctuation">,</span> <span class="token operator">*</span>x<span class="token punctuation">)</span> <span class="token comment">//100</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>传指针使得多个函数能操作同一个对象。</p> <p>传指针比较轻量级（8bytes），只是传内存地址，我们可以用指针传递体积大的结构体。如果用参数值传递的话, 在每次 copy 上面就会花费相对较多的系统开销（内存和时间）。所以当你要传递大的结构体的时候，用指针是一个明智的选择。</p> <p><strong>Go语言中 slice，map 和 channel 这三种类型的实现机制类似指针</strong>， 所以可以直接传递，而不用取地址后传递指针。</p> <blockquote><p>注：若函数需改变 slice 的长度，则仍需要取地址传递指针，因为 slice 扩容后会重新申请一个 array 来作为底层数组，这个时候就改变指向了）</p></blockquote> <h2 id="四、golang-函数返回值"><a href="#四、golang-函数返回值" class="header-anchor">#</a> 四、Golang 函数返回值</h2> <h3 id="_1-一个函数可以有多个返回值"><a href="#_1-一个函数可以有多个返回值" class="header-anchor">#</a> 1. 一个函数可以有多个返回值</h3> <p>如上文所说，Golang 是支持一个函数返回多个值的，这样的一个好处是我们在需要返回多个值的时候不需要像其他语言一样去封装一个结构体或者是类，比较方便。</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// 返回值可以不起名字</span>
+<span class="token keyword">func</span> <span class="token function">swap</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword">return</span> y<span class="token punctuation">,</span> x
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 返回值也可以起名字</span>
+<span class="token keyword">func</span> <span class="token function">handle</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">(</span>res <span class="token builtin">string</span><span class="token punctuation">,</span> err <span class="token builtin">error</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  	<span class="token comment">//...</span>
+ 		<span class="token keyword">return</span>   					<span class="token comment">//这里可以不用写 return 什么</span>
+   <span class="token comment">//return res, err  //当然也可以写</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_2-接收函数的多个返回值"><a href="#_2-接收函数的多个返回值" class="header-anchor">#</a> 2. 接收函数的多个返回值</h3> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// 接收多个值</span>
+res1<span class="token punctuation">,</span> res2 <span class="token operator">:=</span> <span class="token function">invoke</span><span class="token punctuation">(</span>param1<span class="token punctuation">,</span> param2<span class="token punctuation">)</span>
+
+<span class="token comment">// 如果有的值不想要，则可以用空白符 _ 来占位 </span>
+res1<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> <span class="token function">invoke</span><span class="token punctuation">(</span>param1<span class="token punctuation">,</span> param2<span class="token punctuation">)</span>
+</code></pre></div><h2 id="五、golang-延迟函数"><a href="#五、golang-延迟函数" class="header-anchor">#</a> 五、Golang 延迟函数</h2> <h3 id="_1-延迟是什么"><a href="#_1-延迟是什么" class="header-anchor">#</a> 1. 延迟是什么</h3> <blockquote><p>即延迟（defer）语句，延迟语句被用于执行一个函数调用，在这个函数之前，延迟语句返回。</p></blockquote> <h3 id="_2-延迟函数"><a href="#_2-延迟函数" class="header-anchor">#</a> 2. 延迟函数</h3> <p>你可以在函数中添加多个 defer 语句。当函数执行到最后时，这些 defer 语句会按照逆序执行，最后该函数返回。特别是当你在进行一些打开资源的操作时，遇到错误需要提前返回，在返回前你需要关闭相应的资源，不然很容易造成资源泄露等问题。</p> <ul><li>如果有很多调用 defer，那么 defer 是采用<code>后进先出</code>模式  —— 栈</li> <li>在离开所在的方法时，执行（报错的时候也会执行）</li></ul> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">ReadWrite</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span>
+    file<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token string">&quot;file&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">//	打开资源后立刻 defer 是一个好习惯，它会保证无论程序是否正常结束都能关闭资源</span>
+    <span class="token keyword">defer</span> file<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> failureX <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token boolean">false</span>
+    <span class="token punctuation">}</span> i
+    f failureY <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token boolean">false</span>
+    <span class="token punctuation">}</span> 
+    <span class="token keyword">return</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_3-延迟方法"><a href="#_3-延迟方法" class="header-anchor">#</a> 3. 延迟方法</h3> <p>延迟并不仅仅局限于函数。延迟一个方法调用也是完全合法的。</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>  
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> person <span class="token keyword">struct</span> <span class="token punctuation">{</span>  
+    firstName <span class="token builtin">string</span>
+    lastName <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>p person<span class="token punctuation">)</span> <span class="token function">fullName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s %s&quot;</span><span class="token punctuation">,</span>p<span class="token punctuation">.</span>firstName<span class="token punctuation">,</span>p<span class="token punctuation">.</span>lastName<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+    p <span class="token operator">:=</span> person <span class="token punctuation">{</span>
+        firstName<span class="token punctuation">:</span> <span class="token string">&quot;John&quot;</span><span class="token punctuation">,</span>
+        lastName<span class="token punctuation">:</span> <span class="token string">&quot;Smith&quot;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">defer</span> p<span class="token punctuation">.</span><span class="token function">fullName</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Welcome &quot;</span><span class="token punctuation">)</span>  
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>Welcome John Smith 
+</code></pre></div><h3 id="_4-延时参数"><a href="#_4-延时参数" class="header-anchor">#</a> 4. 延时参数</h3> <blockquote><p>延迟函数的参数在<strong>执行延迟语句时被执行</strong>，而不是在执行实际的函数调用时执行。</p></blockquote> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>  
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">printA</span><span class="token punctuation">(</span>a <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;value of a in deferred function&quot;</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+    a <span class="token operator">:=</span> <span class="token number">5</span>
+    <span class="token keyword">defer</span> <span class="token function">printA</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+    a <span class="token operator">=</span> <span class="token number">10</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;value of a before deferred function call&quot;</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>value of a before deferred function call 10  
+value of a in deferred function 5 
+</code></pre></div><p>可以参考，其实 a 已经作为 5 被传递到 defer 中，然后压入栈中了，所以只需 printA 的时候 a 还是 5，而不是后面修改成的 10。</p> <h3 id="_5-逆序输出"><a href="#_5-逆序输出" class="header-anchor">#</a> 5. 逆序输出</h3> <p>前面说了，defer 的执行顺序类似于栈，先进后出。</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>  
+    <span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+    name <span class="token operator">:=</span> <span class="token string">&quot;Naveen&quot;</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Orignal String: %s\n&quot;</span><span class="token punctuation">,</span> <span class="token function">string</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;Reversed String: &quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">rune</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">defer</span> fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%c&quot;</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>Orignal String: Naveen  
+Reversed String: neevaN 
+</code></pre></div><h3 id="_6-defer-注意点"><a href="#_6-defer-注意点" class="header-anchor">#</a> 6. defer 注意点</h3> <ol><li>当外围函数中的语句正常执行完毕时，只有其中所有的延迟函数都执行完毕，外围函数才会真正的结束执行；</li> <li>当执行外围函数中的 return 语句时，只有其中所有的延迟函数都执行完毕后，外围函数才会真正返回；</li> <li>当外围函数中的代码引发运行恐慌（panic）时，只有其中所有的延迟函数都执行完毕后，该运行时恐慌才会真正被扩展至调用函数。</li></ol> <h3 id="_7-defer-原理"><a href="#_7-defer-原理" class="header-anchor">#</a> 7. defer 原理</h3> <blockquote><p>参考：https://draveness.me/golang/docs/part2-foundation/ch05-keyword/golang-defer/</p></blockquote> <p><font color="red">待补充....</font></p> <h2 id="六、golang-匿名函数"><a href="#六、golang-匿名函数" class="header-anchor">#</a> 六、Golang 匿名函数</h2> <blockquote><p>匿名函数：没有名字的函数。</p></blockquote> <p>定义一个匿名函数，直接进行调用。通常只能使用一次。也可以使用匿名函数赋值给某个函数变量，那么就可以调用多次了。</p> <p>Go 语言是支持函数式编程：</p> <ol><li>将匿名函数作为另一个函数的参数：回调函数</li> <li>将匿名函数作为另一个函数的返回值：闭包</li></ol> <h3 id="_1-匿名函数"><a href="#_1-匿名函数" class="header-anchor">#</a> 1. 匿名函数</h3> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+
+<span class="token comment">// 有名函数</span>
+<span class="token keyword">func</span> <span class="token function">fun1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;我是fun1()函数。。&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+     <span class="token function">fun1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+     <span class="token function">fun1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+     fun2 <span class="token operator">:=</span> fun1
+     <span class="token function">fun2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+     <span class="token comment">//匿名函数</span>
+     <span class="token keyword">func</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;我是一个匿名函数。。&quot;</span><span class="token punctuation">)</span>
+     <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		
+     <span class="token comment">//	用一个变量来接收一个匿名函数，就可以再它的作用域内多次调用该函数</span>
+     fun3<span class="token operator">:=</span><span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;我也是一个匿名函数。。&quot;</span><span class="token punctuation">)</span>
+     <span class="token punctuation">}</span>
+     <span class="token function">fun3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+     <span class="token function">fun3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+     <span class="token comment">//	定义带参数的匿名函数</span>
+     <span class="token keyword">func</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span>b <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span>
+     <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+
+     <span class="token comment">//	定义带返回值的匿名函数</span>
+     res1 <span class="token operator">:=</span> <span class="token keyword">func</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token builtin">int</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> a <span class="token operator">+</span> b
+     <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span> <span class="token comment">//匿名函数调用了，将执行结果给res1</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span>
+		
+  
+     res2 <span class="token operator">:=</span> <span class="token keyword">func</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span>b <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token builtin">int</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> a <span class="token operator">+</span> b
+     <span class="token punctuation">}</span> <span class="token comment">// 将匿名函数的值，赋值给 res2，这个时候 res1 是一个函数</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span>
+
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">res2</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_2-回调函数"><a href="#_2-回调函数" class="header-anchor">#</a> 2. 回调函数</h3> <blockquote><p>回调函数：callback，就是将一个函数 func2 作为函数 func1 的一个参数。那么 func2 叫做回调函数，func1 叫做高阶函数。</p></blockquote> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  
+    <span class="token comment">// 设计一个函数，用于求两个整数的加减乘除运算</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%T\n&quot;</span><span class="token punctuation">,</span> add<span class="token punctuation">)</span>  <span class="token comment">//func(int, int) int</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%T\n&quot;</span><span class="token punctuation">,</span> oper<span class="token punctuation">)</span> <span class="token comment">//func(int, int, func(int, int) int) int</span>
+		
+    <span class="token comment">// 普通调用 add</span>
+    res1 <span class="token operator">:=</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span>
+		
+  	<span class="token comment">// 将 add 作为回调函数传入 oper</span>
+    res2 <span class="token operator">:=</span> <span class="token function">oper</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> add<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span>
+		
+  	<span class="token comment">// 将 sub 作为回调函数传入 oper</span>
+    res3 <span class="token operator">:=</span> <span class="token function">oper</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span>sub<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>res3<span class="token punctuation">)</span>
+		
+  	<span class="token comment">// 乘法运算</span>
+    func1 <span class="token operator">:=</span> <span class="token keyword">func</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token builtin">int</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> a <span class="token operator">*</span> b
+    <span class="token punctuation">}</span>
+		
+		<span class="token comment">// 将 func1 作为回调函数传入 oper</span>
+    res4<span class="token operator">:=</span><span class="token function">oper</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span>func1<span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>res4<span class="token punctuation">)</span>
+		
+  	<span class="token comment">// 也可以直接在传参的时候声明匿名函数</span>
+    res5 <span class="token operator">:=</span> <span class="token function">oper</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token keyword">func</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b <span class="token builtin">int</span><span class="token punctuation">)</span><span class="token builtin">int</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> b <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">{</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;除数不能为零&quot;</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token number">0</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> a <span class="token operator">/</span> b
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>res5<span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 根据传入的回调函数进行算术运算</span>
+<span class="token keyword">func</span> <span class="token function">oper</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">,</span> fun <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> fun<span class="token punctuation">)</span> <span class="token comment">//打印3个参数</span>
+    res <span class="token operator">:=</span> <span class="token function">fun</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> res
+<span class="token punctuation">}</span>
+
+<span class="token comment">//	加法运算</span>
+<span class="token keyword">func</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">+</span> b
+<span class="token punctuation">}</span>
+
+<span class="token comment">//	减法运算</span>
+<span class="token keyword">func</span> <span class="token function">sub</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">-</span> b
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="_3-闭包"><a href="#_3-闭包" class="header-anchor">#</a> 3. 闭包</h3> <blockquote><p>闭包（closure）：一个外层函数中，有内层函数，该内层函数中，会操作外层函数的局部变量（外层函数中的参数，或者外层函数中直接定义的变量），并且该外层函数的返回值就是这个内层函数。那么这个内层函数和外层函数的局部变量，统称为闭包结构。</p></blockquote> <ul><li>局部变量的生命周期会发生改变，正常的局部变量随着函数调用而创建，随着函数的结束而销毁。</li> <li>但是闭包结构中的外层函数的局部变量并 <strong>不会</strong> 随着外层函数的结束而销毁，因为内层函数还要继续使用。</li></ul> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">&quot;fmt&quot;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+     res1 <span class="token operator">:=</span> <span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 		 <span class="token comment">// res1 = fun</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%T\n&quot;</span><span class="token punctuation">,</span>res1<span class="token punctuation">)</span> <span class="token comment">// func() int</span>
+     
+  	 <span class="token comment">//	带括号表示执行 res1，得到返回结果 v1</span>
+     v1 <span class="token operator">:=</span> <span class="token function">res1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>v1<span class="token punctuation">)</span> <span class="token comment">// 1</span>
+     <span class="token comment">//	再次执行 res1，得到返回结果 v2</span>
+     v2 <span class="token operator">:=</span> <span class="token function">res1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>v2<span class="token punctuation">)</span> <span class="token comment">// 2</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">res1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 3</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">res1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 4</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">res1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 5</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">res1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 6</span>
+		
+     <span class="token comment">// 用一个新的变量来接收 increment() 的返回结果</span>
+     <span class="token comment">// 这个时候 increment 函数又重新执行了一遍</span>
+     res2 <span class="token operator">:=</span> <span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;%T\n&quot;</span><span class="token punctuation">,</span>res2<span class="token punctuation">)</span> <span class="token comment">// func() int</span>
+  	 <span class="token comment">// 执行 res2</span>
+     v3 <span class="token operator">:=</span> <span class="token function">res2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>v3<span class="token punctuation">)</span> <span class="token comment">// 1</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">res2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 2</span>
+		 
+     <span class="token comment">// res1 和 res2 没什么关系</span>
+     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">res1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 7</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">func</span> <span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>   <span class="token comment">//外层函数</span>
+    <span class="token comment">//1. 定义了一个局部变量</span>
+    i <span class="token operator">:=</span> <span class="token number">0</span>
+    <span class="token comment">//2. 定义了一个匿名函数，给变量自增并返回</span>
+    fun <span class="token operator">:=</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span> <span class="token comment">//内层函数</span>
+        i<span class="token operator">++</span>
+        <span class="token keyword">return</span> i
+    <span class="token punctuation">}</span>
+    <span class="token comment">//3. 返回该匿名函数</span>
+    <span class="token keyword">return</span> fun
+<span class="token punctuation">}</span>
+</code></pre></div><!----></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">7/27/2021, 6:41:10 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/noteSite/backend/golang/02_grammar/struct.html" class="prev">
+        Golang 结构体
+      </a></span> <span class="next"><a href="/noteSite/backend/golang/02_grammar/method.html">
+        Golang 方法
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/noteSite/assets/js/app.24fc9801.js" defer></script><script src="/noteSite/assets/js/2.691adf44.js" defer></script><script src="/noteSite/assets/js/17.8311cdff.js" defer></script>
+  </body>
+</html>

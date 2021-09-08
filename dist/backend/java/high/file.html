@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JavaSE —— File 类 | Hedon</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/noteSite/favicon.ico">
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/noteSite/assets/css/0.styles.0f3b0cbd.css" as="style"><link rel="preload" href="/noteSite/assets/js/app.24fc9801.js" as="script"><link rel="preload" href="/noteSite/assets/js/2.691adf44.js" as="script"><link rel="preload" href="/noteSite/assets/js/37.66fe3725.js" as="script"><link rel="prefetch" href="/noteSite/assets/js/10.9a97bd95.js"><link rel="prefetch" href="/noteSite/assets/js/100.92ff3756.js"><link rel="prefetch" href="/noteSite/assets/js/101.b961d627.js"><link rel="prefetch" href="/noteSite/assets/js/102.f75eebe3.js"><link rel="prefetch" href="/noteSite/assets/js/103.9f29eef3.js"><link rel="prefetch" href="/noteSite/assets/js/104.685d5ae6.js"><link rel="prefetch" href="/noteSite/assets/js/105.8be2e79c.js"><link rel="prefetch" href="/noteSite/assets/js/106.480db75b.js"><link rel="prefetch" href="/noteSite/assets/js/107.3ae52f0e.js"><link rel="prefetch" href="/noteSite/assets/js/108.5136c6f9.js"><link rel="prefetch" href="/noteSite/assets/js/109.00fa7a76.js"><link rel="prefetch" href="/noteSite/assets/js/11.d6449e4b.js"><link rel="prefetch" href="/noteSite/assets/js/110.db9c6c9c.js"><link rel="prefetch" href="/noteSite/assets/js/111.91410c4f.js"><link rel="prefetch" href="/noteSite/assets/js/112.38142bcf.js"><link rel="prefetch" href="/noteSite/assets/js/113.a78fbdf7.js"><link rel="prefetch" href="/noteSite/assets/js/114.779e87b8.js"><link rel="prefetch" href="/noteSite/assets/js/115.8729e847.js"><link rel="prefetch" href="/noteSite/assets/js/116.76804354.js"><link rel="prefetch" href="/noteSite/assets/js/117.1a0b24e1.js"><link rel="prefetch" href="/noteSite/assets/js/118.51d0eda9.js"><link rel="prefetch" href="/noteSite/assets/js/119.3040b1f7.js"><link rel="prefetch" href="/noteSite/assets/js/12.e733a196.js"><link rel="prefetch" href="/noteSite/assets/js/120.5ec306b7.js"><link rel="prefetch" href="/noteSite/assets/js/121.d1006e21.js"><link rel="prefetch" href="/noteSite/assets/js/122.326aa0a1.js"><link rel="prefetch" href="/noteSite/assets/js/123.a2da4635.js"><link rel="prefetch" href="/noteSite/assets/js/124.abc57ded.js"><link rel="prefetch" href="/noteSite/assets/js/125.dea39fe8.js"><link rel="prefetch" href="/noteSite/assets/js/126.6e42b452.js"><link rel="prefetch" href="/noteSite/assets/js/127.017512e2.js"><link rel="prefetch" href="/noteSite/assets/js/128.07d1f923.js"><link rel="prefetch" href="/noteSite/assets/js/129.c4acc6c8.js"><link rel="prefetch" href="/noteSite/assets/js/13.434b5f1e.js"><link rel="prefetch" href="/noteSite/assets/js/130.7152d8af.js"><link rel="prefetch" href="/noteSite/assets/js/131.39c701cd.js"><link rel="prefetch" href="/noteSite/assets/js/132.c500b949.js"><link rel="prefetch" href="/noteSite/assets/js/133.747399e5.js"><link rel="prefetch" href="/noteSite/assets/js/134.2a7ae0c6.js"><link rel="prefetch" href="/noteSite/assets/js/135.781b882c.js"><link rel="prefetch" href="/noteSite/assets/js/136.0fa75b8d.js"><link rel="prefetch" href="/noteSite/assets/js/137.f857b8c3.js"><link rel="prefetch" href="/noteSite/assets/js/138.fe8c125c.js"><link rel="prefetch" href="/noteSite/assets/js/139.e5d9bf59.js"><link rel="prefetch" href="/noteSite/assets/js/14.91f9301c.js"><link rel="prefetch" href="/noteSite/assets/js/140.50fbf4e3.js"><link rel="prefetch" href="/noteSite/assets/js/141.6e5c0697.js"><link rel="prefetch" href="/noteSite/assets/js/142.ef9f6474.js"><link rel="prefetch" href="/noteSite/assets/js/143.026ea3f2.js"><link rel="prefetch" href="/noteSite/assets/js/144.9954d79f.js"><link rel="prefetch" href="/noteSite/assets/js/145.23063f91.js"><link rel="prefetch" href="/noteSite/assets/js/146.0bf7ebb6.js"><link rel="prefetch" href="/noteSite/assets/js/147.f21b59c7.js"><link rel="prefetch" href="/noteSite/assets/js/148.dc68061b.js"><link rel="prefetch" href="/noteSite/assets/js/149.fc3a5d50.js"><link rel="prefetch" href="/noteSite/assets/js/15.47938ffc.js"><link rel="prefetch" href="/noteSite/assets/js/150.e534c38c.js"><link rel="prefetch" href="/noteSite/assets/js/151.4477bf42.js"><link rel="prefetch" href="/noteSite/assets/js/152.87dd1e5b.js"><link rel="prefetch" href="/noteSite/assets/js/153.c22d2496.js"><link rel="prefetch" href="/noteSite/assets/js/154.d6c25c39.js"><link rel="prefetch" href="/noteSite/assets/js/155.ee6a5bcb.js"><link rel="prefetch" href="/noteSite/assets/js/156.3138f0b9.js"><link rel="prefetch" href="/noteSite/assets/js/157.b9cae4d6.js"><link rel="prefetch" href="/noteSite/assets/js/158.64f94b30.js"><link rel="prefetch" href="/noteSite/assets/js/159.482a4b24.js"><link rel="prefetch" href="/noteSite/assets/js/16.c118e0d3.js"><link rel="prefetch" href="/noteSite/assets/js/160.821d070a.js"><link rel="prefetch" href="/noteSite/assets/js/161.23dc1ab4.js"><link rel="prefetch" href="/noteSite/assets/js/162.b417b6a3.js"><link rel="prefetch" href="/noteSite/assets/js/17.8311cdff.js"><link rel="prefetch" href="/noteSite/assets/js/18.d815f23f.js"><link rel="prefetch" href="/noteSite/assets/js/19.13241de9.js"><link rel="prefetch" href="/noteSite/assets/js/20.fdf3ee8c.js"><link rel="prefetch" href="/noteSite/assets/js/21.ed6203ac.js"><link rel="prefetch" href="/noteSite/assets/js/22.e6553a1c.js"><link rel="prefetch" href="/noteSite/assets/js/23.f8f9c155.js"><link rel="prefetch" href="/noteSite/assets/js/24.7382ddd7.js"><link rel="prefetch" href="/noteSite/assets/js/25.333b798b.js"><link rel="prefetch" href="/noteSite/assets/js/26.cce0d974.js"><link rel="prefetch" href="/noteSite/assets/js/27.6a4f4064.js"><link rel="prefetch" href="/noteSite/assets/js/28.3e0d9f6a.js"><link rel="prefetch" href="/noteSite/assets/js/29.8ba6931d.js"><link rel="prefetch" href="/noteSite/assets/js/3.5999c579.js"><link rel="prefetch" href="/noteSite/assets/js/30.1e496c21.js"><link rel="prefetch" href="/noteSite/assets/js/31.63c482b8.js"><link rel="prefetch" href="/noteSite/assets/js/32.e0f9558e.js"><link rel="prefetch" href="/noteSite/assets/js/33.9acbb179.js"><link rel="prefetch" href="/noteSite/assets/js/34.87a908b2.js"><link rel="prefetch" href="/noteSite/assets/js/35.bc27216a.js"><link rel="prefetch" href="/noteSite/assets/js/36.e0a54ae7.js"><link rel="prefetch" href="/noteSite/assets/js/38.29ab7e60.js"><link rel="prefetch" href="/noteSite/assets/js/39.86aa09aa.js"><link rel="prefetch" href="/noteSite/assets/js/4.a61e4cea.js"><link rel="prefetch" href="/noteSite/assets/js/40.40f6c0ad.js"><link rel="prefetch" href="/noteSite/assets/js/41.a115cc5e.js"><link rel="prefetch" href="/noteSite/assets/js/42.a1d44b01.js"><link rel="prefetch" href="/noteSite/assets/js/43.d8046694.js"><link rel="prefetch" href="/noteSite/assets/js/44.03a67dab.js"><link rel="prefetch" href="/noteSite/assets/js/45.8358be5f.js"><link rel="prefetch" href="/noteSite/assets/js/46.fe00ffd7.js"><link rel="prefetch" href="/noteSite/assets/js/47.e80b5b51.js"><link rel="prefetch" href="/noteSite/assets/js/48.d61647f6.js"><link rel="prefetch" href="/noteSite/assets/js/49.2a67648e.js"><link rel="prefetch" href="/noteSite/assets/js/5.2bccd6df.js"><link rel="prefetch" href="/noteSite/assets/js/50.d912ae8f.js"><link rel="prefetch" href="/noteSite/assets/js/51.2894520c.js"><link rel="prefetch" href="/noteSite/assets/js/52.79cf4612.js"><link rel="prefetch" href="/noteSite/assets/js/53.ae6cf3f0.js"><link rel="prefetch" href="/noteSite/assets/js/54.78ff62d1.js"><link rel="prefetch" href="/noteSite/assets/js/55.490e09d0.js"><link rel="prefetch" href="/noteSite/assets/js/56.4ea72d24.js"><link rel="prefetch" href="/noteSite/assets/js/57.dd515189.js"><link rel="prefetch" href="/noteSite/assets/js/58.943efba2.js"><link rel="prefetch" href="/noteSite/assets/js/59.28d04e0a.js"><link rel="prefetch" href="/noteSite/assets/js/6.f3d86aa7.js"><link rel="prefetch" href="/noteSite/assets/js/60.e1b3f1ed.js"><link rel="prefetch" href="/noteSite/assets/js/61.d79fb073.js"><link rel="prefetch" href="/noteSite/assets/js/62.972f97ae.js"><link rel="prefetch" href="/noteSite/assets/js/63.510dab6c.js"><link rel="prefetch" href="/noteSite/assets/js/64.70d17ba5.js"><link rel="prefetch" href="/noteSite/assets/js/65.008b16b8.js"><link rel="prefetch" href="/noteSite/assets/js/66.118ff1b0.js"><link rel="prefetch" href="/noteSite/assets/js/67.917cb0e1.js"><link rel="prefetch" href="/noteSite/assets/js/68.6d5cc5ed.js"><link rel="prefetch" href="/noteSite/assets/js/69.942ee88e.js"><link rel="prefetch" href="/noteSite/assets/js/7.da9921ea.js"><link rel="prefetch" href="/noteSite/assets/js/70.861936b9.js"><link rel="prefetch" href="/noteSite/assets/js/71.8da884c9.js"><link rel="prefetch" href="/noteSite/assets/js/72.48645489.js"><link rel="prefetch" href="/noteSite/assets/js/73.3d731c61.js"><link rel="prefetch" href="/noteSite/assets/js/74.d702e898.js"><link rel="prefetch" href="/noteSite/assets/js/75.e2905a0c.js"><link rel="prefetch" href="/noteSite/assets/js/76.74ff117f.js"><link rel="prefetch" href="/noteSite/assets/js/77.fb857cd8.js"><link rel="prefetch" href="/noteSite/assets/js/78.c8a104ed.js"><link rel="prefetch" href="/noteSite/assets/js/79.c8226dd8.js"><link rel="prefetch" href="/noteSite/assets/js/8.b1ba721d.js"><link rel="prefetch" href="/noteSite/assets/js/80.30822bdb.js"><link rel="prefetch" href="/noteSite/assets/js/81.4caf3898.js"><link rel="prefetch" href="/noteSite/assets/js/82.a3bae02d.js"><link rel="prefetch" href="/noteSite/assets/js/83.c280a426.js"><link rel="prefetch" href="/noteSite/assets/js/84.92c2442d.js"><link rel="prefetch" href="/noteSite/assets/js/85.0a3c5e7d.js"><link rel="prefetch" href="/noteSite/assets/js/86.01e50878.js"><link rel="prefetch" href="/noteSite/assets/js/87.8db830a1.js"><link rel="prefetch" href="/noteSite/assets/js/88.003ef34a.js"><link rel="prefetch" href="/noteSite/assets/js/89.5ffa0238.js"><link rel="prefetch" href="/noteSite/assets/js/9.09db9bdb.js"><link rel="prefetch" href="/noteSite/assets/js/90.dc502e8a.js"><link rel="prefetch" href="/noteSite/assets/js/91.f923e9e3.js"><link rel="prefetch" href="/noteSite/assets/js/92.6c596924.js"><link rel="prefetch" href="/noteSite/assets/js/93.86401fdc.js"><link rel="prefetch" href="/noteSite/assets/js/94.5a9b0dc6.js"><link rel="prefetch" href="/noteSite/assets/js/95.d138495b.js"><link rel="prefetch" href="/noteSite/assets/js/96.45ce2015.js"><link rel="prefetch" href="/noteSite/assets/js/97.1fc4fa5a.js"><link rel="prefetch" href="/noteSite/assets/js/98.ccc65635.js"><link rel="prefetch" href="/noteSite/assets/js/99.cdcea560.js">
+    <link rel="stylesheet" href="/noteSite/assets/css/0.styles.0f3b0cbd.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/noteSite/" class="home-link router-link-active"><img src="/noteSite/images/hedon.png" alt="Hedon" class="logo"> <span class="site-name can-hide">Hedon</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/component/" class="nav-link">
+  计算机组成原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link router-link-active">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/component/" class="nav-link">
+  计算机组成原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link router-link-active">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Java 常用类</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Java 高级特性</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/backend/java/high/file.html" aria-current="page" class="active sidebar-link">JavaSE —— File 类</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/java/high/file.html#_1-简介" class="sidebar-link">1. 简介</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/java/high/file.html#_2-构造器" class="sidebar-link">2. 构造器</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/java/high/file.html#_3-常用方法" class="sidebar-link">3. 常用方法</a></li></ul></li><li><a href="/noteSite/backend/java/high/io.html" class="sidebar-link">JavaSE —— IO</a></li><li><a href="/noteSite/backend/java/high/enum.html" class="sidebar-link">JavaSE —— 枚举类</a></li><li><a href="/noteSite/backend/java/high/reflect.html" class="sidebar-link">Java SE —— 反射</a></li><li><a href="/noteSite/backend/java/high/annotation.html" class="sidebar-link">Java SE —— 注解</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Java 并发编程</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Java 虚拟机</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Spring 5</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>SpringBoot 2.x</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>SpringCloud Hoxton</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>SpringCloud Alibaba</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>MyBatis 3.4.5</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="javase-file-类"><a href="#javase-file-类" class="header-anchor">#</a> JavaSE —— File 类</h1> <h2 id="_1-简介"><a href="#_1-简介" class="header-anchor">#</a> 1. 简介</h2> <ul><li>java.io.File类：文件和文件目录路径的抽象表示形式，与平台无关。</li> <li>File 能新建、删除、重命名文件和目录，但 File 不能访问文件内容本身。 如果需要访问文件内容本身，则需要使用 IO 流。</li> <li>想要在Java程序中表示一个真实存在的文件或目录，那么必须有一个 File 对象，但是 Java 程序中的一个File对象，可能没有一个真实存在的文件或目录。</li> <li>File 对象可以作为参数传递给流的构造器。</li></ul> <h2 id="_2-构造器"><a href="#_2-构造器" class="header-anchor">#</a> 2. 构造器</h2> <ul><li><p>public File(String pathname)</p> <p>以 pathname 为路径创建 File 对象，可以是绝对路径或者相对路径，如果 pathname 是相对路径，则默认的当前路径在系统属性user.dir 中存储。</p></li> <li><p>public File(String parent,String child)</p> <p>以 parent 为父路径，child 为子路径创建 File 对象。</p></li> <li><p>public File(File parent, String child)</p> <p>根据一个父 File 对象和子文件路径创建 File 对象。</p></li></ul> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> 路径分隔符</span>
+<span class="token list punctuation">-</span> windows 和 DOS 系统默认使用“\”来表示
+<span class="token list punctuation">-</span> UNIX 和 URL 使用“/”来表示
+Java 程序支持跨平台运行，因此路径分隔符要慎用。
+为了解决这个隐患，File类提供了一个常量: public static final String separator -&gt; 根据操作系统，动态的提供分隔符。
+</code></pre></div><h2 id="_3-常用方法"><a href="#_3-常用方法" class="header-anchor">#</a> 3. 常用方法</h2> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> 获取功能</span>
+ public String getAbsolutePath(): 获取绝对路径。
+ public String getPath(): 获取路径。
+ public String getName(): 获取名称。
+ public String getParent(): 获取上层文件目录路径。若无，返回null。
+ public long length(): 获取文件长度(即:字节数)。不能获取目录的长度。 
+ public long lastModified(): 获取最后一次的修改时间，毫秒值。
+ public String[] list(): 获取指定目录下的所有文件或者文件目录的名称数组。
+ public File[] listFiles(): 获取指定目录下的所有文件或者文件目录的 File 数组。
+
+<span class="token title important"><span class="token punctuation">#</span> 重命名功能</span>
+ public boolean renameTo(File dest):把文件重命名为指定的文件路径
+<span class="token title important"><span class="token punctuation">###</span> 注意事项：file1.renameTo(file2) 中 file 1必须真实存在，file2 必须不存在。</span>
+
+<span class="token title important"><span class="token punctuation">#</span> 判断功能</span>
+ public boolean isDirectory(): 判断是否是文件目录 
+ public boolean isFile(): 判断是否是文件
+ public boolean exists(): 判断是否存在
+ public boolean canRead(): 判断是否可读
+ public boolean canWrite(): 判断是否可写 
+ public boolean isHidden(): 判断是否隐藏
+
+<span class="token title important"><span class="token punctuation">#</span> 创建功能</span>
+ public boolean createNewFile(): 创建文件。若文件存在，则不创建，返回false。
+ public boolean mkdir(): 创建文件目录。如果此文件目录存在，就不创建了。如果此文件目录的上层目录不存在，也不创建。
+ public boolean mkdirs(): 创建文件目录。如果上层文件目录不存在，一并创建。
+<span class="token title important"><span class="token punctuation">###</span> 注意事项:如果你创建文件或者文件目录没有写盘符路径，那么，默认在项目路径下。</span>
+
+<span class="token title important"><span class="token punctuation">#</span> 删除功能</span>
+ public boolean delete():删除文件或者文件夹
+<span class="token title important"><span class="token punctuation">###</span> 删除注意事项: Java中的删除不走回收站。要删除一个文件目录，请注意该文件目录内不能包含文件或者文件目录。</span>
+</code></pre></div><!----></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">8/27/2021, 6:21:27 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/noteSite/backend/java/usual_classes/08-list.html" class="prev">
+        JavaSE —— 集合
+      </a></span> <span class="next"><a href="/noteSite/backend/java/high/io.html">
+        JavaSE —— IO
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/noteSite/assets/js/app.24fc9801.js" defer></script><script src="/noteSite/assets/js/2.691adf44.js" defer></script><script src="/noteSite/assets/js/37.66fe3725.js" defer></script>
+  </body>
+</html>

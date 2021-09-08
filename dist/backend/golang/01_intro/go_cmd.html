@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>go 命令 | Hedon</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/noteSite/favicon.ico">
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/noteSite/assets/css/0.styles.0f3b0cbd.css" as="style"><link rel="preload" href="/noteSite/assets/js/app.24fc9801.js" as="script"><link rel="preload" href="/noteSite/assets/js/2.691adf44.js" as="script"><link rel="preload" href="/noteSite/assets/js/8.b1ba721d.js" as="script"><link rel="prefetch" href="/noteSite/assets/js/10.9a97bd95.js"><link rel="prefetch" href="/noteSite/assets/js/100.92ff3756.js"><link rel="prefetch" href="/noteSite/assets/js/101.b961d627.js"><link rel="prefetch" href="/noteSite/assets/js/102.f75eebe3.js"><link rel="prefetch" href="/noteSite/assets/js/103.9f29eef3.js"><link rel="prefetch" href="/noteSite/assets/js/104.685d5ae6.js"><link rel="prefetch" href="/noteSite/assets/js/105.8be2e79c.js"><link rel="prefetch" href="/noteSite/assets/js/106.480db75b.js"><link rel="prefetch" href="/noteSite/assets/js/107.3ae52f0e.js"><link rel="prefetch" href="/noteSite/assets/js/108.5136c6f9.js"><link rel="prefetch" href="/noteSite/assets/js/109.00fa7a76.js"><link rel="prefetch" href="/noteSite/assets/js/11.d6449e4b.js"><link rel="prefetch" href="/noteSite/assets/js/110.db9c6c9c.js"><link rel="prefetch" href="/noteSite/assets/js/111.91410c4f.js"><link rel="prefetch" href="/noteSite/assets/js/112.38142bcf.js"><link rel="prefetch" href="/noteSite/assets/js/113.a78fbdf7.js"><link rel="prefetch" href="/noteSite/assets/js/114.779e87b8.js"><link rel="prefetch" href="/noteSite/assets/js/115.8729e847.js"><link rel="prefetch" href="/noteSite/assets/js/116.76804354.js"><link rel="prefetch" href="/noteSite/assets/js/117.1a0b24e1.js"><link rel="prefetch" href="/noteSite/assets/js/118.51d0eda9.js"><link rel="prefetch" href="/noteSite/assets/js/119.3040b1f7.js"><link rel="prefetch" href="/noteSite/assets/js/12.e733a196.js"><link rel="prefetch" href="/noteSite/assets/js/120.5ec306b7.js"><link rel="prefetch" href="/noteSite/assets/js/121.d1006e21.js"><link rel="prefetch" href="/noteSite/assets/js/122.326aa0a1.js"><link rel="prefetch" href="/noteSite/assets/js/123.a2da4635.js"><link rel="prefetch" href="/noteSite/assets/js/124.abc57ded.js"><link rel="prefetch" href="/noteSite/assets/js/125.dea39fe8.js"><link rel="prefetch" href="/noteSite/assets/js/126.6e42b452.js"><link rel="prefetch" href="/noteSite/assets/js/127.017512e2.js"><link rel="prefetch" href="/noteSite/assets/js/128.07d1f923.js"><link rel="prefetch" href="/noteSite/assets/js/129.c4acc6c8.js"><link rel="prefetch" href="/noteSite/assets/js/13.434b5f1e.js"><link rel="prefetch" href="/noteSite/assets/js/130.7152d8af.js"><link rel="prefetch" href="/noteSite/assets/js/131.39c701cd.js"><link rel="prefetch" href="/noteSite/assets/js/132.c500b949.js"><link rel="prefetch" href="/noteSite/assets/js/133.747399e5.js"><link rel="prefetch" href="/noteSite/assets/js/134.2a7ae0c6.js"><link rel="prefetch" href="/noteSite/assets/js/135.781b882c.js"><link rel="prefetch" href="/noteSite/assets/js/136.0fa75b8d.js"><link rel="prefetch" href="/noteSite/assets/js/137.f857b8c3.js"><link rel="prefetch" href="/noteSite/assets/js/138.fe8c125c.js"><link rel="prefetch" href="/noteSite/assets/js/139.e5d9bf59.js"><link rel="prefetch" href="/noteSite/assets/js/14.91f9301c.js"><link rel="prefetch" href="/noteSite/assets/js/140.50fbf4e3.js"><link rel="prefetch" href="/noteSite/assets/js/141.6e5c0697.js"><link rel="prefetch" href="/noteSite/assets/js/142.ef9f6474.js"><link rel="prefetch" href="/noteSite/assets/js/143.026ea3f2.js"><link rel="prefetch" href="/noteSite/assets/js/144.9954d79f.js"><link rel="prefetch" href="/noteSite/assets/js/145.23063f91.js"><link rel="prefetch" href="/noteSite/assets/js/146.0bf7ebb6.js"><link rel="prefetch" href="/noteSite/assets/js/147.f21b59c7.js"><link rel="prefetch" href="/noteSite/assets/js/148.dc68061b.js"><link rel="prefetch" href="/noteSite/assets/js/149.fc3a5d50.js"><link rel="prefetch" href="/noteSite/assets/js/15.47938ffc.js"><link rel="prefetch" href="/noteSite/assets/js/150.e534c38c.js"><link rel="prefetch" href="/noteSite/assets/js/151.4477bf42.js"><link rel="prefetch" href="/noteSite/assets/js/152.87dd1e5b.js"><link rel="prefetch" href="/noteSite/assets/js/153.c22d2496.js"><link rel="prefetch" href="/noteSite/assets/js/154.d6c25c39.js"><link rel="prefetch" href="/noteSite/assets/js/155.ee6a5bcb.js"><link rel="prefetch" href="/noteSite/assets/js/156.3138f0b9.js"><link rel="prefetch" href="/noteSite/assets/js/157.b9cae4d6.js"><link rel="prefetch" href="/noteSite/assets/js/158.64f94b30.js"><link rel="prefetch" href="/noteSite/assets/js/159.482a4b24.js"><link rel="prefetch" href="/noteSite/assets/js/16.c118e0d3.js"><link rel="prefetch" href="/noteSite/assets/js/160.821d070a.js"><link rel="prefetch" href="/noteSite/assets/js/161.23dc1ab4.js"><link rel="prefetch" href="/noteSite/assets/js/162.b417b6a3.js"><link rel="prefetch" href="/noteSite/assets/js/17.8311cdff.js"><link rel="prefetch" href="/noteSite/assets/js/18.d815f23f.js"><link rel="prefetch" href="/noteSite/assets/js/19.13241de9.js"><link rel="prefetch" href="/noteSite/assets/js/20.fdf3ee8c.js"><link rel="prefetch" href="/noteSite/assets/js/21.ed6203ac.js"><link rel="prefetch" href="/noteSite/assets/js/22.e6553a1c.js"><link rel="prefetch" href="/noteSite/assets/js/23.f8f9c155.js"><link rel="prefetch" href="/noteSite/assets/js/24.7382ddd7.js"><link rel="prefetch" href="/noteSite/assets/js/25.333b798b.js"><link rel="prefetch" href="/noteSite/assets/js/26.cce0d974.js"><link rel="prefetch" href="/noteSite/assets/js/27.6a4f4064.js"><link rel="prefetch" href="/noteSite/assets/js/28.3e0d9f6a.js"><link rel="prefetch" href="/noteSite/assets/js/29.8ba6931d.js"><link rel="prefetch" href="/noteSite/assets/js/3.5999c579.js"><link rel="prefetch" href="/noteSite/assets/js/30.1e496c21.js"><link rel="prefetch" href="/noteSite/assets/js/31.63c482b8.js"><link rel="prefetch" href="/noteSite/assets/js/32.e0f9558e.js"><link rel="prefetch" href="/noteSite/assets/js/33.9acbb179.js"><link rel="prefetch" href="/noteSite/assets/js/34.87a908b2.js"><link rel="prefetch" href="/noteSite/assets/js/35.bc27216a.js"><link rel="prefetch" href="/noteSite/assets/js/36.e0a54ae7.js"><link rel="prefetch" href="/noteSite/assets/js/37.66fe3725.js"><link rel="prefetch" href="/noteSite/assets/js/38.29ab7e60.js"><link rel="prefetch" href="/noteSite/assets/js/39.86aa09aa.js"><link rel="prefetch" href="/noteSite/assets/js/4.a61e4cea.js"><link rel="prefetch" href="/noteSite/assets/js/40.40f6c0ad.js"><link rel="prefetch" href="/noteSite/assets/js/41.a115cc5e.js"><link rel="prefetch" href="/noteSite/assets/js/42.a1d44b01.js"><link rel="prefetch" href="/noteSite/assets/js/43.d8046694.js"><link rel="prefetch" href="/noteSite/assets/js/44.03a67dab.js"><link rel="prefetch" href="/noteSite/assets/js/45.8358be5f.js"><link rel="prefetch" href="/noteSite/assets/js/46.fe00ffd7.js"><link rel="prefetch" href="/noteSite/assets/js/47.e80b5b51.js"><link rel="prefetch" href="/noteSite/assets/js/48.d61647f6.js"><link rel="prefetch" href="/noteSite/assets/js/49.2a67648e.js"><link rel="prefetch" href="/noteSite/assets/js/5.2bccd6df.js"><link rel="prefetch" href="/noteSite/assets/js/50.d912ae8f.js"><link rel="prefetch" href="/noteSite/assets/js/51.2894520c.js"><link rel="prefetch" href="/noteSite/assets/js/52.79cf4612.js"><link rel="prefetch" href="/noteSite/assets/js/53.ae6cf3f0.js"><link rel="prefetch" href="/noteSite/assets/js/54.78ff62d1.js"><link rel="prefetch" href="/noteSite/assets/js/55.490e09d0.js"><link rel="prefetch" href="/noteSite/assets/js/56.4ea72d24.js"><link rel="prefetch" href="/noteSite/assets/js/57.dd515189.js"><link rel="prefetch" href="/noteSite/assets/js/58.943efba2.js"><link rel="prefetch" href="/noteSite/assets/js/59.28d04e0a.js"><link rel="prefetch" href="/noteSite/assets/js/6.f3d86aa7.js"><link rel="prefetch" href="/noteSite/assets/js/60.e1b3f1ed.js"><link rel="prefetch" href="/noteSite/assets/js/61.d79fb073.js"><link rel="prefetch" href="/noteSite/assets/js/62.972f97ae.js"><link rel="prefetch" href="/noteSite/assets/js/63.510dab6c.js"><link rel="prefetch" href="/noteSite/assets/js/64.70d17ba5.js"><link rel="prefetch" href="/noteSite/assets/js/65.008b16b8.js"><link rel="prefetch" href="/noteSite/assets/js/66.118ff1b0.js"><link rel="prefetch" href="/noteSite/assets/js/67.917cb0e1.js"><link rel="prefetch" href="/noteSite/assets/js/68.6d5cc5ed.js"><link rel="prefetch" href="/noteSite/assets/js/69.942ee88e.js"><link rel="prefetch" href="/noteSite/assets/js/7.da9921ea.js"><link rel="prefetch" href="/noteSite/assets/js/70.861936b9.js"><link rel="prefetch" href="/noteSite/assets/js/71.8da884c9.js"><link rel="prefetch" href="/noteSite/assets/js/72.48645489.js"><link rel="prefetch" href="/noteSite/assets/js/73.3d731c61.js"><link rel="prefetch" href="/noteSite/assets/js/74.d702e898.js"><link rel="prefetch" href="/noteSite/assets/js/75.e2905a0c.js"><link rel="prefetch" href="/noteSite/assets/js/76.74ff117f.js"><link rel="prefetch" href="/noteSite/assets/js/77.fb857cd8.js"><link rel="prefetch" href="/noteSite/assets/js/78.c8a104ed.js"><link rel="prefetch" href="/noteSite/assets/js/79.c8226dd8.js"><link rel="prefetch" href="/noteSite/assets/js/80.30822bdb.js"><link rel="prefetch" href="/noteSite/assets/js/81.4caf3898.js"><link rel="prefetch" href="/noteSite/assets/js/82.a3bae02d.js"><link rel="prefetch" href="/noteSite/assets/js/83.c280a426.js"><link rel="prefetch" href="/noteSite/assets/js/84.92c2442d.js"><link rel="prefetch" href="/noteSite/assets/js/85.0a3c5e7d.js"><link rel="prefetch" href="/noteSite/assets/js/86.01e50878.js"><link rel="prefetch" href="/noteSite/assets/js/87.8db830a1.js"><link rel="prefetch" href="/noteSite/assets/js/88.003ef34a.js"><link rel="prefetch" href="/noteSite/assets/js/89.5ffa0238.js"><link rel="prefetch" href="/noteSite/assets/js/9.09db9bdb.js"><link rel="prefetch" href="/noteSite/assets/js/90.dc502e8a.js"><link rel="prefetch" href="/noteSite/assets/js/91.f923e9e3.js"><link rel="prefetch" href="/noteSite/assets/js/92.6c596924.js"><link rel="prefetch" href="/noteSite/assets/js/93.86401fdc.js"><link rel="prefetch" href="/noteSite/assets/js/94.5a9b0dc6.js"><link rel="prefetch" href="/noteSite/assets/js/95.d138495b.js"><link rel="prefetch" href="/noteSite/assets/js/96.45ce2015.js"><link rel="prefetch" href="/noteSite/assets/js/97.1fc4fa5a.js"><link rel="prefetch" href="/noteSite/assets/js/98.ccc65635.js"><link rel="prefetch" href="/noteSite/assets/js/99.cdcea560.js">
+    <link rel="stylesheet" href="/noteSite/assets/css/0.styles.0f3b0cbd.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/noteSite/" class="home-link router-link-active"><img src="/noteSite/images/hedon.png" alt="Hedon" class="logo"> <span class="site-name can-hide">Hedon</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/component/" class="nav-link">
+  计算机组成原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link router-link-active">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/component/" class="nav-link">
+  计算机组成原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link router-link-active">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>入门</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/backend/golang/01_intro/go_intro.html" class="sidebar-link">Golang 入门简介</a></li><li><a href="/noteSite/backend/golang/01_intro/go_first.html" class="sidebar-link">Golang 入门程序</a></li><li><a href="/noteSite/backend/golang/01_intro/go_cmd.html" aria-current="page" class="active sidebar-link">go 命令</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#一、通用选项" class="sidebar-link">一、通用选项</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#二、go-run" class="sidebar-link">二、go run</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#三、go-build" class="sidebar-link">三、go build</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#四、go-install" class="sidebar-link">四、go install</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#五、go-get" class="sidebar-link">五、go get</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#_1-常用选项" class="sidebar-link">1. 常用选项</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#_2-go-get-做了什么" class="sidebar-link">2. go get 做了什么</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#_3-引入了-go-module-后-go-get-变化" class="sidebar-link">3. 引入了 go module  后，go get 变化</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#_4-注意" class="sidebar-link">4. 注意</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#六、go-clean" class="sidebar-link">六、go clean</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#七、go-fmt" class="sidebar-link">七、go fmt</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#八、go-test" class="sidebar-link">八、go test</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#九、go-doc" class="sidebar-link">九、go doc</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#十、go-fix" class="sidebar-link">十、go fix</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#十一、go-version" class="sidebar-link">十一、go version</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#十二、go-env" class="sidebar-link">十二、go env</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/01_intro/go_cmd.html#十三、go-list" class="sidebar-link">十三、go list</a></li></ul></li><li><a href="/noteSite/backend/golang/01_intro/go_modules.html" class="sidebar-link">Go modules</a></li><li><a href="/noteSite/backend/golang/01_intro/go_spec.html" class="sidebar-link">Golang 编码规范</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>基础</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>进阶</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>标准库</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>常用技巧</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="go-命令"><a href="#go-命令" class="header-anchor">#</a> go 命令</h1> <div class="language-text extra-class"><pre class="language-text"><code>Go is a tool for managing Go source code.
+
+Usage:
+
+	go &lt;command&gt; [arguments]
+
+The commands are:
+
+	bug         start a bug report
+	build       compile packages and dependencies
+	clean       remove object files and cached files
+	doc         show documentation for package or symbol
+	env         print Go environment information
+	fix         update packages to use new APIs
+	fmt         gofmt (reformat) package sources
+	generate    generate Go files by processing source
+	get         add dependencies to current module and install them
+	install     compile and install packages and dependencies
+	list        list packages or modules
+	mod         module maintenance
+	run         compile and run Go program
+	test        test packages
+	tool        run specified go tool
+	version     print Go version
+	vet         report likely mistakes in packages
+
+Use &quot;go help &lt;command&gt;&quot; for more information about a command.
+</code></pre></div><h2 id="一、通用选项"><a href="#一、通用选项" class="header-anchor">#</a> 一、通用选项</h2> <table><thead><tr><th>可选项</th> <th>作用</th></tr></thead> <tbody><tr><td>-a</td> <td>用于强制重新编译所有涉及的 Go 语言代码包（包括 Go 语言标准库中的代码包），即使它们已经是最新的了。该标记可以让我们有机会通过改动底层的代码包做一些实验。</td></tr> <tr><td>-n</td> <td>使命令仅打印其执行过程中用到的所有命令，而不去真正执行它们。如果只想查看或者验证命令的执行过程，而不想改变任何东西，使用它正好合适。</td></tr> <tr><td>-race<img width="200/"></td> <td>用于检测并报告指定 Go 语言程序中存在的数据竞争问题。当用 Go 语言编写并发程序的时候，这是很重要的检测手段之一。</td></tr> <tr><td>-v</td> <td>用于打印命令执行过程中涉及的代码包。这一定包括我们指定的目标代码包，并且有时还会包括该代码包直接或间接依赖的那些代码包。这会让你知道哪些代码包被执行过了。</td></tr> <tr><td>-work<img width="200/"></td> <td>用于打印命令执行时生成和使用的临时工作目录的名字，且命令执行完成后不删除它。这个目录下的文件可能会对你有用，也可以从侧面了解命令的执行过程。如果不添加此标记，那么临时工作目录会在命令执行完毕前删除。</td></tr> <tr><td>-x</td> <td>使命令打印其执行过程中用到的所有命令，并同时执行它们。</td></tr></tbody></table> <h2 id="二、go-run"><a href="#二、go-run" class="header-anchor">#</a> 二、go run</h2> <blockquote><p>go run 专门用来运行命令源码文件。</p> <p><strong>注意，这个命令不是用来运行所有 Go 的源码文件的！</strong></p></blockquote> <p><code>go run</code>  命令只能接受一个命令源码文件以及若干个库源码文件（必须同属于 main 包）作为文件参数，且<strong>不能接受测试源码文件</strong>。它在执行时会检查源码文件的类型。如果参数中有多个或者没有命令源码文件，那么 <code>go run</code>  命令就只会打印错误提示信息并退出，而不会继续执行。</p> <p>下面来看看 <code>go run</code>  做了什么：</p> <p><strong>1. 准备如下代码</strong> <code>main.go</code>：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">&quot;fmt&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Hello World!&quot;</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Test go run&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><strong>2. go run 配合 -n</strong></p> <p>执行：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go run -n main.go
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>#
+# command-line-arguments
+#
+
+mkdir -p $WORK/b001/
+cat &gt;$WORK/b001/_gomod_.go &lt;&lt; 'EOF' # internal
+package main
+import _ &quot;unsafe&quot;
+//go:linkname __debug_modinfo__ runtime.modinfo
+var __debug_modinfo__ = &quot;0w\xaf\f\x92t\b\x02A\xe1\xc1\a\xe6\xd6\x18\xe6path\tcommand-line-arguments\nmod\tgoHelloWorld\t(devel)\t\n\xf92C1\x86\x18 r\x00\x82B\x10A\x16\xd8\xf2&quot;
+EOF
+cat &gt;$WORK/b001/importcfg &lt;&lt; 'EOF' # internal
+# import config
+packagefile fmt=/usr/local/go/pkg/darwin_amd64/fmt.a
+packagefile runtime=/usr/local/go/pkg/darwin_amd64/runtime.a
+EOF
+cd /Users/bytedance/goHelloWorld
+/usr/local/go/pkg/tool/darwin_amd64/compile -o $WORK/b001/_pkg_.a -trimpath &quot;$WORK/b001=&gt;&quot; -p main -lang=go1.16 -complete -buildid n6gyFYLsk3XgS57M4INh/n6gyFYLsk3XgS57M4INh -dwarf=false -goversion go1.16.4 -D _/Users/bytedance/goHelloWorld -importcfg $WORK/b001/importcfg -pack -c=4 ./main.go $WORK/b001/_gomod_.go
+/usr/local/go/pkg/tool/darwin_amd64/buildid -w $WORK/b001/_pkg_.a # internal
+cat &gt;$WORK/b001/importcfg.link &lt;&lt; 'EOF' # internal
+packagefile command-line-arguments=$WORK/b001/_pkg_.a
+....
+packagefile path=/usr/local/go/pkg/darwin_amd64/path.a
+EOF
+mkdir -p $WORK/b001/exe/
+cd .
+/usr/local/go/pkg/tool/darwin_amd64/link -o $WORK/b001/exe/main -importcfg $WORK/b001/importcfg.link -s -w -buildmode=exe -buildid=YVAr2monG5TnrAB0h8HG/n6gyFYLsk3XgS57M4INh/n6gyFYLsk3XgS57M4INh/YVAr2monG5TnrAB0h8HG -extld=clang $WORK/b001/_pkg_.a
+$WORK/b001/exe/main
+</code></pre></div><p>这里可以看到创建了两个临时文件夹 <strong>b001</strong> 和 <strong>exe</strong>，先执行了 <code>compile</code> 命令，然后 <code>link</code>，生成了归档文件 <strong>_pkg_.a</strong> 和 <strong>最终可执行文件</strong> ，最终的可执行文件放在 <strong>exe</strong> 文件夹里面。命令的最后一步就是执行了可执行文件。</p> <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsmdlk0wpjj30rm0hp751.jpg" alt="img"></p> <p><strong>3. go run 配合 -work</strong></p> <p>举个例子，生成的临时文件可以用 <code>go run -work</code> 看到，比如当前生成的临时文件夹是如下的路径：</p> <p>执行：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go run -work main.go
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>WORK=/var/folders/cg/0cgg4vd9495c_n3dxvv_df8w0000gp/T/go-build3905178702
+Hello World!
+Test go run
+</code></pre></div><p>进入临时文件夹：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> /var/folders/cg/0cgg4vd9495c_n3dxvv_df8w0000gp/T/go-build3905178702
+</code></pre></div><p>查看目录结构：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>$ tree
+<span class="token builtin class-name">.</span>
+└── b001
+    ├── _gomod_.go
+    ├── _pkg_.a
+    ├── exe
+    │   └── main
+    ├── importcfg
+    └── importcfg.link
+</code></pre></div><p>可以看到，最终<code>go run</code>命令是生成了 2 个文件</p> <ul><li>一个是归档文件 _pkg_.a</li> <li>一个是可执行文件 main</li></ul> <p><code>go run</code> 命令在第二次执行的时候，如果发现导入的代码包没有发生变化，那么 <code>go run</code> 不会再次编译这个导入的代码包。直接静态链接进来。</p> <h2 id="三、go-build"><a href="#三、go-build" class="header-anchor">#</a> 三、go build</h2> <blockquote><p>go build 命令主要是用于测试编译。在包的编译过程中，若有必要，会同时编译与之相关联的包。</p></blockquote> <ol><li>如果是普通包，当你执行 <code>go build</code>命令后，不会产生任何文件；</li> <li>如果是 <strong>main</strong> 包，当只执行 <code>go build</code>命令后，会在当前目录下生成一个可执行文件。如果需要在 $GOPATH/bin 目录下生成相应的 exe 文件，需要执行 <code>go install</code> 或者使用 <code>go build -o 路径/可执行文件</code>；</li> <li>如果某个文件夹下有多个文件，而你只想编译其中某一个文件，可以在 <code>go build</code> 之后加上文件名，例如 <code>go build a.go</code>。<code>go build</code> 命令默认会编译当前目录下的所有 go 文件；</li> <li>你也可以指定编译输出的文件名。比如，我们可以指定 <code>go build -o</code> 可执行文件名，默认情况是你的 package 名(非 main 包)，或者是第一个源文件的文件名（main 包）；</li> <li><code>go build</code> 会忽略目录下以 <strong>“_”</strong> 或者 <strong>“.”</strong> 开头的 go 文件；</li> <li>如果你的源代码针对不同的操作系统需要不同的处理，那么你可以根据不同的操作系统后缀来命名文件；</li> <li>当代码包中有且仅有一个命令源码文件的时候，在文件夹所在目录中执行 go build 命令，会在该目录下生成一个与目录同名的可执行文件；</li></ol> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 当前目录</span>
+$ ll
+total <span class="token number">16</span>
+-rw-r--r--  <span class="token number">1</span> bytedance  staff   <span class="token number">29</span>  <span class="token number">7</span> <span class="token number">19</span> <span class="token number">16</span>:54 go.mod
+-rw-r--r--  <span class="token number">1</span> bytedance  staff  <span class="token number">106</span>  <span class="token number">7</span> <span class="token number">19</span> <span class="token number">17</span>:10 main.go
+
+<span class="token comment"># 执行 go build</span>
+$ go build
+
+<span class="token comment"># 再次查看当前目录，会发现多了 goHelloWorld，这个就是 go build 编译产物</span>
+$ ll
+total <span class="token number">3984</span>
+-rw-r--r--  <span class="token number">1</span> bytedance  staff       <span class="token number">29</span>  <span class="token number">7</span> <span class="token number">19</span> <span class="token number">16</span>:54 go.mod
+-rwxr-xr-x  <span class="token number">1</span> bytedance  staff  <span class="token number">2027936</span>  <span class="token number">7</span> <span class="token number">19</span> <span class="token number">17</span>:21 goHelloWorld
+-rw-r--r--  <span class="token number">1</span> bytedance  staff      <span class="token number">106</span>  <span class="token number">7</span> <span class="token number">19</span> <span class="token number">17</span>:10 main.go
+</code></pre></div><div class="custom-block warning"><p class="custom-block-title">Go 1.16 变化</p> <p>Go 1.16 后，go build/run 命令不再自动更新 go.mod 和 go.sum。</p></div> <p>下面来看看 <code>go build</code> 干了什么：</p> <p><strong>1. go build 配合 -n</strong></p> <p>执行：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go build -n
+</code></pre></div><p>输出：</p> <div class="language-txt extra-class"><pre class="language-text"><code>mkdir -p $WORK/b001/
+cat &gt;$WORK/b001/importcfg.link &lt;&lt; 'EOF' # internal
+packagefile goHelloWorld=/Users/bytedance/Library/Caches/go-build/71/71bdab3154f908f152290c268aabe0220943c6c9d64e40d85be2aa4d5170c47b-d
+...
+packagefile io=/usr/local/go/pkg/darwin_amd64/io.a
+EOF
+mkdir -p $WORK/b001/exe/
+cd .
+/usr/local/go/pkg/tool/darwin_amd64/link -o $WORK/b001/exe/a.out -importcfg $WORK/b001/importcfg.link -buildmode=exe -buildid=7YYz2SWVaL2TAgEq9Aju/S_ayM9h6okuR2tz0sOmx/_chCAYSxt9RhagjJjDzh/7YYz2SWVaL2TAgEq9Aju -extld=clang /Users/bytedance/Library/Caches/go-build/71/71bdab3154f908f152290c268aabe0220943c6c9d64e40d85be2aa4d5170c47b-d
+/usr/local/go/pkg/tool/darwin_amd64/buildid -w $WORK/b001/exe/a.out # internal
+mv $WORK/b001/exe/a.out goHelloWorld
+</code></pre></div><p>可以看到，执行过程和 <code>go run</code> 大体相同，唯一不同的就是在最后一步：<strong><code>go run</code>  是执行了可执行文件，但是 <code>go build</code> 命令，只是把库源码文件编译了一遍，然后把可执行文件移动到了当前目录的文件夹中。</strong></p> <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsmdwnwlvjj30i70id3za.jpg" alt="img"></p> <h2 id="四、go-install"><a href="#四、go-install" class="header-anchor">#</a> 四、go install</h2> <blockquote><p>go install 命令是用来编译并<strong>安装</strong>代码包或者源码文件的。</p></blockquote> <p>执行：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go <span class="token function">install</span> -n 
+</code></pre></div><p>输出：</p> <div class="language-txt extra-class"><pre class="language-text"><code>mkdir -p $WORK/b001/
+cat &gt;$WORK/b001/importcfg.link &lt;&lt; 'EOF' # internal
+packagefile goHelloWorld=/Users/bytedance/Library/Caches/go-build/71/71bdab3154f908f152290c268aabe0220943c6c9d64e40d85be2aa4d5170c47b-d
+...
+packagefile path=/usr/local/go/pkg/darwin_amd64/path.a
+EOF
+mkdir -p $WORK/b001/exe/
+cd .
+/usr/local/go/pkg/tool/darwin_amd64/link -o $WORK/b001/exe/a.out -importcfg $WORK/b001/importcfg.link -buildmode=exe -buildid=7YYz2SWVaL2TAgEq9Aju/S_ayM9h6okuR2tz0sOmx/_chCAYSxt9RhagjJjDzh/7YYz2SWVaL2TAgEq9Aju -extld=clang /Users/bytedance/Library/Caches/go-build/71/71bdab3154f908f152290c268aabe0220943c6c9d64e40d85be2aa4d5170c47b-d
+/usr/local/go/pkg/tool/darwin_amd64/buildid -w $WORK/b001/exe/a.out # internal
+mkdir -p /Users/bytedance/go/bin/
+mv $WORK/b001/exe/a.out /Users/bytedance/go/bin/goHelloWorld
+</code></pre></div><p><code>go install</code> 命令在内部实际上分成了两步操作：</p> <ol><li>生成结果文件（可执行文件或者 _pkg_.a 包)
+<ul><li>可执行文件： 一般是 go install 带 main 函数的 go 文件产生的，有函数入口，可以直接运行</li> <li>_pkg_.a 包： 一般是 go install 不包含 main 函数的 go 文件产生的，没有函数入口，只能被调用</li></ul></li> <li>把编译好的结果移到 <code>$GOPATH/pkg</code> 或者 <code>$GOPATH/bin</code></li></ol> <p><code>go install</code> 用于编译并安装指定的代码包及它们的依赖包。当指定的代码包的依赖包还没有被编译和安装时，该命令会先去处理依赖包。与 <code>go build</code> 命令一样，传给 <code>go install</code> 命令的代码包参数应该以导入路径的形式提供。并且，<code>go build</code> 命令的绝大多数标记也都可以用于 <code>go install</code>。</p> <p>实际上，<code>go install</code> 命令只比 <code>go build</code> 命令多做了一件事，即：<strong>安装编译后的结果文件到指定目录。</strong></p> <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsme35j9o9j30i40icgmg.jpg" alt="img"></p> <blockquote><p>注意：在安装多个库源码文件时有可能遇到如下的问题</p> <div class="language-shell extra-class"><pre class="language-shell"><code>$  go <span class="token function">install</span> envir.go fpath.go ipath.go pnode.go util.go
+go install: no <span class="token function">install</span> location <span class="token keyword">for</span> .go files listed on <span class="token builtin class-name">command</span> line <span class="token punctuation">(</span>GOBIN not <span class="token builtin class-name">set</span><span class="token punctuation">)</span>
+</code></pre></div><p>而且，在我们为环境变量 GOBIN 设置了正确的值之后，这个错误提示信息仍然会出现。</p> <p>这是因为，只有在安装命令源码文件的时候，命令程序才会将环境变量 GOBIN 的值作为结果文件的存放目录。而在安装库源码文件时，在命令程序内部的代表结果文件存放目录路径的那个变量不会被赋值。最后，命令程序会发现它依然是个无效的空值。</p> <p>所以，命令程序会同样返回一个关于“无安装位置”的错误。</p> <p>这就引出一个结论，我们只能使用安装代码包的方式来安装库源码文件，而不能在 <code>go install</code> 命令罗列并安装它们。</p> <p>另外，<code>go install</code> 命令目前无法接受标记 <code>-o</code> 以自定义结果文件的存放位置。这也从侧面说明了 <code>go install</code> 命令不支持针对库源码文件的安装操作。</p></blockquote> <h2 id="五、go-get"><a href="#五、go-get" class="header-anchor">#</a> 五、go get</h2> <blockquote><p>go get 命令用于从远程代码仓库（比如 Github ）上下载并安装代码包。</p></blockquote> <h3 id="_1-常用选项"><a href="#_1-常用选项" class="header-anchor">#</a> 1. 常用选项</h3> <table><thead><tr><th>可选项<img width="200/"></th> <th>作用</th></tr></thead> <tbody><tr><td>-d</td> <td>让命令程序只执行下载动作，而不执行安装动作。</td></tr> <tr><td>-f</td> <td>仅在使用<code>-u</code>标记时才有效。该标记会让命令程序忽略掉对已下载代码包的导入路径的检查。<br>如果下载并安装的代码包所属的项目是你从别人那里 fork 过来的，那么这样做就尤为重要了。</td></tr> <tr><td>-fix</td> <td>让命令程序在下载代码包后先执行修正动作，而后再进行编译和安装。</td></tr> <tr><td>-insecure</td> <td>允许命令程序使用非安全的 scheme（如 HTTP ）去下载指定的代码包。<br>如果你用的代码仓库（如公司内部的 Gitlab ）没有HTTPS 支持，可以添加此标记。请在确定安全的情况下使用它。</td></tr> <tr><td>-t</td> <td>让命令程序同时下载并安装指定的代码包中的测试源码文件中依赖的代码包。</td></tr> <tr><td>-u</td> <td>让命令利用网络来更新已有代码包及其依赖包。<br>默认情况下，该命令只会从网络上下载本地不存在的代码包，而不会更新已有的代码包。</td></tr></tbody></table> <h3 id="_2-go-get-做了什么"><a href="#_2-go-get-做了什么" class="header-anchor">#</a> 2. go get 做了什么</h3> <p>执行：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go get -x github.com/go-errors/errors
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>cd git clone https://gi thub. com go- errors/ errors /Users/bytedance/go/src/github.com/go-errors/errors
+cd /Users/bytedance/go/src/github.com/go-errors/errors 
+git submodule update --init --recursive
+cd /Users/bytedance/go/src/github.com/go-errors/errors
+git show-ref
+cd /Users/bytedance/go/src/github.com/go-errors/errors
+git submodule update --init --recursive
+WORK=/var/folders/kt/nlhsnpgn6lgd_q16f8j83sbhØØØØgn/T/go-build188558329
+</code></pre></div><p>这里可以很明显的看到，执行完 <code>go get</code> 命令以后，会调用 git clone 方法下载源码，并编译，最终会把库源码文件编译成归档文件安装到 pkg 对应的相关平台目录下。</p> <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsmefl5qbhj30n40hv3z8.jpg" alt="img"></p> <h3 id="_3-引入了-go-module-后-go-get-变化"><a href="#_3-引入了-go-module-后-go-get-变化" class="header-anchor">#</a> 3. 引入了 go module  后，go get 变化</h3> <blockquote><p>使用go module之后，go get 拉取依赖的方式就发生了变化。</p></blockquote> <ul><li><p>拉取最新的版本（优先择取 tag）</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go get golang.org/x/text@latest
+</code></pre></div></li> <li><p>拉取 master 分支的最新 commit</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go get golang.org/x/text@master
+</code></pre></div></li> <li><p>拉取 tag 为 v0.3.2 的 commit</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go get golang.org/x/text@v0.3.2
+</code></pre></div></li> <li><p>拉取 hash 为 342b231 的 commit，最终会被转换为其对应的 tag 号</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go get golang.org/x/text@342b2e
+</code></pre></div></li> <li><p>拉取指定版本，如指定版本 v3</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go get github.com/smartwalle/alipay/v3
+</code></pre></div></li> <li><p>更新</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go get -u
+</code></pre></div></li></ul> <h3 id="_4-注意"><a href="#_4-注意" class="header-anchor">#</a> 4. 注意</h3> <blockquote><p>注意：由于不可诉原因，go get 经常拉不到代码</p> <ol><li><p>需要将下面两个变量加入到系统环境变量中：</p> <div class="language-properties extra-class"><pre class="language-properties"><code><span class="token attr-name">GO111MODULE</span><span class="token punctuation">=</span><span class="token attr-value">on</span>
+<span class="token attr-name">GOPROXY</span><span class="token punctuation">=</span><span class="token attr-value">https://goproxy.io</span>
+</code></pre></div></li> <li><p>覆盖原来的值</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go <span class="token function">env</span> -w <span class="token assign-left variable">GO111MODULE</span><span class="token operator">=</span>on
+go <span class="token function">env</span> -w <span class="token assign-left variable">GOPROXY</span><span class="token operator">=</span>https://goproxy.cn,https://goproxy.io,direct
+</code></pre></div></li></ol></blockquote> <h2 id="六、go-clean"><a href="#六、go-clean" class="header-anchor">#</a> 六、go clean</h2> <blockquote><p>go clean 命令是用来移除当前源码包里面编译生成的文件。</p></blockquote> <p>这些文件包括：</p> <table><thead><tr><th>文件<img width="200/"></th> <th>来源</th></tr></thead> <tbody><tr><td>_obj/</td> <td>旧的 object 目录，由 Makefiles 遗留</td></tr> <tr><td>_test/</td> <td>旧的 test 目录，由 Makefiles 遗留</td></tr> <tr><td>_testmain.go</td> <td>旧的 gotest 文件，由 Makefiles 遗留</td></tr> <tr><td>test.out</td> <td>旧的 test 记录，由 Makefiles 遗留</td></tr> <tr><td>build.out</td> <td>旧的 test 记录，由 Makefiles 遗留</td></tr> <tr><td>*.[568ao]</td> <td>object文件，由 Makefiles 遗留</td></tr> <tr><td>DIR(.exe)</td> <td>由 go build 产生</td></tr> <tr><td>DIR.test(.exe)</td> <td>由 go test -c 产生</td></tr> <tr><td>MAINFILE(.exe)</td> <td>由 go build MAINFILE.go产生</td></tr></tbody></table> <h2 id="七、go-fmt"><a href="#七、go-fmt" class="header-anchor">#</a> 七、go fmt</h2> <blockquote><p>go fmt 命令主要是用来帮你格式化所写好的代码文件。</p></blockquote> <p>比如我们写了一个格式很糟糕的 test.go 文件，我们只需要使用 fmt go test.go 命令，就可以让 go 帮我们格式化我们的代码文件。但是我们一般很少使用这个命令，因为我们的开发工具一般都带有保存时自动格式化功能，这个功能底层其实就是调用了 go fmt 命令而已。</p> <p>使用 go fmt 命令，更多时候是用 <strong>gofmt</strong>，而且需要参数 <strong>-w</strong>，否则格式化结果不会写入文件。<strong>gofmt -w src</strong>，可以格式化整个项目。</p> <h2 id="八、go-test"><a href="#八、go-test" class="header-anchor">#</a> 八、go test</h2> <blockquote><p>go test 命令，会自动读取源码目录下面名为 *_test.go 的文件，生成并运行测试用的可执行文件。</p></blockquote> <p>默认的情况下，不需要任何的参数，它会自动把你源码包下面所有 test 文件测试完毕，当然你也可以带上参数，详情请参考 go help test。</p> <h2 id="九、go-doc"><a href="#九、go-doc" class="header-anchor">#</a> 九、go doc</h2> <blockquote><p>go doc 命令是一个很强大的文档工具。</p></blockquote> <p>如何查看相应 package 的文档呢？</p> <ul><li>例如 builtin 包，那么执行 go doc builtin；</li> <li>如果是http包，那么执行 go doc net/http；</li> <li>查看某一个包里面的函数，那么执行 go doc fmt Printf；</li> <li>也可以查看相应的代码，执行 go doc -src fmt Printf；</li></ul> <p>go doc 对应的一个非常好用的工具 <strong>godoc</strong>，我们先下载：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>go get golang.org/x/tools/cmd/godoc
+</code></pre></div><p>通过命令在命令行执行</p> <ul><li><strong>godoc -http=:端口号</strong> (godoc 无空格)</li></ul> <p>比如</p> <ul><li><strong>godoc -http=:8080</strong></li></ul> <p>然后在浏览器中打开 <strong>127.0.0.1:8080</strong>，你将会看到一个 golang.org 的本地 copy 版本，通过它你可以查询 pkg 文档等其它内容。如果你设置了 GOPATH，在 pkg 分类下，不但会列出标准包的文档，还会列出你本地 GOPATH 中所有项目的相关文档，这对于经常被限制访问的用户来说是一个不错的选择。</p> <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gsmeu5khgoj618w0u00z102.jpg" alt="image-20210719175744351"></p> <h2 id="十、go-fix"><a href="#十、go-fix" class="header-anchor">#</a> 十、go fix</h2> <blockquote><p>go fix 用来修复以前老版本的代码到新版本，例如 go1 之前老版本的代码转化到 go1。</p></blockquote> <h2 id="十一、go-version"><a href="#十一、go-version" class="header-anchor">#</a> 十一、go version</h2> <blockquote><p>查看当前 go 版本。</p></blockquote> <h2 id="十二、go-env"><a href="#十二、go-env" class="header-anchor">#</a> 十二、go env</h2> <blockquote><p>查看当前 go 的环境变量。</p></blockquote> <h2 id="十三、go-list"><a href="#十三、go-list" class="header-anchor">#</a> 十三、go list</h2> <blockquote><p>查看当前安装的全部的 package。</p></blockquote> <!----></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">8/5/2021, 6:37:10 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/noteSite/backend/golang/01_intro/go_first.html" class="prev">
+        Golang 入门程序
+      </a></span> <span class="next"><a href="/noteSite/backend/golang/01_intro/go_modules.html">
+        Go modules
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/noteSite/assets/js/app.24fc9801.js" defer></script><script src="/noteSite/assets/js/2.691adf44.js" defer></script><script src="/noteSite/assets/js/8.b1ba721d.js" defer></script>
+  </body>
+</html>
