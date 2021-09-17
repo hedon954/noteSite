@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>十、Redis 集群高可用 | Hedon</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/noteSite/favicon.ico">
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/noteSite/assets/css/0.styles.0f3b0cbd.css" as="style"><link rel="preload" href="/noteSite/assets/js/app.4a2b23d7.js" as="script"><link rel="preload" href="/noteSite/assets/js/2.691adf44.js" as="script"><link rel="preload" href="/noteSite/assets/js/86.1eb13d06.js" as="script"><link rel="prefetch" href="/noteSite/assets/js/10.ab723198.js"><link rel="prefetch" href="/noteSite/assets/js/100.ba5c10a3.js"><link rel="prefetch" href="/noteSite/assets/js/101.ae26c2d8.js"><link rel="prefetch" href="/noteSite/assets/js/102.5fe90241.js"><link rel="prefetch" href="/noteSite/assets/js/103.97270f6a.js"><link rel="prefetch" href="/noteSite/assets/js/104.678d3e7d.js"><link rel="prefetch" href="/noteSite/assets/js/105.d14d5411.js"><link rel="prefetch" href="/noteSite/assets/js/106.951d70ec.js"><link rel="prefetch" href="/noteSite/assets/js/107.3b8bb777.js"><link rel="prefetch" href="/noteSite/assets/js/108.583a3359.js"><link rel="prefetch" href="/noteSite/assets/js/109.aaff761d.js"><link rel="prefetch" href="/noteSite/assets/js/11.0e4d5955.js"><link rel="prefetch" href="/noteSite/assets/js/110.fc0e46a3.js"><link rel="prefetch" href="/noteSite/assets/js/111.b6801ea8.js"><link rel="prefetch" href="/noteSite/assets/js/112.239aabdd.js"><link rel="prefetch" href="/noteSite/assets/js/113.e5bad6a3.js"><link rel="prefetch" href="/noteSite/assets/js/114.c9417ce6.js"><link rel="prefetch" href="/noteSite/assets/js/115.59711f27.js"><link rel="prefetch" href="/noteSite/assets/js/116.c871ff69.js"><link rel="prefetch" href="/noteSite/assets/js/117.b2d2bf69.js"><link rel="prefetch" href="/noteSite/assets/js/118.2726453b.js"><link rel="prefetch" href="/noteSite/assets/js/119.1724f0d3.js"><link rel="prefetch" href="/noteSite/assets/js/12.84338459.js"><link rel="prefetch" href="/noteSite/assets/js/120.025bee0f.js"><link rel="prefetch" href="/noteSite/assets/js/121.ab209ac4.js"><link rel="prefetch" href="/noteSite/assets/js/122.30f92016.js"><link rel="prefetch" href="/noteSite/assets/js/123.53ae9635.js"><link rel="prefetch" href="/noteSite/assets/js/124.3753e2ed.js"><link rel="prefetch" href="/noteSite/assets/js/125.3dcf3243.js"><link rel="prefetch" href="/noteSite/assets/js/126.885ff092.js"><link rel="prefetch" href="/noteSite/assets/js/127.c6c7a558.js"><link rel="prefetch" href="/noteSite/assets/js/128.40f398ab.js"><link rel="prefetch" href="/noteSite/assets/js/129.06d285f3.js"><link rel="prefetch" href="/noteSite/assets/js/13.cfd4493f.js"><link rel="prefetch" href="/noteSite/assets/js/130.4bfc9180.js"><link rel="prefetch" href="/noteSite/assets/js/131.a4b56964.js"><link rel="prefetch" href="/noteSite/assets/js/132.33e5c550.js"><link rel="prefetch" href="/noteSite/assets/js/133.cf5d78c6.js"><link rel="prefetch" href="/noteSite/assets/js/134.51da4194.js"><link rel="prefetch" href="/noteSite/assets/js/135.7817bbdf.js"><link rel="prefetch" href="/noteSite/assets/js/136.7d9d4ee1.js"><link rel="prefetch" href="/noteSite/assets/js/137.a2194dc3.js"><link rel="prefetch" href="/noteSite/assets/js/138.ff99ed38.js"><link rel="prefetch" href="/noteSite/assets/js/139.29cbe0a4.js"><link rel="prefetch" href="/noteSite/assets/js/14.f255fb4c.js"><link rel="prefetch" href="/noteSite/assets/js/140.ece74dd5.js"><link rel="prefetch" href="/noteSite/assets/js/141.61345e24.js"><link rel="prefetch" href="/noteSite/assets/js/142.c34e8d0f.js"><link rel="prefetch" href="/noteSite/assets/js/143.a413a7af.js"><link rel="prefetch" href="/noteSite/assets/js/144.ce9e6119.js"><link rel="prefetch" href="/noteSite/assets/js/145.f0db043d.js"><link rel="prefetch" href="/noteSite/assets/js/146.4be2e4a5.js"><link rel="prefetch" href="/noteSite/assets/js/147.df049d7c.js"><link rel="prefetch" href="/noteSite/assets/js/148.9e2aa7d9.js"><link rel="prefetch" href="/noteSite/assets/js/149.7521b256.js"><link rel="prefetch" href="/noteSite/assets/js/15.637c455d.js"><link rel="prefetch" href="/noteSite/assets/js/150.f2f58ec3.js"><link rel="prefetch" href="/noteSite/assets/js/151.6a0de16a.js"><link rel="prefetch" href="/noteSite/assets/js/152.6b20917e.js"><link rel="prefetch" href="/noteSite/assets/js/153.2b5ebfd8.js"><link rel="prefetch" href="/noteSite/assets/js/154.7d259ee0.js"><link rel="prefetch" href="/noteSite/assets/js/155.cee16fdd.js"><link rel="prefetch" href="/noteSite/assets/js/156.0d0ba814.js"><link rel="prefetch" href="/noteSite/assets/js/157.5332757d.js"><link rel="prefetch" href="/noteSite/assets/js/158.b86ddbb9.js"><link rel="prefetch" href="/noteSite/assets/js/159.c3b89554.js"><link rel="prefetch" href="/noteSite/assets/js/16.588a856e.js"><link rel="prefetch" href="/noteSite/assets/js/160.fb6e652a.js"><link rel="prefetch" href="/noteSite/assets/js/161.4d52e086.js"><link rel="prefetch" href="/noteSite/assets/js/162.6e62aee2.js"><link rel="prefetch" href="/noteSite/assets/js/163.411c8ac5.js"><link rel="prefetch" href="/noteSite/assets/js/164.9a0f4e52.js"><link rel="prefetch" href="/noteSite/assets/js/165.9d38a3f9.js"><link rel="prefetch" href="/noteSite/assets/js/166.93de92c6.js"><link rel="prefetch" href="/noteSite/assets/js/167.dc1eab1f.js"><link rel="prefetch" href="/noteSite/assets/js/168.6f2faf45.js"><link rel="prefetch" href="/noteSite/assets/js/169.8eca4a21.js"><link rel="prefetch" href="/noteSite/assets/js/17.42c5f955.js"><link rel="prefetch" href="/noteSite/assets/js/170.b5fc8cbf.js"><link rel="prefetch" href="/noteSite/assets/js/171.37cb79c5.js"><link rel="prefetch" href="/noteSite/assets/js/172.979574b6.js"><link rel="prefetch" href="/noteSite/assets/js/173.89c5ba59.js"><link rel="prefetch" href="/noteSite/assets/js/174.fc5ed82f.js"><link rel="prefetch" href="/noteSite/assets/js/175.0d6ccff7.js"><link rel="prefetch" href="/noteSite/assets/js/176.69f3e464.js"><link rel="prefetch" href="/noteSite/assets/js/177.a548b549.js"><link rel="prefetch" href="/noteSite/assets/js/178.05332d59.js"><link rel="prefetch" href="/noteSite/assets/js/179.a528d400.js"><link rel="prefetch" href="/noteSite/assets/js/18.7a2f817c.js"><link rel="prefetch" href="/noteSite/assets/js/180.dc9f6d84.js"><link rel="prefetch" href="/noteSite/assets/js/19.13241de9.js"><link rel="prefetch" href="/noteSite/assets/js/20.fdf3ee8c.js"><link rel="prefetch" href="/noteSite/assets/js/21.70d9c212.js"><link rel="prefetch" href="/noteSite/assets/js/22.cf71177a.js"><link rel="prefetch" href="/noteSite/assets/js/23.f8f9c155.js"><link rel="prefetch" href="/noteSite/assets/js/24.7382ddd7.js"><link rel="prefetch" href="/noteSite/assets/js/25.333b798b.js"><link rel="prefetch" href="/noteSite/assets/js/26.cce0d974.js"><link rel="prefetch" href="/noteSite/assets/js/27.6a4f4064.js"><link rel="prefetch" href="/noteSite/assets/js/28.3e0d9f6a.js"><link rel="prefetch" href="/noteSite/assets/js/29.8ba6931d.js"><link rel="prefetch" href="/noteSite/assets/js/3.b100fda9.js"><link rel="prefetch" href="/noteSite/assets/js/30.de36f890.js"><link rel="prefetch" href="/noteSite/assets/js/31.6612acd4.js"><link rel="prefetch" href="/noteSite/assets/js/32.95b0ae5c.js"><link rel="prefetch" href="/noteSite/assets/js/33.5fa0f87e.js"><link rel="prefetch" href="/noteSite/assets/js/34.5d7dcd55.js"><link rel="prefetch" href="/noteSite/assets/js/35.9a5325ad.js"><link rel="prefetch" href="/noteSite/assets/js/36.ac37a5cb.js"><link rel="prefetch" href="/noteSite/assets/js/37.da45cad7.js"><link rel="prefetch" href="/noteSite/assets/js/38.13345905.js"><link rel="prefetch" href="/noteSite/assets/js/39.5999eed7.js"><link rel="prefetch" href="/noteSite/assets/js/4.a61e4cea.js"><link rel="prefetch" href="/noteSite/assets/js/40.2f830ac0.js"><link rel="prefetch" href="/noteSite/assets/js/41.9d057dbb.js"><link rel="prefetch" href="/noteSite/assets/js/42.ec445d6f.js"><link rel="prefetch" href="/noteSite/assets/js/43.53ebc897.js"><link rel="prefetch" href="/noteSite/assets/js/44.9c5411e3.js"><link rel="prefetch" href="/noteSite/assets/js/45.b3fd2486.js"><link rel="prefetch" href="/noteSite/assets/js/46.d6faa7e0.js"><link rel="prefetch" href="/noteSite/assets/js/47.303b3159.js"><link rel="prefetch" href="/noteSite/assets/js/48.d4f91e20.js"><link rel="prefetch" href="/noteSite/assets/js/49.4f8a9444.js"><link rel="prefetch" href="/noteSite/assets/js/5.2bccd6df.js"><link rel="prefetch" href="/noteSite/assets/js/50.55caae3d.js"><link rel="prefetch" href="/noteSite/assets/js/51.13816627.js"><link rel="prefetch" href="/noteSite/assets/js/52.95b4e096.js"><link rel="prefetch" href="/noteSite/assets/js/53.5af15cad.js"><link rel="prefetch" href="/noteSite/assets/js/54.abd84d8b.js"><link rel="prefetch" href="/noteSite/assets/js/55.fab87694.js"><link rel="prefetch" href="/noteSite/assets/js/56.03713098.js"><link rel="prefetch" href="/noteSite/assets/js/57.9743428d.js"><link rel="prefetch" href="/noteSite/assets/js/58.454a9dad.js"><link rel="prefetch" href="/noteSite/assets/js/59.b62e72c8.js"><link rel="prefetch" href="/noteSite/assets/js/6.f3d86aa7.js"><link rel="prefetch" href="/noteSite/assets/js/60.0cb171dc.js"><link rel="prefetch" href="/noteSite/assets/js/61.2784c53c.js"><link rel="prefetch" href="/noteSite/assets/js/62.59a78391.js"><link rel="prefetch" href="/noteSite/assets/js/63.91ba34a6.js"><link rel="prefetch" href="/noteSite/assets/js/64.a3c9381e.js"><link rel="prefetch" href="/noteSite/assets/js/65.6e7604dd.js"><link rel="prefetch" href="/noteSite/assets/js/66.f9041d6b.js"><link rel="prefetch" href="/noteSite/assets/js/67.79d586c0.js"><link rel="prefetch" href="/noteSite/assets/js/68.6b937f11.js"><link rel="prefetch" href="/noteSite/assets/js/69.9f020db3.js"><link rel="prefetch" href="/noteSite/assets/js/7.da9921ea.js"><link rel="prefetch" href="/noteSite/assets/js/70.f6816715.js"><link rel="prefetch" href="/noteSite/assets/js/71.89924f1c.js"><link rel="prefetch" href="/noteSite/assets/js/72.d1defce3.js"><link rel="prefetch" href="/noteSite/assets/js/73.3728ae97.js"><link rel="prefetch" href="/noteSite/assets/js/74.cefe37e6.js"><link rel="prefetch" href="/noteSite/assets/js/75.d2a9f8d7.js"><link rel="prefetch" href="/noteSite/assets/js/76.2edaa075.js"><link rel="prefetch" href="/noteSite/assets/js/77.4836da79.js"><link rel="prefetch" href="/noteSite/assets/js/78.b62cecd9.js"><link rel="prefetch" href="/noteSite/assets/js/79.139796b0.js"><link rel="prefetch" href="/noteSite/assets/js/8.eff72f04.js"><link rel="prefetch" href="/noteSite/assets/js/80.61be3846.js"><link rel="prefetch" href="/noteSite/assets/js/81.34ef4f6e.js"><link rel="prefetch" href="/noteSite/assets/js/82.d89892fc.js"><link rel="prefetch" href="/noteSite/assets/js/83.3bba8b06.js"><link rel="prefetch" href="/noteSite/assets/js/84.c2271ec9.js"><link rel="prefetch" href="/noteSite/assets/js/85.083c3149.js"><link rel="prefetch" href="/noteSite/assets/js/87.13c6644a.js"><link rel="prefetch" href="/noteSite/assets/js/88.034fd132.js"><link rel="prefetch" href="/noteSite/assets/js/89.10e5b366.js"><link rel="prefetch" href="/noteSite/assets/js/9.409ee5bd.js"><link rel="prefetch" href="/noteSite/assets/js/90.738664f9.js"><link rel="prefetch" href="/noteSite/assets/js/91.ee49a280.js"><link rel="prefetch" href="/noteSite/assets/js/92.424d58f2.js"><link rel="prefetch" href="/noteSite/assets/js/93.7cd8efa5.js"><link rel="prefetch" href="/noteSite/assets/js/94.87784807.js"><link rel="prefetch" href="/noteSite/assets/js/95.a0f509c1.js"><link rel="prefetch" href="/noteSite/assets/js/96.68407d3e.js"><link rel="prefetch" href="/noteSite/assets/js/97.edf26645.js"><link rel="prefetch" href="/noteSite/assets/js/98.3e00cbf5.js"><link rel="prefetch" href="/noteSite/assets/js/99.c724368c.js">
+    <link rel="stylesheet" href="/noteSite/assets/css/0.styles.0f3b0cbd.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/noteSite/" class="home-link router-link-active"><img src="/noteSite/images/hedon.png" alt="Hedon" class="logo"> <span class="site-name can-hide">Hedon</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/component/" class="nav-link">
+  计算机组成原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link router-link-active">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/component/" class="nav-link">
+  计算机组成原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link router-link-active">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Redis</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/backend/middleware/redis/redis_intro.html" class="sidebar-link">一、Redis 快速入门</a></li><li><a href="/noteSite/backend/middleware/redis/redis_dataType.html" class="sidebar-link">二、Redis 数据类型</a></li><li><a href="/noteSite/backend/middleware/redis/redis_store.html" class="sidebar-link">三、Redis 持久化</a></li><li><a href="/noteSite/backend/middleware/redis/redis_client.html" class="sidebar-link">四、Redis 客户端</a></li><li><a href="/noteSite/backend/middleware/redis/redis_cache.html" class="sidebar-link">五、Redis 缓存</a></li><li><a href="/noteSite/backend/middleware/redis/redis_better.html" class="sidebar-link">六、Redis 性能优化</a></li><li><a href="/noteSite/backend/middleware/redis/redis_master_slave.html" class="sidebar-link">七、Redis 主从复制</a></li><li><a href="/noteSite/backend/middleware/redis/redis_sentinel.html" class="sidebar-link">八、Redis 哨兵模式</a></li><li><a href="/noteSite/backend/middleware/redis/redis_cluster.html" class="sidebar-link">九、Redis 集群分片</a></li><li><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html" aria-current="page" class="active sidebar-link">十、Redis 集群高可用</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_1-节点与插槽管理" class="sidebar-link">1. 节点与插槽管理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_1-1-添加主节点" class="sidebar-link">1.1 添加主节点</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_1-2-添加从节点" class="sidebar-link">1.2 添加从节点</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_1-3-删除从节点" class="sidebar-link">1.3 删除从节点</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_1-4-删除主节点" class="sidebar-link">1.4 删除主节点</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_2-moved-转向" class="sidebar-link">2. MOVED 转向</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_2-1-moved-错误演示" class="sidebar-link">2.1 MOVED 错误演示</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_2-2-解决措施" class="sidebar-link">2.2 解决措施</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_3-ask-转向" class="sidebar-link">3. ASK 转向</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_3-1-ask-错误" class="sidebar-link">3.1 ASK 错误</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_3-2-解决措施" class="sidebar-link">3.2 解决措施</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_4-自动故障转移" class="sidebar-link">4. 自动故障转移</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_4-1-环境准备" class="sidebar-link">4.1 环境准备</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_4-2-演示" class="sidebar-link">4.2 演示</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_5-手动故障转移" class="sidebar-link">5. 手动故障转移</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_5-1-故障转移" class="sidebar-link">5.1 故障转移</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_5-2-查看集群状态" class="sidebar-link">5.2 查看集群状态</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_5-3-查看日志" class="sidebar-link">5.3 查看日志</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_5-4-读取数据" class="sidebar-link">5.4 读取数据</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_6-集群迁移" class="sidebar-link">6. 集群迁移</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_6-1-手动迁移" class="sidebar-link">6.1 手动迁移</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_6-2-自动迁移-redisshake" class="sidebar-link">6.2 自动迁移 RedisShake</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/middleware/redis/redis_cluster_manage.html#_6-3-迁移检查-redisfullcheck" class="sidebar-link">6.3 迁移检查 RedisFullCheck</a></li></ul></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Redis 实战</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>MongoDB</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="十、redis-集群高可用"><a href="#十、redis-集群高可用" class="header-anchor">#</a> 十、Redis 集群高可用</h1> <h2 id="_1-节点与插槽管理"><a href="#_1-节点与插槽管理" class="header-anchor">#</a> 1. 节点与插槽管理</h2> <h3 id="_1-1-添加主节点"><a href="#_1-1-添加主节点" class="header-anchor">#</a> 1.1 添加主节点</h3> <div class="custom-block tip"><p class="custom-block-title">步骤</p> <ol><li>准备节点 M4；</li> <li>启动节点 M4；</li> <li>使用 <code>add-node</code> 将节点加入到集群当中；</li> <li>使用 <code>reshard</code> 对集群重新分配，给 M4 分配槽；</li></ol> <img src="https://tva1.sinaimg.cn/large/008i3skNly1gtbho6mejcj30l40k00tq.jpg" alt="image-20210810103452785" style="zoom:50%;"></div> <h4 id="_1-1-1-准备节点"><a href="#_1-1-1-准备节点" class="header-anchor">#</a> 1.1.1 准备节点</h4> <ul><li><p>随便在一个节点上添加如下配置文件：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">vim</span> /usr/local/redis/cluster/conf/redis-6377.conf
+</code></pre></div><p>内容：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 放行 IP 限制</span>
+<span class="token builtin class-name">bind</span> <span class="token number">0.0</span>.0.0
+<span class="token comment"># 端口</span>
+port <span class="token number">6377</span>
+<span class="token comment"># 后台启动</span>
+daemonize <span class="token function">yes</span>
+<span class="token comment"># 日志存储目录以及日志文件名</span>
+logfile <span class="token string">&quot;/usr/local/redis/cluster/log/redis-6377.log&quot;</span>
+<span class="token comment"># RDB 数据文件名</span>
+dbfilename dump-6377.rbd
+<span class="token comment"># AOF 模式开启和 AOF 数据文件名</span>
+appendonly <span class="token function">yes</span>
+appendfilename <span class="token string">&quot;appendonly-6377.aof&quot;</span>
+<span class="token comment"># RDB 数据文件和 AOF 数据文件的存储目录</span>
+<span class="token function">dir</span> /usr/local/redis/cluster/data
+<span class="token comment"># 设置密码</span>
+requirepass <span class="token number">123456</span>
+<span class="token comment"># 从节点访问主节点密码（必须与 requirepass 一致）</span>
+masterauth <span class="token number">123456</span>
+<span class="token comment"># 是否开启集群模式，默认是 no</span>
+cluster-enabled <span class="token function">yes</span>
+<span class="token comment"># 集群节点信息文件，会保存在 dir 配置对应目录下</span>
+cluster-config-file nodes-6377.conf
+<span class="token comment"># 集群节点连接超时时间，单位是毫秒</span>
+cluster-node-timeout <span class="token number">15000</span>
+<span class="token comment"># 集群节点 IP</span>
+cluster-announce-ip <span class="token number">172.16</span>.58.200
+<span class="token comment"># 集群节点映射端口</span>
+cluster-announce-port <span class="token number">6377</span>
+<span class="token comment"># 集群节点总线端口</span>
+cluster-announce-bus-port <span class="token number">16377</span>
+</code></pre></div></li></ul> <h4 id="_1-1-2-启动节点"><a href="#_1-1-2-启动节点" class="header-anchor">#</a> 1.1.2 启动节点</h4> <div class="language-sh extra-class"><pre class="language-sh"><code>/usr/local/redis/bin/redis-server /usr/local/redis/cluster/conf/redis-6377.conf
+</code></pre></div><h4 id="_1-1-3-将节点加入集群"><a href="#_1-1-3-将节点加入集群" class="header-anchor">#</a> 1.1.3 将节点加入集群</h4> <ul><li><p>语法</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a requirepass --cluster add-node new_host:new_port exiting_host:exitsing_port --cluster-master-id node_id
+</code></pre></div><ul><li><code>requirepass</code>：密码</li> <li><code>new_host</code>：新节点所在 IP</li> <li><code>new_port</code>：新节点端口</li> <li><code>existing_host</code>：集群中最后一个 Master 的 IP</li> <li><code>existing_port</code>：集群中最后一个 Master 的端口</li> <li><code>node_id</code>：集群中最后一个节点的 ID</li></ul></li> <li><p>查看集群节点信息</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> -h <span class="token number">172.16</span>.58.200 -p <span class="token number">6371</span> cluster nodes
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 172.16.58.200:6372@16372 master - 0 1628560132000 7 connected 10923-16383
+be0ddf4921a4a2f077b8c0a72504c8714c69b836 172.16.58.202:6375@16375 slave 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 0 1628560132391 7 connected
+ad98c789913e6cb9db293379509d39d8856d41b2 172.16.58.201:6373@16373 master - 0 1628560132000 3 connected 5461-10922
+3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 172.16.58.201:6374@16374 slave 8306858f71a9a4f43c644bf4426ae2c6561b36a5 0 1628560133394 1 connected
+7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f 172.16.58.202:6376@16376 slave ad98c789913e6cb9db293379509d39d8856d41b2 0 1628560134400 3 connected
+8306858f71a9a4f43c644bf4426ae2c6561b36a5 172.16.58.200:6371@16371 myself,master - 0 1628560133000 1 connected 0-5460
+</code></pre></div><p>可以看到集群中最后一个节点是 <code>8306858f71a9a4f43c644bf4426ae2c6561b36a5 172.16.58.200:6371</code></p></li> <li><p>将 6377 加入集群中</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster add-node <span class="token number">172.16</span>.58.200:6377 <span class="token number">172.16</span>.58.200:6371 --cluster-master-id 8306858f71a9a4f43c644bf4426ae2c6561b36a5
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Adding node <span class="token number">172.16</span>.58.200:6377 to cluster <span class="token number">172.16</span>.58.200:6371
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Performing Cluster Check <span class="token punctuation">(</span>using node <span class="token number">172.16</span>.58.200:6371<span class="token punctuation">)</span>
+M: 8306858f71a9a4f43c644bf4426ae2c6561b36a5 <span class="token number">172.16</span>.58.200:6371
+   slots:<span class="token punctuation">[</span><span class="token number">0</span>-5460<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+M: 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 <span class="token number">172.16</span>.58.200:6372
+   slots:<span class="token punctuation">[</span><span class="token number">10923</span>-16383<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: be0ddf4921a4a2f077b8c0a72504c8714c69b836 <span class="token number">172.16</span>.58.202:6375
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1
+M: ad98c789913e6cb9db293379509d39d8856d41b2 <span class="token number">172.16</span>.58.201:6373
+   slots:<span class="token punctuation">[</span><span class="token number">5461</span>-10922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5462</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 <span class="token number">172.16</span>.58.201:6374
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8306858f71a9a4f43c644bf4426ae2c6561b36a5
+S: 7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f <span class="token number">172.16</span>.58.202:6376
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates ad98c789913e6cb9db293379509d39d8856d41b2
+<span class="token punctuation">[</span>OK<span class="token punctuation">]</span> All nodes agree about slots configuration.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Check <span class="token keyword">for</span> <span class="token function">open</span> slots<span class="token punctuation">..</span>.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Check slots coverage<span class="token punctuation">..</span>.
+<span class="token punctuation">[</span>OK<span class="token punctuation">]</span> All <span class="token number">16384</span> slots covered.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Send CLUSTER MEET to node <span class="token number">172.16</span>.58.200:6377 to <span class="token function">make</span> it <span class="token function">join</span> the cluster.
+<span class="token punctuation">[</span>OK<span class="token punctuation">]</span> New node added correctly.
+</code></pre></div></li></ul> <h4 id="_1-1-4-重新分片"><a href="#_1-1-4-重新分片" class="header-anchor">#</a> 1.1.4 重新分片</h4> <ul><li><p>先来看当前集群状态：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster check <span class="token number">172.16</span>.58.201:6373
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token number">172.16</span>.58.201:6373 <span class="token punctuation">(</span>ad98c789<span class="token punctuation">..</span>.<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> <span class="token number">0</span> keys <span class="token operator">|</span> <span class="token number">5462</span> slots <span class="token operator">|</span> <span class="token number">1</span> slaves.
+<span class="token number">172.16</span>.58.200:6377 <span class="token punctuation">(</span>71568f93<span class="token punctuation">..</span>.<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> <span class="token number">0</span> keys <span class="token operator">|</span> <span class="token number">0</span> slots <span class="token operator">|</span> <span class="token number">0</span> slaves.
+<span class="token number">172.16</span>.58.200:6372 <span class="token punctuation">(</span>8f18a0cf<span class="token punctuation">..</span>.<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> <span class="token number">1</span> keys <span class="token operator">|</span> <span class="token number">5461</span> slots <span class="token operator">|</span> <span class="token number">1</span> slaves.
+<span class="token number">172.16</span>.58.200:6371 <span class="token punctuation">(</span>8306858f<span class="token punctuation">..</span>.<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> <span class="token number">210524</span> keys <span class="token operator">|</span> <span class="token number">5461</span> slots <span class="token operator">|</span> <span class="token number">1</span> slaves.
+<span class="token punctuation">[</span>OK<span class="token punctuation">]</span> <span class="token number">210525</span> keys <span class="token keyword">in</span> <span class="token number">4</span> masters.
+<span class="token number">12.85</span> keys per slot on average.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Performing Cluster Check <span class="token punctuation">(</span>using node <span class="token number">172.16</span>.58.201:6373<span class="token punctuation">)</span>
+M: ad98c789913e6cb9db293379509d39d8856d41b2 <span class="token number">172.16</span>.58.201:6373
+   slots:<span class="token punctuation">[</span><span class="token number">5461</span>-10922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5462</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 <span class="token number">172.16</span>.58.201:6374
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8306858f71a9a4f43c644bf4426ae2c6561b36a5
+M: 71568f93af0eb55bcd25083bb5b6b22115efaafc <span class="token number">172.16</span>.58.200:6377
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> master
+M: 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 <span class="token number">172.16</span>.58.200:6372
+   slots:<span class="token punctuation">[</span><span class="token number">10923</span>-16383<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+M: 8306858f71a9a4f43c644bf4426ae2c6561b36a5 <span class="token number">172.16</span>.58.200:6371
+   slots:<span class="token punctuation">[</span><span class="token number">0</span>-5460<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: be0ddf4921a4a2f077b8c0a72504c8714c69b836 <span class="token number">172.16</span>.58.202:6375
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1
+S: 7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f <span class="token number">172.16</span>.58.202:6376
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates ad98c789913e6cb9db293379509d39d8856d41b2
+<span class="token punctuation">[</span>OK<span class="token punctuation">]</span> All nodes agree about slots configuration.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Check <span class="token keyword">for</span> <span class="token function">open</span> slots<span class="token punctuation">..</span>.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Check slots coverage<span class="token punctuation">..</span>.
+<span class="token punctuation">[</span>OK<span class="token punctuation">]</span> All <span class="token number">16384</span> slots covered.
+</code></pre></div><p>可以看到 6377 已经加入集群中了，但是没有分配槽给它。</p></li> <li><p>添加完新节点后，需要对新添加的主节点进行 hash 槽重新分配，这样该主节点才能存储数据，Redis 共有 16384 个槽，语法如下：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a requirepass --cluster reshard host:port --cluster-from node_id1 --cluster-to node_id2 --cluster-slots <span class="token operator">&lt;</span>args<span class="token operator">&gt;</span> --cluster-yes
+</code></pre></div><ul><li><code>requirepass</code>：密码</li> <li><code>host:port</code>：随便集群中的一个 IP 和端口</li> <li><code>node_id1</code>：表示分配的槽的来源</li> <li><code>node_id2</code>：表示分配的槽的取向</li> <li><code>&lt;args&gt;</code>：分配多少槽的范围</li> <li><code>--cluster-yes</code>：不回显槽的分配情况，表示默认同意分配</li></ul></li> <li><p>运行：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster reshard <span class="token number">172.16</span>.58.200:6371 --cluster-from 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 --cluster-to 71568f93af0eb55bcd25083bb5b6b22115efaafc --cluster-slots <span class="token number">3000</span> --cluster-yes 
+</code></pre></div></li> <li><p>再次查看集群状态：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster check <span class="token number">172.16</span>.58.201:6373
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>M: ad98c789913e6cb9db293379509d39d8856d41b2 <span class="token number">172.16</span>.58.201:6373
+   slots:<span class="token punctuation">[</span><span class="token number">5461</span>-10922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5462</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 <span class="token number">172.16</span>.58.201:6374
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8306858f71a9a4f43c644bf4426ae2c6561b36a5
+M: 71568f93af0eb55bcd25083bb5b6b22115efaafc <span class="token number">172.16</span>.58.200:6377
+   slots:<span class="token punctuation">[</span><span class="token number">10923</span>-13922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">3000</span> slots<span class="token punctuation">)</span> master
+M: 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 <span class="token number">172.16</span>.58.200:6372
+   slots:<span class="token punctuation">[</span><span class="token number">13923</span>-16383<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">2461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+M: 8306858f71a9a4f43c644bf4426ae2c6561b36a5 <span class="token number">172.16</span>.58.200:6371
+   slots:<span class="token punctuation">[</span><span class="token number">0</span>-5460<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: be0ddf4921a4a2f077b8c0a72504c8714c69b836 <span class="token number">172.16</span>.58.202:6375
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1
+S: 7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f <span class="token number">172.16</span>.58.202:6376
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates ad98c789913e6cb9db293379509d39d8856d41b2
+</code></pre></div><p>现在 6377 已经分配了 [10923-13922] 的槽了，至此，主节点就添加完毕了。</p></li></ul> <h3 id="_1-2-添加从节点"><a href="#_1-2-添加从节点" class="header-anchor">#</a> 1.2 添加从节点</h3> <div class="custom-block tip"><p class="custom-block-title">步骤</p> <ol><li>准备节点 S4；</li> <li>启动节点 S4；</li> <li>使用 <code>add-node</code> 将节点加入到集群当中，并用 <code>--cluater-salve</code> 声明该节点为从节点，且使用 <code>--cluster-master-id</code> 指定主节点 ID；</li></ol></div> <h4 id="_1-2-1-准备节点"><a href="#_1-2-1-准备节点" class="header-anchor">#</a> 1.2.1 准备节点</h4> <ul><li><p>随便在一个节点上添加如下配置文件：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">vim</span> /usr/local/redis/cluster/conf/redis-6378.conf
+</code></pre></div><p>内容：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 放行 IP 限制</span>
+<span class="token builtin class-name">bind</span> <span class="token number">0.0</span>.0.0
+<span class="token comment"># 端口</span>
+port <span class="token number">6378</span>
+<span class="token comment"># 后台启动</span>
+daemonize <span class="token function">yes</span>
+<span class="token comment"># 日志存储目录以及日志文件名</span>
+logfile <span class="token string">&quot;/usr/local/redis/cluster/log/redis-6378.log&quot;</span>
+<span class="token comment"># RDB 数据文件名</span>
+dbfilename dump-6378.rbd
+<span class="token comment"># AOF 模式开启和 AOF 数据文件名</span>
+appendonly <span class="token function">yes</span>
+appendfilename <span class="token string">&quot;appendonly-6378.aof&quot;</span>
+<span class="token comment"># RDB 数据文件和 AOF 数据文件的存储目录</span>
+<span class="token function">dir</span> /usr/local/redis/cluster/data
+<span class="token comment"># 设置密码</span>
+requirepass <span class="token number">123456</span>
+<span class="token comment"># 从节点访问主节点密码（必须与 requirepass 一致）</span>
+masterauth <span class="token number">123456</span>
+<span class="token comment"># 是否开启集群模式，默认是 no</span>
+cluster-enabled <span class="token function">yes</span>
+<span class="token comment"># 集群节点信息文件，会保存在 dir 配置对应目录下</span>
+cluster-config-file nodes-6378.conf
+<span class="token comment"># 集群节点连接超时时间，单位是毫秒</span>
+cluster-node-timeout <span class="token number">15000</span>
+<span class="token comment"># 集群节点 IP</span>
+cluster-announce-ip <span class="token number">172.16</span>.58.201
+<span class="token comment"># 集群节点映射端口</span>
+cluster-announce-port <span class="token number">6378</span>
+<span class="token comment"># 集群节点总线端口</span>
+cluster-announce-bus-port <span class="token number">16378</span>
+</code></pre></div></li></ul> <h4 id="_1-2-2-启动节点"><a href="#_1-2-2-启动节点" class="header-anchor">#</a> 1.2.2 启动节点</h4> <div class="language-sh extra-class"><pre class="language-sh"><code>/usr/local/redis/bin/redis-server /usr/local/redis/cluster/conf/redis-6378.conf
+</code></pre></div><h4 id="_1-2-3-将节点加入集群"><a href="#_1-2-3-将节点加入集群" class="header-anchor">#</a> 1.2.3 将节点加入集群</h4> <ul><li><p>语法：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a reuqirepass --cluster add-node new_host:new_port exsiting_host:existing_port --cluater-salve --cluster-master-id node_id
+</code></pre></div><ul><li><code>reuqirepass</code>：密码</li> <li><code>new_host</code>：新节点所在 IP</li> <li><code>new_port</code>：新节点所在端口</li> <li><code>exisiting_host</code>：该从节点要跟的主节点的 IP</li> <li><code>exisiting_port</code>：该从节点要跟的主节点的端口</li> <li><code>node_id</code>：该从节点要跟的主节点的 ID</li></ul></li> <li><p>运行：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster add-node <span class="token number">172.16</span>.58.201:6378 <span class="token number">172.16</span>.58.200:6377 --cluster-slave --cluster-master-id 71568f93af0eb55bcd25083bb5b6b22115efaafc
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Adding node <span class="token number">172.16</span>.58.201:6378 to cluster <span class="token number">172.16</span>.58.200:6377
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Performing Cluster Check <span class="token punctuation">(</span>using node <span class="token number">172.16</span>.58.200:6377<span class="token punctuation">)</span>
+M: 71568f93af0eb55bcd25083bb5b6b22115efaafc <span class="token number">172.16</span>.58.200:6377
+   slots:<span class="token punctuation">[</span><span class="token number">10923</span>-13922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">3000</span> slots<span class="token punctuation">)</span> master
+M: ad98c789913e6cb9db293379509d39d8856d41b2 <span class="token number">172.16</span>.58.201:6373
+   slots:<span class="token punctuation">[</span><span class="token number">5461</span>-10922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5462</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: be0ddf4921a4a2f077b8c0a72504c8714c69b836 <span class="token number">172.16</span>.58.202:6375
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1
+M: 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 <span class="token number">172.16</span>.58.200:6372
+   slots:<span class="token punctuation">[</span><span class="token number">13923</span>-16383<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">2461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 <span class="token number">172.16</span>.58.201:6374
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8306858f71a9a4f43c644bf4426ae2c6561b36a5
+M: 8306858f71a9a4f43c644bf4426ae2c6561b36a5 <span class="token number">172.16</span>.58.200:6371
+   slots:<span class="token punctuation">[</span><span class="token number">0</span>-5460<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f <span class="token number">172.16</span>.58.202:6376
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates ad98c789913e6cb9db293379509d39d8856d41b2
+<span class="token punctuation">[</span>OK<span class="token punctuation">]</span> All nodes agree about slots configuration.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Check <span class="token keyword">for</span> <span class="token function">open</span> slots<span class="token punctuation">..</span>.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Check slots coverage<span class="token punctuation">..</span>.
+<span class="token punctuation">[</span>OK<span class="token punctuation">]</span> All <span class="token number">16384</span> slots covered.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Send CLUSTER MEET to node <span class="token number">172.16</span>.58.201:6378 to <span class="token function">make</span> it <span class="token function">join</span> the cluster.
+Waiting <span class="token keyword">for</span> the cluster to <span class="token function">join</span>
+
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Configure node as replica of <span class="token number">172.16</span>.58.200:6377.
+<span class="token punctuation">[</span>OK<span class="token punctuation">]</span> New node added correctly.
+</code></pre></div></li></ul> <h4 id="_1-2-4-查询集群状态"><a href="#_1-2-4-查询集群状态" class="header-anchor">#</a> 1.2.4 查询集群状态</h4> <ul><li><p>执行：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster check <span class="token number">172.16</span>.58.201:6378
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token number">172.16</span>.58.201:6373 <span class="token punctuation">(</span>ad98c789<span class="token punctuation">..</span>.<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> <span class="token number">0</span> keys <span class="token operator">|</span> <span class="token number">5462</span> slots <span class="token operator">|</span> <span class="token number">1</span> slaves.
+<span class="token number">172.16</span>.58.200:6377 <span class="token punctuation">(</span>71568f93<span class="token punctuation">..</span>.<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> <span class="token number">0</span> keys <span class="token operator">|</span> <span class="token number">3000</span> slots <span class="token operator">|</span> <span class="token number">1</span> slaves.
+<span class="token number">172.16</span>.58.200:6372 <span class="token punctuation">(</span>8f18a0cf<span class="token punctuation">..</span>.<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> <span class="token number">1</span> keys <span class="token operator">|</span> <span class="token number">2461</span> slots <span class="token operator">|</span> <span class="token number">1</span> slaves.
+<span class="token number">172.16</span>.58.200:6371 <span class="token punctuation">(</span>8306858f<span class="token punctuation">..</span>.<span class="token punctuation">)</span> -<span class="token operator">&gt;</span> <span class="token number">210524</span> keys <span class="token operator">|</span> <span class="token number">5461</span> slots <span class="token operator">|</span> <span class="token number">1</span> slaves.
+<span class="token punctuation">[</span>OK<span class="token punctuation">]</span> <span class="token number">210525</span> keys <span class="token keyword">in</span> <span class="token number">4</span> masters.
+<span class="token number">12.85</span> keys per slot on average.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Performing Cluster Check <span class="token punctuation">(</span>using node <span class="token number">172.16</span>.58.201:6378<span class="token punctuation">)</span>
+S: 35724039f2e9d7f43c349718fee303b0681e454e <span class="token number">172.16</span>.58.201:6378
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 71568f93af0eb55bcd25083bb5b6b22115efaafc
+M: ad98c789913e6cb9db293379509d39d8856d41b2 <span class="token number">172.16</span>.58.201:6373
+   slots:<span class="token punctuation">[</span><span class="token number">5461</span>-10922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5462</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 <span class="token number">172.16</span>.58.201:6374
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8306858f71a9a4f43c644bf4426ae2c6561b36a5
+M: 71568f93af0eb55bcd25083bb5b6b22115efaafc <span class="token number">172.16</span>.58.200:6377
+   slots:<span class="token punctuation">[</span><span class="token number">10923</span>-13922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">3000</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f <span class="token number">172.16</span>.58.202:6376
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates ad98c789913e6cb9db293379509d39d8856d41b2
+M: 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 <span class="token number">172.16</span>.58.200:6372
+   slots:<span class="token punctuation">[</span><span class="token number">13923</span>-16383<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">2461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+M: 8306858f71a9a4f43c644bf4426ae2c6561b36a5 <span class="token number">172.16</span>.58.200:6371
+   slots:<span class="token punctuation">[</span><span class="token number">0</span>-5460<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: be0ddf4921a4a2f077b8c0a72504c8714c69b836 <span class="token number">172.16</span>.58.202:6375
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1
+<span class="token punctuation">[</span>OK<span class="token punctuation">]</span> All nodes agree about slots configuration.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Check <span class="token keyword">for</span> <span class="token function">open</span> slots<span class="token punctuation">..</span>.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Check slots coverage<span class="token punctuation">..</span>.
+<span class="token punctuation">[</span>OK<span class="token punctuation">]</span> All <span class="token number">16384</span> slots covered.
+</code></pre></div><p>可以看到 6377 也已经有从节点了，至此，从节点就添加完毕了。</p></li></ul> <h3 id="_1-3-删除从节点"><a href="#_1-3-删除从节点" class="header-anchor">#</a> 1.3 删除从节点</h3> <div class="custom-block tip"><p class="custom-block-title">步骤</p> <ol><li>使用 <code>del-node</code> 将节点从集群中移除；</li> <li>使用 kill 或 SHUTDOWN 停止节点进程。</li></ol></div> <p>删除从节点就比较简单了，直接将它从集群中删除，然后杀死进程就可以了。</p> <ul><li><p>语法：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a requirepass --cluster del-node host:port node_id
+</code></pre></div></li> <li><p>运行：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster del-node <span class="token number">172.16</span>.58.201:6378 35724039f2e9d7f43c349718fee303b0681e454e
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Removing node 35724039f2e9d7f43c349718fee303b0681e454e from cluster <span class="token number">172.16</span>.58.201:6378
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Sending CLUSTER FORGET messages to the cluster<span class="token punctuation">..</span>.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Sending CLUSTER RESET SOFT to the deleted node.
+</code></pre></div></li> <li><p>再次查看集群状态：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster check <span class="token number">172.16</span>.58.201:6373
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>M: ad98c789913e6cb9db293379509d39d8856d41b2 <span class="token number">172.16</span>.58.201:6373
+   slots:<span class="token punctuation">[</span><span class="token number">5461</span>-10922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5462</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 <span class="token number">172.16</span>.58.201:6374
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8306858f71a9a4f43c644bf4426ae2c6561b36a5
+M: 71568f93af0eb55bcd25083bb5b6b22115efaafc <span class="token number">172.16</span>.58.200:6377
+   slots:<span class="token punctuation">[</span><span class="token number">10923</span>-13922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">3000</span> slots<span class="token punctuation">)</span> master
+M: 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 <span class="token number">172.16</span>.58.200:6372
+   slots:<span class="token punctuation">[</span><span class="token number">13923</span>-16383<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">2461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+M: 8306858f71a9a4f43c644bf4426ae2c6561b36a5 <span class="token number">172.16</span>.58.200:6371
+   slots:<span class="token punctuation">[</span><span class="token number">0</span>-5460<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">5461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: be0ddf4921a4a2f077b8c0a72504c8714c69b836 <span class="token number">172.16</span>.58.202:6375
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1
+S: 7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f <span class="token number">172.16</span>.58.202:6376
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates ad98c789913e6cb9db293379509d39d8856d41b2
+</code></pre></div><p>会发现从节点已经从集群中移除了。</p></li> <li><p>停掉从节点进程：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">grep</span> redis
+<span class="token function">kill</span> -9 PID
+</code></pre></div></li></ul> <h3 id="_1-4-删除主节点"><a href="#_1-4-删除主节点" class="header-anchor">#</a> 1.4 删除主节点</h3> <div class="custom-block tip"><p class="custom-block-title">步骤</p> <ol><li>使用 <code>reshard</code> 将要删除的主节点 M4 的槽分配给其他节点；</li> <li>使用 <code>del-node</code> 将 M4 从集群中移除；</li> <li>停止 M4 进程。</li></ol> <img src="https://tva1.sinaimg.cn/large/008i3skNly1gtbhr6dn56j30mw0k8jsg.jpg" alt="image-20210810103747994" style="zoom:50%;"></div> <p>删除主节点稍微麻烦一点，因为主节点分配了槽，所以必须先把槽分配给其他可用节点后，才可以移除节点，不然会造成数据丢失。</p> <h4 id="_1-4-1-重新分片"><a href="#_1-4-1-重新分片" class="header-anchor">#</a> 1.4.1 重新分片</h4> <ul><li><p>将数据移动到其他主节点去，执行重新分片命令：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster reshard <span class="token number">172.16</span>.58.200:6377
+</code></pre></div></li> <li><p>出现：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>How many slots <span class="token keyword">do</span> you want to move <span class="token punctuation">(</span>from <span class="token number">1</span> to <span class="token number">16384</span><span class="token punctuation">)</span>? 
+</code></pre></div><p>前面我们给 6377 分配了 2000 个槽，这里输入 2000 即可。</p></li> <li><p>出现：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>What is the receiving node ID? 
+</code></pre></div><p>我们需要指定这些槽的取向，这里我们分配回给 6371，输入 6371 的 ID。</p></li> <li><p>出现：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>Please enter all the <span class="token builtin class-name">source</span> node IDs.
+  Type <span class="token string">'all'</span> to use all the nodes as <span class="token builtin class-name">source</span> nodes <span class="token keyword">for</span> the <span class="token builtin class-name">hash</span> slots.
+  Type <span class="token string">'done'</span> once you entered all the <span class="token builtin class-name">source</span> nodes IDs.
+Source node <span class="token comment">#1:</span>
+</code></pre></div><p>这里是要指定槽从谁取，直接填写 6377 的 ID 即可。然后按回车，再输入 done。</p> <p>也可以直接输入 all，从集群的所有 master 中随机取。</p></li> <li><p>再输入：</p> <div class="language- extra-class"><pre class="language-text"><code>yes
+</code></pre></div></li></ul> <h4 id="_1-4-2-查看集群状态"><a href="#_1-4-2-查看集群状态" class="header-anchor">#</a> 1.4.2 查看集群状态</h4> <ul><li><p>执行：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster check <span class="token number">172.16</span>.58.200:6371
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>M: 8306858f71a9a4f43c644bf4426ae2c6561b36a5 <span class="token number">172.16</span>.58.200:6371
+   slots:<span class="token punctuation">[</span><span class="token number">0</span>-6461<span class="token punctuation">]</span>,<span class="token punctuation">[</span><span class="token number">10923</span>-14372<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">9912</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+M: 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 <span class="token number">172.16</span>.58.200:6372
+   slots:<span class="token punctuation">[</span><span class="token number">14373</span>-16383<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">2011</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+M: 71568f93af0eb55bcd25083bb5b6b22115efaafc <span class="token number">172.16</span>.58.200:6377
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> master
+S: be0ddf4921a4a2f077b8c0a72504c8714c69b836 <span class="token number">172.16</span>.58.202:6375
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1
+M: ad98c789913e6cb9db293379509d39d8856d41b2 <span class="token number">172.16</span>.58.201:6373
+   slots:<span class="token punctuation">[</span><span class="token number">6462</span>-10922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">4461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 <span class="token number">172.16</span>.58.201:6374
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8306858f71a9a4f43c644bf4426ae2c6561b36a5
+S: 7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f <span class="token number">172.16</span>.58.202:6376
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates ad98c789913e6cb9db293379509d39d8856d41b2
+</code></pre></div><p>可以看到 6377 的 slots 为 0 了。</p></li></ul> <h4 id="_1-4-3-移除主节点"><a href="#_1-4-3-移除主节点" class="header-anchor">#</a> 1.4.3 移除主节点</h4> <ul><li><p>执行：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster del-node <span class="token number">172.16</span>.58.200:6377 71568f93af0eb55bcd25083bb5b6b22115efaafc
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Removing node 71568f93af0eb55bcd25083bb5b6b22115efaafc from cluster <span class="token number">172.16</span>.58.200:6377
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Sending CLUSTER FORGET messages to the cluster<span class="token punctuation">..</span>.
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> Sending CLUSTER RESET SOFT to the deleted node.
+</code></pre></div></li></ul> <h4 id="_1-4-4-检查集群状态"><a href="#_1-4-4-检查集群状态" class="header-anchor">#</a> 1.4.4 检查集群状态</h4> <ul><li><p>执行：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster check <span class="token number">172.16</span>.58.200:6371
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>M: 8306858f71a9a4f43c644bf4426ae2c6561b36a5 <span class="token number">172.16</span>.58.200:6371
+   slots:<span class="token punctuation">[</span><span class="token number">0</span>-6461<span class="token punctuation">]</span>,<span class="token punctuation">[</span><span class="token number">10923</span>-14372<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">9912</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+M: 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 <span class="token number">172.16</span>.58.200:6372
+   slots:<span class="token punctuation">[</span><span class="token number">14373</span>-16383<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">2011</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: be0ddf4921a4a2f077b8c0a72504c8714c69b836 <span class="token number">172.16</span>.58.202:6375
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1
+M: ad98c789913e6cb9db293379509d39d8856d41b2 <span class="token number">172.16</span>.58.201:6373
+   slots:<span class="token punctuation">[</span><span class="token number">6462</span>-10922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">4461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 <span class="token number">172.16</span>.58.201:6374
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8306858f71a9a4f43c644bf4426ae2c6561b36a5
+S: 7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f <span class="token number">172.16</span>.58.202:6376
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates ad98c789913e6cb9db293379509d39d8856d41b2
+</code></pre></div><p>至此，6377 就从集群中移除了。</p></li></ul> <h4 id="_1-4-5-停止节点进程"><a href="#_1-4-5-停止节点进程" class="header-anchor">#</a> 1.4.5 停止节点进程</h4> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">grep</span> redis
+<span class="token function">kill</span> -9 PID
+</code></pre></div><h2 id="_2-moved-转向"><a href="#_2-moved-转向" class="header-anchor">#</a> 2. MOVED 转向</h2> <h3 id="_2-1-moved-错误演示"><a href="#_2-1-moved-错误演示" class="header-anchor">#</a> 2.1 MOVED 错误演示</h3> <p>当我们使用操作 Redis 单节点的 Client 来操作集群时，比如使用以下方式登入 Client：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> -h <span class="token number">172.16</span>.58.202 -p <span class="token number">6375</span>
+</code></pre></div><p>然后执行：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>get username
+</code></pre></div><p>会出现 MOVED 错误：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token number">172.16</span>.58.202:637<span class="token operator"><span class="token file-descriptor important">5</span>&gt;</span> get username
+<span class="token punctuation">(</span>error<span class="token punctuation">)</span> MOVED <span class="token number">14315</span> <span class="token number">172.16</span>.58.200:6371
+</code></pre></div><p>Redis 官方规范要求所有 Clieny 都应该处理 MOVED 错误，从而实现对用户的透明。</p> <p>单击模式/集群模式下 MOVED 错误的显示区别：</p> <ul><li>集群模式：自动转向</li> <li>单击模式：报错，需要开发者自主做出处理</li></ul> <h3 id="_2-2-解决措施"><a href="#_2-2-解决措施" class="header-anchor">#</a> 2.2 解决措施</h3> <h4 id="_2-2-1-使用集群模式进入-client"><a href="#_2-2-1-使用集群模式进入-client" class="header-anchor">#</a> 2.2.1 使用集群模式进入 Client</h4> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -c -a <span class="token number">123456</span> -h <span class="token number">172.16</span>.58.200 -p <span class="token number">6371</span>
+</code></pre></div><h4 id="_2-2-2-手动切换到正确节点"><a href="#_2-2-2-手动切换到正确节点" class="header-anchor">#</a> 2.2.2 手动切换到正确节点</h4> <div class="language- extra-class"><pre class="language-text"><code>(error) MOVED 14315 172.16.58.200:6371
+</code></pre></div><p>上述信息当中有该 slot 所在的节点，可以切换到该节点进行操作。</p> <h2 id="_3-ask-转向"><a href="#_3-ask-转向" class="header-anchor">#</a> 3. ASK 转向</h2> <h3 id="_3-1-ask-错误"><a href="#_3-1-ask-错误" class="header-anchor">#</a> 3.1 ASK 错误</h3> <p>除了 MOVED 转向，Redis 规范还要求 Client 实现对 ASK 转向的处理。</p> <p>当 Client 向源节点发送一个命令，并且命令要处理的键恰好就属于正在被迁移的槽时：</p> <ol><li>先在自己的数据里面查找指定的键，找到，就直接响应 Client；</li> <li>但是，这个键有可能已经被迁移到了目标节点，源节点将向 Client 返回一个 ASK 错误。</li></ol> <p>单击模式/集群模式下 ASK 错误的显示区别：</p> <ul><li>集群模式：自动转向</li> <li>单击模式：报错，需要开发者自主做出处理</li></ul> <h3 id="_3-2-解决措施"><a href="#_3-2-解决措施" class="header-anchor">#</a> 3.2 解决措施</h3> <h4 id="_3-2-1-使用集群模式进入-client"><a href="#_3-2-1-使用集群模式进入-client" class="header-anchor">#</a> 3.2.1 使用集群模式进入 Client</h4> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -c -a <span class="token number">123456</span> -h <span class="token number">172.16</span>.58.200 -p <span class="token number">6371</span>
+</code></pre></div><h4 id="_3-2-2-使用-asking-命令"><a href="#_3-2-2-使用-asking-命令" class="header-anchor">#</a> 3.2.2 使用 ASKING 命令</h4> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token number">172.16</span>.58.202:637<span class="token operator"><span class="token file-descriptor important">5</span>&gt;</span> ASKING
+OK
+</code></pre></div><p>ASKING 命令打开 Redis ASKING 标识，执行 <code>get</code> 命令后，该标识会被去除，每次都需要 ASKING。</p> <div class="custom-block tip"><p class="custom-block-title">MOVED vs ASK</p> <ol><li>MOVED 错误代表槽的负责权已经从一个节点转移到了另外一个节点，是长期的状态；</li> <li>ASK 错误只是两个节点在迁移槽的过程中使用的一种临时措施。</li></ol></div> <h2 id="_4-自动故障转移"><a href="#_4-自动故障转移" class="header-anchor">#</a> 4. 自动故障转移</h2> <h3 id="_4-1-环境准备"><a href="#_4-1-环境准备" class="header-anchor">#</a> 4.1 环境准备</h3> <ul><li>启动 6 个 redis 节点，参考前面文章。</li></ul> <h3 id="_4-2-演示"><a href="#_4-2-演示" class="header-anchor">#</a> 4.2 演示</h3> <p>查看集群状态</p> <div class="language-sh extra-class"><pre class="language-sh"><code>M: 8306858f71a9a4f43c644bf4426ae2c6561b36a5 <span class="token number">172.16</span>.58.200:6371
+   slots:<span class="token punctuation">[</span><span class="token number">0</span>-6461<span class="token punctuation">]</span>,<span class="token punctuation">[</span><span class="token number">10923</span>-14372<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">9912</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+M: 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 <span class="token number">172.16</span>.58.200:6372
+   slots:<span class="token punctuation">[</span><span class="token number">14373</span>-16383<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">2011</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: be0ddf4921a4a2f077b8c0a72504c8714c69b836 <span class="token number">172.16</span>.58.202:6375
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1
+M: ad98c789913e6cb9db293379509d39d8856d41b2 <span class="token number">172.16</span>.58.201:6373
+   slots:<span class="token punctuation">[</span><span class="token number">6462</span>-10922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">4461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 <span class="token number">172.16</span>.58.201:6374
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8306858f71a9a4f43c644bf4426ae2c6561b36a5
+S: 7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f <span class="token number">172.16</span>.58.202:6376
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates ad98c789913e6cb9db293379509d39d8856d41b
+</code></pre></div><p>下面来演示 6371 故障后，它的从节点 6374 会自动顶上。</p> <ul><li><p>杀死 6371：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">grep</span> redis
+<span class="token function">kill</span> -9 PID
+</code></pre></div></li> <li><p>查看 6374 日志：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">tail</span> -f -n <span class="token number">1000</span> /usr/local/redis/cluster/log/redis-6374.log 
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 6374 与主节点 6371 失去联系了</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:22.255 <span class="token comment"># Connection with master lost.</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:22.255 * Caching the disconnected master state.
+<span class="token comment"># 重新重新连接</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:23.080 * Connecting to MASTER <span class="token number">172.16</span>.58.200:6371
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:23.080 * MASTER <span class="token operator">&lt;</span>-<span class="token operator">&gt;</span> REPLICA <span class="token function">sync</span> started
+<span class="token comment"># 连接失败</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:23.080 <span class="token comment"># Error condition on socket for SYNC: Connection refused</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:40.880 * FAIL message received from ad98c789913e6cb9db293379509d39d8856d41b2 about 8306858f71a9a4f43c644bf4426ae2c6561b36a5
+<span class="token comment"># 集群进入 fail 状态</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:40.880 <span class="token comment"># Cluster state changed: fail</span>
+<span class="token comment"># 开始选举</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:40.882 <span class="token comment"># Start of election delayed for 611 milliseconds (rank #0, offset 15019915).</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:41.184 * Connecting to MASTER <span class="token number">172.16</span>.58.200:6371
+<span class="token comment"># 主从复制</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:41.184 * MASTER <span class="token operator">&lt;</span>-<span class="token operator">&gt;</span> REPLICA <span class="token function">sync</span> started
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:41.185 <span class="token comment"># Error condition on socket for SYNC: Connection refused</span>
+<span class="token comment"># 故障转移</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:41.584 <span class="token comment"># Starting a failover election for epoch 10.</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:41.588 <span class="token comment"># Failover election won: I'm the new master.</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:41.588 <span class="token comment"># configEpoch set to 10 after successful failover</span>
+<span class="token comment"># 删除之前的 master 状态</span>
+<span class="token number">98575</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:41.588 * Discarding previously cached master state.
+<span class="token comment"># 更新 replication ID</span>
+<span class="token number">98575</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:41.588 <span class="token comment"># Setting secondary replication ID to 145f1a07ead94288b0324a632fcb1d1c2debbba7, valid up to offset: 15019916. New replication ID is a0d6838ae362f8f0416f3c21fb1ea7b25bf32187</span>
+<span class="token comment"># 集群进入 ok 状态</span>
+<span class="token number">98575</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:03:41.588 <span class="token comment"># Cluster state changed: ok</span>
+</code></pre></div></li> <li><p>再看集群状态：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster check <span class="token number">172.16</span>.58.200:6372
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>M: 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 <span class="token number">172.16</span>.58.200:6372
+   slots:<span class="token punctuation">[</span><span class="token number">14373</span>-16383<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">2011</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: be0ddf4921a4a2f077b8c0a72504c8714c69b836 <span class="token number">172.16</span>.58.202:6375
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1
+M: 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 <span class="token number">172.16</span>.58.201:6374
+   slots:<span class="token punctuation">[</span><span class="token number">0</span>-6461<span class="token punctuation">]</span>,<span class="token punctuation">[</span><span class="token number">10923</span>-14372<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">9912</span> slots<span class="token punctuation">)</span> master
+S: 7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f <span class="token number">172.16</span>.58.202:6376
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates ad98c789913e6cb9db293379509d39d8856d41b2
+M: ad98c789913e6cb9db293379509d39d8856d41b2 <span class="token number">172.16</span>.58.201:6373
+   slots:<span class="token punctuation">[</span><span class="token number">6462</span>-10922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">4461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+</code></pre></div></li> <li><p>尝试获取 username，之前这个字段是存在 6371 上的：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token number">172.16</span>.58.201:637<span class="token operator"><span class="token file-descriptor important">3</span>&gt;</span> get username
+-<span class="token operator">&gt;</span> Redirected to slot <span class="token punctuation">[</span><span class="token number">14315</span><span class="token punctuation">]</span> located at <span class="token number">172.16</span>.58.201:6374
+<span class="token string">&quot;zhangsan&quot;</span>
+</code></pre></div><p>可以发现 username 已经转移到 6374 上面了，自动故障转移成功！</p></li> <li><p>再次启动 6371：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-server redis-6371.conf
+</code></pre></div></li> <li><p>查看集群状态：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>M: 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 <span class="token number">172.16</span>.58.200:6372
+   slots:<span class="token punctuation">[</span><span class="token number">14373</span>-16383<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">2011</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: be0ddf4921a4a2f077b8c0a72504c8714c69b836 <span class="token number">172.16</span>.58.202:6375
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1
+M: 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 <span class="token number">172.16</span>.58.201:6374
+   slots:<span class="token punctuation">[</span><span class="token number">0</span>-6461<span class="token punctuation">]</span>,<span class="token punctuation">[</span><span class="token number">10923</span>-14372<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">9912</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f <span class="token number">172.16</span>.58.202:6376
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates ad98c789913e6cb9db293379509d39d8856d41b2
+S: 8306858f71a9a4f43c644bf4426ae2c6561b36a5 <span class="token number">172.16</span>.58.200:6371
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38
+M: ad98c789913e6cb9db293379509d39d8856d41b2 <span class="token number">172.16</span>.58.201:6373
+   slots:<span class="token punctuation">[</span><span class="token number">6462</span>-10922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">4461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+</code></pre></div></li> <li><p>可以看到 6371 已经成了 6374 的从节点了。</p></li></ul> <h2 id="_5-手动故障转移"><a href="#_5-手动故障转移" class="header-anchor">#</a> 5. 手动故障转移</h2> <p>Redis Cluster 使用 <code>CLUSTER FAILOVER</code> 命令来进行故障转移，不过要在 <strong>被转移的主节点的从节点上</strong> 执行该命令。</p> <h3 id="_5-1-故障转移"><a href="#_5-1-故障转移" class="header-anchor">#</a> 5.1 故障转移</h3> <ul><li><p>在刚刚降级为从节点的 6371 中执行 <code>CLUSTER FAILOVER</code> 开启手动故障转移：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -c -a <span class="token number">123456</span> -h <span class="token number">172.16</span>.58.200 -p <span class="token number">6371</span> cluster failover
+</code></pre></div></li></ul> <h3 id="_5-2-查看集群状态"><a href="#_5-2-查看集群状态" class="header-anchor">#</a> 5.2 查看集群状态</h3> <ul><li><p>执行：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>redis-cli -a <span class="token number">123456</span> --cluster check <span class="token number">172.16</span>.58.200:6371
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code>M: 8306858f71a9a4f43c644bf4426ae2c6561b36a5 <span class="token number">172.16</span>.58.200:6371
+   slots:<span class="token punctuation">[</span><span class="token number">0</span>-6461<span class="token punctuation">]</span>,<span class="token punctuation">[</span><span class="token number">10923</span>-14372<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">9912</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+M: ad98c789913e6cb9db293379509d39d8856d41b2 <span class="token number">172.16</span>.58.201:6373
+   slots:<span class="token punctuation">[</span><span class="token number">6462</span>-10922<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">4461</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+M: 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1 <span class="token number">172.16</span>.58.200:6372
+   slots:<span class="token punctuation">[</span><span class="token number">14373</span>-16383<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token number">2011</span> slots<span class="token punctuation">)</span> master
+   <span class="token number">1</span> additional replica<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+S: 3c95fde7335c16c7f3fe323bde9cfc9778ca1d38 <span class="token number">172.16</span>.58.201:6374
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8306858f71a9a4f43c644bf4426ae2c6561b36a5
+S: be0ddf4921a4a2f077b8c0a72504c8714c69b836 <span class="token number">172.16</span>.58.202:6375
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates 8f18a0cf21cc4bcc3d96c0e672edf0949abefad1
+S: 7ba9475d72e3ff57b409e9ff2ee7ecbfce4a024f <span class="token number">172.16</span>.58.202:6376
+   slots: <span class="token punctuation">(</span><span class="token number">0</span> slots<span class="token punctuation">)</span> slave
+   replicates ad98c789913e6cb9db293379509d39d8856d41b2
+</code></pre></div><p>可以看到现在 6371 是 6374 的主节点了。</p></li></ul> <h3 id="_5-3-查看日志"><a href="#_5-3-查看日志" class="header-anchor">#</a> 5.3 查看日志</h3> <ul><li><p>查看 6371 日志：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">tail</span> -f -n <span class="token number">1000</span> redis-6371.log
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 接受手动故障转移</span>
+<span class="token number">33635</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.816 <span class="token comment"># Manual failover user request accepted.</span>
+<span class="token comment"># 准备转移</span>
+<span class="token number">33635</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.835 <span class="token comment"># Received replication offset for paused master manual failover: 15020307</span>
+<span class="token comment"># 开启手动故障转移</span>
+<span class="token number">33635</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.908 <span class="token comment"># All master replication stream processed, manual failover can start.</span>
+<span class="token comment"># 选举 leader</span>
+<span class="token number">33635</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.908 <span class="token comment"># Start of election delayed for 0 milliseconds (rank #0, offset 15020307).</span>
+<span class="token number">33635</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.908 <span class="token comment"># Starting a failover election for epoch 11.</span>
+<span class="token comment"># 等待投票</span>
+<span class="token number">33635</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.912 <span class="token comment"># Currently unable to failover: Waiting for votes, but majority still not reached.</span>
+<span class="token comment"># 选举完毕</span>
+<span class="token number">33635</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.913 <span class="token comment"># Failover election won: I'm the new master.</span>
+<span class="token number">33635</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.913 <span class="token comment"># configEpoch set to 11 after successful failover</span>
+<span class="token number">33635</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.913 <span class="token comment"># Connection with master lost.</span>
+<span class="token number">33635</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.913 * Caching the disconnected master state.
+<span class="token number">33635</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.913 * Discarding previously cached master state.
+<span class="token number">33635</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.913 <span class="token comment"># Setting secondary replication ID to a0d6838ae362f8f0416f3c21fb1ea7b25bf32187, valid up to offset: 15020308. New replication ID is 213fd6cf96e35b3c470c6852357d9b438682a208</span>
+<span class="token comment"># 主从复制</span>
+<span class="token number">33635</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:21.851 * Replica <span class="token number">172.16</span>.58.201:6374 asks <span class="token keyword">for</span> synchronization
+<span class="token number">33635</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:21.851 * Partial resynchronization request from <span class="token number">172.16</span>.58.201:6374 accepted. Sending <span class="token number">0</span> bytes of backlog starting from offset <span class="token number">15020308</span>.
+</code></pre></div></li> <li><p>查看 6374 日志：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">tail</span> -f -n <span class="token number">1000</span> redis-6374.log
+</code></pre></div><p>输出：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 接受手动故障转移</span>
+<span class="token number">98575</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.608 <span class="token comment"># Manual failover requested by replica 8306858f71a9a4f43c644bf4426ae2c6561b36a5.</span>
+<span class="token number">98575</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.702 <span class="token comment"># Failover auth granted to 8306858f71a9a4f43c644bf4426ae2c6561b36a5 for epoch 11</span>
+<span class="token number">98575</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.706 <span class="token comment"># Connection with replica 172.16.58.200:6371 lost.</span>
+<span class="token number">98575</span>:M 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.707 <span class="token comment"># Configuration change detected. Reconfiguring myself as a replica of 8306858f71a9a4f43c644bf4426ae2c6561b36a5</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:20.707 * Before turning into a replica, using my own master parameters to synthesize a cached master: I may be able to synchronize with the new master with just a partial transfer.
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:21.630 * Connecting to MASTER <span class="token number">172.16</span>.58.200:6371
+<span class="token comment"># 开始主从复制</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:21.631 * MASTER <span class="token operator">&lt;</span>-<span class="token operator">&gt;</span> REPLICA <span class="token function">sync</span> started
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:21.631 * Non blocking connect <span class="token keyword">for</span> SYNC fired the event.
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:21.637 * Master replied to PING, replication can continue<span class="token punctuation">..</span>.
+<span class="token comment"># 增量复制</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:21.644 * Trying a partial resynchronization <span class="token punctuation">(</span>request a0d6838ae362f8f0416f3c21fb1ea7b25bf32187:15020308<span class="token punctuation">)</span>.
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:21.645 * Successful partial resynchronization with master.
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:21.645 <span class="token comment"># Master replication ID changed to 213fd6cf96e35b3c470c6852357d9b438682a208</span>
+<span class="token number">98575</span>:S 09 Aug <span class="token number">2021</span> <span class="token number">20</span>:15:21.645 * MASTER <span class="token operator">&lt;</span>-<span class="token operator">&gt;</span> REPLICA sync: Master accepted a Partial Resynchronization.
+</code></pre></div></li></ul> <h3 id="_5-4-读取数据"><a href="#_5-4-读取数据" class="header-anchor">#</a> 5.4 读取数据</h3> <p>现在再来 <code>get username</code>，数据应该转移到 6371 上了：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token number">172.16</span>.58.200:637<span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span> get username
+-<span class="token operator">&gt;</span> Redirected to slot <span class="token punctuation">[</span><span class="token number">14315</span><span class="token punctuation">]</span> located at <span class="token number">172.16</span>.58.200:6371
+&quot;zhangsan
+</code></pre></div><h2 id="_6-集群迁移"><a href="#_6-集群迁移" class="header-anchor">#</a> 6. 集群迁移</h2> <h3 id="_6-1-手动迁移"><a href="#_6-1-手动迁移" class="header-anchor">#</a> 6.1 手动迁移</h3> <ul><li><p>源集群于目标集群结构一致</p> <blockquote><ol><li>取消密码；</li> <li>创建跟源集群结构一致的目标集群；</li> <li>先从后主停掉目标集群服务；</li> <li>删除目标集群中所有节点的 AOF 和 RDB 文件；</li> <li>源集群数据持久化；</li> <li>将源集群的所有节点的 AOF 和 RDB 文件复制到目标集群对应的节点上；</li> <li>启动目标集群服务；</li> <li>检查目标集群状态。</li></ol></blockquote></li> <li><p>源集群于目标集群结构不一致</p> <blockquote><p>思路一：</p> <ol><li>先按照集群结构一致的情况进行迁移；</li> <li>再进行集群的缩容或者扩容到之前指定的目标集群的结构。</li></ol> <p>思路二：</p> <ol><li>源集群和目标集群都将槽全部归到一个节点 A 上；</li> <li>源集群对 A 进行持久化；</li> <li>将源集群 A 节点的 AOF 和 RDB 文件复制到目标集群的 A 节点上；</li> <li>启动目标集群；</li> <li>目标集群进行槽的重新分配。</li></ol></blockquote></li></ul> <h3 id="_6-2-自动迁移-redisshake"><a href="#_6-2-自动迁移-redisshake" class="header-anchor">#</a> 6.2 自动迁移 RedisShake</h3> <p>阿里开源的 Redis 自动化迁移工具。</p> <ul><li>Github: https://github.com/alibaba/RedisShake/wiki</li></ul> <h3 id="_6-3-迁移检查-redisfullcheck"><a href="#_6-3-迁移检查-redisfullcheck" class="header-anchor">#</a> 6.3 迁移检查 RedisFullCheck</h3> <p>阿里开源的配套工具，用于检查源和目标是否数据统一。</p> <ul><li>Github: https://github.com/alibaba/RedisFullCheck/wiki</li></ul> <!----></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">8/11/2021, 11:14:33 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/noteSite/backend/middleware/redis/redis_cluster.html" class="prev">
+        九、Redis 集群分片
+      </a></span> <span class="next"><a href="/noteSite/backend/middleware/redis/apply/redis_lock.html">
+        Redis 应用丨分布式锁
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/noteSite/assets/js/app.4a2b23d7.js" defer></script><script src="/noteSite/assets/js/2.691adf44.js" defer></script><script src="/noteSite/assets/js/86.1eb13d06.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Golang 异常处理 | Hedon</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/noteSite/favicon.ico">
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/noteSite/assets/css/0.styles.0f3b0cbd.css" as="style"><link rel="preload" href="/noteSite/assets/js/app.4a2b23d7.js" as="script"><link rel="preload" href="/noteSite/assets/js/2.691adf44.js" as="script"><link rel="preload" href="/noteSite/assets/js/15.637c455d.js" as="script"><link rel="prefetch" href="/noteSite/assets/js/10.ab723198.js"><link rel="prefetch" href="/noteSite/assets/js/100.ba5c10a3.js"><link rel="prefetch" href="/noteSite/assets/js/101.ae26c2d8.js"><link rel="prefetch" href="/noteSite/assets/js/102.5fe90241.js"><link rel="prefetch" href="/noteSite/assets/js/103.97270f6a.js"><link rel="prefetch" href="/noteSite/assets/js/104.678d3e7d.js"><link rel="prefetch" href="/noteSite/assets/js/105.d14d5411.js"><link rel="prefetch" href="/noteSite/assets/js/106.951d70ec.js"><link rel="prefetch" href="/noteSite/assets/js/107.3b8bb777.js"><link rel="prefetch" href="/noteSite/assets/js/108.583a3359.js"><link rel="prefetch" href="/noteSite/assets/js/109.aaff761d.js"><link rel="prefetch" href="/noteSite/assets/js/11.0e4d5955.js"><link rel="prefetch" href="/noteSite/assets/js/110.fc0e46a3.js"><link rel="prefetch" href="/noteSite/assets/js/111.b6801ea8.js"><link rel="prefetch" href="/noteSite/assets/js/112.239aabdd.js"><link rel="prefetch" href="/noteSite/assets/js/113.e5bad6a3.js"><link rel="prefetch" href="/noteSite/assets/js/114.c9417ce6.js"><link rel="prefetch" href="/noteSite/assets/js/115.59711f27.js"><link rel="prefetch" href="/noteSite/assets/js/116.c871ff69.js"><link rel="prefetch" href="/noteSite/assets/js/117.b2d2bf69.js"><link rel="prefetch" href="/noteSite/assets/js/118.2726453b.js"><link rel="prefetch" href="/noteSite/assets/js/119.1724f0d3.js"><link rel="prefetch" href="/noteSite/assets/js/12.84338459.js"><link rel="prefetch" href="/noteSite/assets/js/120.025bee0f.js"><link rel="prefetch" href="/noteSite/assets/js/121.ab209ac4.js"><link rel="prefetch" href="/noteSite/assets/js/122.30f92016.js"><link rel="prefetch" href="/noteSite/assets/js/123.53ae9635.js"><link rel="prefetch" href="/noteSite/assets/js/124.3753e2ed.js"><link rel="prefetch" href="/noteSite/assets/js/125.3dcf3243.js"><link rel="prefetch" href="/noteSite/assets/js/126.885ff092.js"><link rel="prefetch" href="/noteSite/assets/js/127.c6c7a558.js"><link rel="prefetch" href="/noteSite/assets/js/128.40f398ab.js"><link rel="prefetch" href="/noteSite/assets/js/129.06d285f3.js"><link rel="prefetch" href="/noteSite/assets/js/13.cfd4493f.js"><link rel="prefetch" href="/noteSite/assets/js/130.4bfc9180.js"><link rel="prefetch" href="/noteSite/assets/js/131.a4b56964.js"><link rel="prefetch" href="/noteSite/assets/js/132.33e5c550.js"><link rel="prefetch" href="/noteSite/assets/js/133.cf5d78c6.js"><link rel="prefetch" href="/noteSite/assets/js/134.51da4194.js"><link rel="prefetch" href="/noteSite/assets/js/135.7817bbdf.js"><link rel="prefetch" href="/noteSite/assets/js/136.7d9d4ee1.js"><link rel="prefetch" href="/noteSite/assets/js/137.a2194dc3.js"><link rel="prefetch" href="/noteSite/assets/js/138.ff99ed38.js"><link rel="prefetch" href="/noteSite/assets/js/139.29cbe0a4.js"><link rel="prefetch" href="/noteSite/assets/js/14.f255fb4c.js"><link rel="prefetch" href="/noteSite/assets/js/140.ece74dd5.js"><link rel="prefetch" href="/noteSite/assets/js/141.61345e24.js"><link rel="prefetch" href="/noteSite/assets/js/142.c34e8d0f.js"><link rel="prefetch" href="/noteSite/assets/js/143.a413a7af.js"><link rel="prefetch" href="/noteSite/assets/js/144.ce9e6119.js"><link rel="prefetch" href="/noteSite/assets/js/145.f0db043d.js"><link rel="prefetch" href="/noteSite/assets/js/146.4be2e4a5.js"><link rel="prefetch" href="/noteSite/assets/js/147.df049d7c.js"><link rel="prefetch" href="/noteSite/assets/js/148.9e2aa7d9.js"><link rel="prefetch" href="/noteSite/assets/js/149.7521b256.js"><link rel="prefetch" href="/noteSite/assets/js/150.f2f58ec3.js"><link rel="prefetch" href="/noteSite/assets/js/151.6a0de16a.js"><link rel="prefetch" href="/noteSite/assets/js/152.6b20917e.js"><link rel="prefetch" href="/noteSite/assets/js/153.2b5ebfd8.js"><link rel="prefetch" href="/noteSite/assets/js/154.7d259ee0.js"><link rel="prefetch" href="/noteSite/assets/js/155.cee16fdd.js"><link rel="prefetch" href="/noteSite/assets/js/156.0d0ba814.js"><link rel="prefetch" href="/noteSite/assets/js/157.5332757d.js"><link rel="prefetch" href="/noteSite/assets/js/158.b86ddbb9.js"><link rel="prefetch" href="/noteSite/assets/js/159.c3b89554.js"><link rel="prefetch" href="/noteSite/assets/js/16.588a856e.js"><link rel="prefetch" href="/noteSite/assets/js/160.fb6e652a.js"><link rel="prefetch" href="/noteSite/assets/js/161.4d52e086.js"><link rel="prefetch" href="/noteSite/assets/js/162.6e62aee2.js"><link rel="prefetch" href="/noteSite/assets/js/163.411c8ac5.js"><link rel="prefetch" href="/noteSite/assets/js/164.9a0f4e52.js"><link rel="prefetch" href="/noteSite/assets/js/165.9d38a3f9.js"><link rel="prefetch" href="/noteSite/assets/js/166.93de92c6.js"><link rel="prefetch" href="/noteSite/assets/js/167.dc1eab1f.js"><link rel="prefetch" href="/noteSite/assets/js/168.6f2faf45.js"><link rel="prefetch" href="/noteSite/assets/js/169.8eca4a21.js"><link rel="prefetch" href="/noteSite/assets/js/17.42c5f955.js"><link rel="prefetch" href="/noteSite/assets/js/170.b5fc8cbf.js"><link rel="prefetch" href="/noteSite/assets/js/171.37cb79c5.js"><link rel="prefetch" href="/noteSite/assets/js/172.979574b6.js"><link rel="prefetch" href="/noteSite/assets/js/173.89c5ba59.js"><link rel="prefetch" href="/noteSite/assets/js/174.fc5ed82f.js"><link rel="prefetch" href="/noteSite/assets/js/175.0d6ccff7.js"><link rel="prefetch" href="/noteSite/assets/js/176.69f3e464.js"><link rel="prefetch" href="/noteSite/assets/js/177.a548b549.js"><link rel="prefetch" href="/noteSite/assets/js/178.05332d59.js"><link rel="prefetch" href="/noteSite/assets/js/179.a528d400.js"><link rel="prefetch" href="/noteSite/assets/js/18.7a2f817c.js"><link rel="prefetch" href="/noteSite/assets/js/180.dc9f6d84.js"><link rel="prefetch" href="/noteSite/assets/js/19.13241de9.js"><link rel="prefetch" href="/noteSite/assets/js/20.fdf3ee8c.js"><link rel="prefetch" href="/noteSite/assets/js/21.70d9c212.js"><link rel="prefetch" href="/noteSite/assets/js/22.cf71177a.js"><link rel="prefetch" href="/noteSite/assets/js/23.f8f9c155.js"><link rel="prefetch" href="/noteSite/assets/js/24.7382ddd7.js"><link rel="prefetch" href="/noteSite/assets/js/25.333b798b.js"><link rel="prefetch" href="/noteSite/assets/js/26.cce0d974.js"><link rel="prefetch" href="/noteSite/assets/js/27.6a4f4064.js"><link rel="prefetch" href="/noteSite/assets/js/28.3e0d9f6a.js"><link rel="prefetch" href="/noteSite/assets/js/29.8ba6931d.js"><link rel="prefetch" href="/noteSite/assets/js/3.b100fda9.js"><link rel="prefetch" href="/noteSite/assets/js/30.de36f890.js"><link rel="prefetch" href="/noteSite/assets/js/31.6612acd4.js"><link rel="prefetch" href="/noteSite/assets/js/32.95b0ae5c.js"><link rel="prefetch" href="/noteSite/assets/js/33.5fa0f87e.js"><link rel="prefetch" href="/noteSite/assets/js/34.5d7dcd55.js"><link rel="prefetch" href="/noteSite/assets/js/35.9a5325ad.js"><link rel="prefetch" href="/noteSite/assets/js/36.ac37a5cb.js"><link rel="prefetch" href="/noteSite/assets/js/37.da45cad7.js"><link rel="prefetch" href="/noteSite/assets/js/38.13345905.js"><link rel="prefetch" href="/noteSite/assets/js/39.5999eed7.js"><link rel="prefetch" href="/noteSite/assets/js/4.a61e4cea.js"><link rel="prefetch" href="/noteSite/assets/js/40.2f830ac0.js"><link rel="prefetch" href="/noteSite/assets/js/41.9d057dbb.js"><link rel="prefetch" href="/noteSite/assets/js/42.ec445d6f.js"><link rel="prefetch" href="/noteSite/assets/js/43.53ebc897.js"><link rel="prefetch" href="/noteSite/assets/js/44.9c5411e3.js"><link rel="prefetch" href="/noteSite/assets/js/45.b3fd2486.js"><link rel="prefetch" href="/noteSite/assets/js/46.d6faa7e0.js"><link rel="prefetch" href="/noteSite/assets/js/47.303b3159.js"><link rel="prefetch" href="/noteSite/assets/js/48.d4f91e20.js"><link rel="prefetch" href="/noteSite/assets/js/49.4f8a9444.js"><link rel="prefetch" href="/noteSite/assets/js/5.2bccd6df.js"><link rel="prefetch" href="/noteSite/assets/js/50.55caae3d.js"><link rel="prefetch" href="/noteSite/assets/js/51.13816627.js"><link rel="prefetch" href="/noteSite/assets/js/52.95b4e096.js"><link rel="prefetch" href="/noteSite/assets/js/53.5af15cad.js"><link rel="prefetch" href="/noteSite/assets/js/54.abd84d8b.js"><link rel="prefetch" href="/noteSite/assets/js/55.fab87694.js"><link rel="prefetch" href="/noteSite/assets/js/56.03713098.js"><link rel="prefetch" href="/noteSite/assets/js/57.9743428d.js"><link rel="prefetch" href="/noteSite/assets/js/58.454a9dad.js"><link rel="prefetch" href="/noteSite/assets/js/59.b62e72c8.js"><link rel="prefetch" href="/noteSite/assets/js/6.f3d86aa7.js"><link rel="prefetch" href="/noteSite/assets/js/60.0cb171dc.js"><link rel="prefetch" href="/noteSite/assets/js/61.2784c53c.js"><link rel="prefetch" href="/noteSite/assets/js/62.59a78391.js"><link rel="prefetch" href="/noteSite/assets/js/63.91ba34a6.js"><link rel="prefetch" href="/noteSite/assets/js/64.a3c9381e.js"><link rel="prefetch" href="/noteSite/assets/js/65.6e7604dd.js"><link rel="prefetch" href="/noteSite/assets/js/66.f9041d6b.js"><link rel="prefetch" href="/noteSite/assets/js/67.79d586c0.js"><link rel="prefetch" href="/noteSite/assets/js/68.6b937f11.js"><link rel="prefetch" href="/noteSite/assets/js/69.9f020db3.js"><link rel="prefetch" href="/noteSite/assets/js/7.da9921ea.js"><link rel="prefetch" href="/noteSite/assets/js/70.f6816715.js"><link rel="prefetch" href="/noteSite/assets/js/71.89924f1c.js"><link rel="prefetch" href="/noteSite/assets/js/72.d1defce3.js"><link rel="prefetch" href="/noteSite/assets/js/73.3728ae97.js"><link rel="prefetch" href="/noteSite/assets/js/74.cefe37e6.js"><link rel="prefetch" href="/noteSite/assets/js/75.d2a9f8d7.js"><link rel="prefetch" href="/noteSite/assets/js/76.2edaa075.js"><link rel="prefetch" href="/noteSite/assets/js/77.4836da79.js"><link rel="prefetch" href="/noteSite/assets/js/78.b62cecd9.js"><link rel="prefetch" href="/noteSite/assets/js/79.139796b0.js"><link rel="prefetch" href="/noteSite/assets/js/8.eff72f04.js"><link rel="prefetch" href="/noteSite/assets/js/80.61be3846.js"><link rel="prefetch" href="/noteSite/assets/js/81.34ef4f6e.js"><link rel="prefetch" href="/noteSite/assets/js/82.d89892fc.js"><link rel="prefetch" href="/noteSite/assets/js/83.3bba8b06.js"><link rel="prefetch" href="/noteSite/assets/js/84.c2271ec9.js"><link rel="prefetch" href="/noteSite/assets/js/85.083c3149.js"><link rel="prefetch" href="/noteSite/assets/js/86.1eb13d06.js"><link rel="prefetch" href="/noteSite/assets/js/87.13c6644a.js"><link rel="prefetch" href="/noteSite/assets/js/88.034fd132.js"><link rel="prefetch" href="/noteSite/assets/js/89.10e5b366.js"><link rel="prefetch" href="/noteSite/assets/js/9.409ee5bd.js"><link rel="prefetch" href="/noteSite/assets/js/90.738664f9.js"><link rel="prefetch" href="/noteSite/assets/js/91.ee49a280.js"><link rel="prefetch" href="/noteSite/assets/js/92.424d58f2.js"><link rel="prefetch" href="/noteSite/assets/js/93.7cd8efa5.js"><link rel="prefetch" href="/noteSite/assets/js/94.87784807.js"><link rel="prefetch" href="/noteSite/assets/js/95.a0f509c1.js"><link rel="prefetch" href="/noteSite/assets/js/96.68407d3e.js"><link rel="prefetch" href="/noteSite/assets/js/97.edf26645.js"><link rel="prefetch" href="/noteSite/assets/js/98.3e00cbf5.js"><link rel="prefetch" href="/noteSite/assets/js/99.c724368c.js">
+    <link rel="stylesheet" href="/noteSite/assets/css/0.styles.0f3b0cbd.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/noteSite/" class="home-link router-link-active"><img src="/noteSite/images/hedon.png" alt="Hedon" class="logo"> <span class="site-name can-hide">Hedon</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/component/" class="nav-link">
+  计算机组成原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link router-link-active">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/noteSite/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/noteSite/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="CS Menu" class="dropdown-title"><span class="title">计算机基础</span> <span class="arrow down"></span></button> <button type="button" aria-label="CS Menu" class="mobile-dropdown-title"><span class="title">计算机基础</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/cs/mysql/" class="nav-link">
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/os/" class="nav-link">
+  操作系统
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/cn/" class="nav-link">
+  计算机网络
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/cs/component/" class="nav-link">
+  计算机组成原理
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Backend Menu" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="Backend Menu" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/backend/java/" class="nav-link">
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/golang/" class="nav-link router-link-active">
+  Golang
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/backend/middleware/" class="nav-link">
+  中间件
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/frontend/" class="nav-link">
+  前端
+</a></div><div class="nav-item"><a href="/noteSite/linux/" class="nav-link">
+  Linux
+</a></div><div class="nav-item"><a href="/noteSite/mac/" class="nav-link">
+  Mac
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Leetcode Menu" class="dropdown-title"><span class="title">Leetcode</span> <span class="arrow down"></span></button> <button type="button" aria-label="Leetcode Menu" class="mobile-dropdown-title"><span class="title">Leetcode</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/data-structure/" class="nav-link">
+  数据结构
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/algorithm-thought/" class="nav-link">
+  算法思想
+</a></li><li class="dropdown-item"><!----> <a href="/noteSite/leetcode/leetcode/" class="nav-link">
+  Leetcode
+</a></li></ul></div></div><div class="nav-item"><a href="/noteSite/paper/" class="nav-link">
+  Paper
+</a></div><div class="nav-item"><a href="https://github.com/hedon954/noteSite" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>入门</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>基础</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/noteSite/backend/golang/02_grammar/data_type.html" class="sidebar-link">Golang 数据类型</a></li><li><a href="/noteSite/backend/golang/02_grammar/flow_control.html" class="sidebar-link">Golang 流程控制</a></li><li><a href="/noteSite/backend/golang/02_grammar/arr_slice.html" class="sidebar-link">Golang 数组和切片</a></li><li><a href="/noteSite/backend/golang/02_grammar/map.html" class="sidebar-link">Golang Map</a></li><li><a href="/noteSite/backend/golang/02_grammar/pointer.html" class="sidebar-link">Golang 指针</a></li><li><a href="/noteSite/backend/golang/02_grammar/struct.html" class="sidebar-link">Golang 结构体</a></li><li><a href="/noteSite/backend/golang/02_grammar/function.html" class="sidebar-link">Golang 函数</a></li><li><a href="/noteSite/backend/golang/02_grammar/method.html" class="sidebar-link">Golang 方法</a></li><li><a href="/noteSite/backend/golang/02_grammar/interface.html" class="sidebar-link">Golang 接口</a></li><li><a href="/noteSite/backend/golang/02_grammar/type.html" class="sidebar-link">Golang 关键字 type</a></li><li><a href="/noteSite/backend/golang/02_grammar/error.html" aria-current="page" class="active sidebar-link">Golang 异常处理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#一、golang-错误处理" class="sidebar-link">一、Golang 错误处理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#_1-错误-异常" class="sidebar-link">1. 错误 &amp; 异常</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#_2-演示错误" class="sidebar-link">2. 演示错误</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#_3-错误类型" class="sidebar-link">3. 错误类型</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#_4-获取错误信息" class="sidebar-link">4. 获取错误信息</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#二、golang-panic-recover" class="sidebar-link">二、Golang panic &amp; recover</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#_1-panic-recover" class="sidebar-link">1. panic &amp; recover</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#_2-goroutine-与-panic、recover-的小问题" class="sidebar-link">2. goroutine 与 panic、recover 的小问题</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#_3-让-go-恐慌-的十种方法" class="sidebar-link">3. 让 Go “恐慌”的十种方法</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#三、golang-错误和异常正确处理" class="sidebar-link">三、Golang 错误和异常正确处理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#_1-错误处理的正确姿势" class="sidebar-link">1. 错误处理的正确姿势</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#_2-异常处理的正确姿势" class="sidebar-link">2. 异常处理的正确姿势</a></li></ul></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#四、深究-panic" class="sidebar-link">四、深究 panic</a></li><li class="sidebar-sub-header"><a href="/noteSite/backend/golang/02_grammar/error.html#五、深究-defer" class="sidebar-link">五、深究 defer</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>进阶</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>标准库</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>常用技巧</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="golang-异常处理"><a href="#golang-异常处理" class="header-anchor">#</a> Golang 异常处理</h1> <p>在实际工程项目中，我们希望通过程序的错误信息快速定位问题，但是又不喜欢错误处理代码写的冗余而又啰嗦。<code>Go</code>语言没有提供像 <code>Java</code>、<code>C#</code>语言中的 <code>try...catch</code> 异常处理方式，而是通过函数返回值逐层往上抛。</p> <p>这种设计，鼓励工程师在代码中显式的检查错误，而非忽略错误，好处就是避免漏掉本应处理的错误。但是带来一个弊端，让代码啰嗦。</p> <h2 id="一、golang-错误处理"><a href="#一、golang-错误处理" class="header-anchor">#</a> 一、Golang 错误处理</h2> <h3 id="_1-错误-异常"><a href="#_1-错误-异常" class="header-anchor">#</a> 1. 错误 &amp; 异常</h3> <p>错误指的是可能出现问题的地方出现了问题。比如打开一个文件时失败，这种情况在人们的意料之中 。</p> <p>而异常指的是不应该出现问题的地方出现了问题。比如引用了空指针，这种情况在人们的意料之外。可见，错误是业务过程的一部分，而异常不是 。</p> <p>Go 中的错误也是一种类型。错误用内置的 <code>error</code> 类型表示。就像其他类型的，如 int，float64。错误值可以存储在变量中，从函数中返回，等等。</p> <h3 id="_2-演示错误"><a href="#_2-演示错误" class="header-anchor">#</a> 2. 演示错误</h3> <p>我们来尝试打开一个不存在的文件：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>  
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+    f<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token string">&quot;/test.txt&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//根据f进行文件的读或写</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>f<span class="token punctuation">.</span><span class="token function">Name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;opened successfully&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>在 os 包中有打开文件的功能函数：</p> <p>func Open(name string) (file *File, err error)</p> <p>如果文件已经成功打开，那么 Open 函数将返回文件处理。如果在打开文件时出现错误，将返回一个非 nil 错误。</p></blockquote> <p>如果一个函数或方法返回一个错误，那么按照惯例，它必须是函数返回的最后一个值。因此，<code>Open</code> 函数返回的值是最后一个值。</p> <p>处理错误的惯用方法是将返回的错误与nil进行比较。nil 值表示没有发生错误，而非 nil 值表示出现错误。在我们的例子中，我们检查错误是否为 nil。如果它不是 nil，我们只需打印错误并从主函数返回。</p> <p>运行结果：</p> <div class="language-go extra-class"><pre class="language-go"><code>open <span class="token operator">/</span>test<span class="token punctuation">.</span>txt<span class="token punctuation">:</span> No such file or directory
+</code></pre></div><p>我们得到一个错误，说明该文件不存在。</p> <h3 id="_3-错误类型"><a href="#_3-错误类型" class="header-anchor">#</a> 3. 错误类型</h3> <p>Go 语言通过内置的错误接口提供了非常简单的错误处理机制。</p> <p>在 Go 语言中，错误是一个带有以下定义的接口类型：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">type</span> <span class="token builtin">error</span> <span class="token keyword">interface</span> <span class="token punctuation">{</span>
+    <span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>它包含一个带有 <code>Error()</code> 字符串的方法。任何实现这个接口的类型都可以作为一个错误使用。这个方法提供了对错误的描述。当打印错误时，fmt.Println 函数在内部调用 Error() 方法来获取错误的描述。这就是错误描述是如何在一行中打印出来的。</p> <h3 id="_4-获取错误信息"><a href="#_4-获取错误信息" class="header-anchor">#</a> 4. 获取错误信息</h3> <p>既然我们知道错误是一种接口类型，那么让我们看看如何提取更多关于错误的信息。</p> <p>在上面的例子中，我们仅仅是打印了错误的描述。如果我们想要的是导致错误的文件的实际路径。一种可能的方法是解析错误字符串。这是我们程序的输出：</p> <div class="language-go extra-class"><pre class="language-go"><code>open <span class="token operator">/</span>test<span class="token punctuation">.</span>txt<span class="token punctuation">:</span> No such file or directory  
+</code></pre></div><p>我们可以解析这个错误消息并从中获取文件路径 &quot;/test.txt&quot;。但这是一个糟糕的方法。在新版本的语言中，错误描述可能随时更改，我们的代码将会中断。</p> <p>是否有办法可靠地获取文件名？答案是肯定的，它可以做到，Go 标准库使用不同的方式提供更多关于错误的信息。</p> <h4 id="_4-1-断言底层结构类型并从结构字段获取更多信息"><a href="#_4-1-断言底层结构类型并从结构字段获取更多信息" class="header-anchor">#</a> 4.1 断言底层结构类型并从结构字段获取更多信息</h4> <p>如果仔细阅读 <code>Open()</code> 函数的文档，可以看到它返回的是 <code>PathError</code> 类型的错误。</p> <p><img src="https://i.loli.net/2021/07/22/16IGceYnDKBSxVj.png" alt="image-20210722155316932"></p> <p><code>PathError</code> 是一个 struct 类型，它在标准库中的实现如下：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">type</span> PathError <span class="token keyword">struct</span> <span class="token punctuation">{</span>  
+    Op   <span class="token builtin">string</span>
+    Path <span class="token builtin">string</span>
+    Err  <span class="token builtin">error</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>e <span class="token operator">*</span>PathError<span class="token punctuation">)</span> <span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> e<span class="token punctuation">.</span>Op <span class="token operator">+</span> <span class="token string">&quot; &quot;</span> <span class="token operator">+</span> e<span class="token punctuation">.</span>Path <span class="token operator">+</span> <span class="token string">&quot;: &quot;</span> <span class="token operator">+</span> e<span class="token punctuation">.</span>Err<span class="token punctuation">.</span><span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>  
+</code></pre></div><p>从上面的代码中，我可以理解 <code>PathError</code> 通过声明 <code>Error() string</code> 方法实现了错误接口。该方法连接操作、路径和实际错误并返回它。这样我们就得到了错误信息：</p> <div class="language-go extra-class"><pre class="language-go"><code>open <span class="token operator">/</span>test<span class="token punctuation">.</span>txt<span class="token punctuation">:</span> No such file or directory 
+</code></pre></div><p><code>PathError</code> 结构的路径字段包含导致错误的文件的路径。让我们修改上面写的程序，并打印出路径。</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>  
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;os&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+    f<span class="token punctuation">,</span> err <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span><span class="token string">&quot;/test.txt&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> err<span class="token punctuation">,</span> ok <span class="token operator">:=</span> err<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>os<span class="token punctuation">.</span>PathError<span class="token punctuation">)</span><span class="token punctuation">;</span> ok <span class="token punctuation">{</span>
+        fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;File at path&quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">.</span>Path<span class="token punctuation">,</span> <span class="token string">&quot;failed to open&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>f<span class="token punctuation">.</span><span class="token function">Name</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;opened successfully&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>在上面的程序中，我们使用类型断言获得错误接口的基本值。然后自定义错误输出：</p> <div class="language-go extra-class"><pre class="language-go"><code>File at path <span class="token operator">/</span>test<span class="token punctuation">.</span>txt failed to open  
+</code></pre></div><h4 id="_4-2-断言底层数据结构并使用方法获取更多信息"><a href="#_4-2-断言底层数据结构并使用方法获取更多信息" class="header-anchor">#</a> 4.2 断言底层数据结构并使用方法获取更多信息</h4> <p>获得更多信息的第二种方法是断言底层类型，并通过调用struct 类型的方法获取更多信息。</p> <p>如下 <code>DNSError</code>：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">type</span> DNSError <span class="token keyword">struct</span> <span class="token punctuation">{</span>  
+    <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>e <span class="token operator">*</span>DNSError<span class="token punctuation">)</span> <span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>  
+    <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>e <span class="token operator">*</span>DNSError<span class="token punctuation">)</span> <span class="token function">Timeout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span>  
+    <span class="token operator">...</span> 
+<span class="token punctuation">}</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>e <span class="token operator">*</span>DNSError<span class="token punctuation">)</span> <span class="token function">Temporary</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span>  
+    <span class="token operator">...</span> 
+<span class="token punctuation">}</span>
+</code></pre></div><p>从上面的代码中可以看到，<code>DNSError</code>struct 有两个方法 <code>Timeout() bool</code> 和 <code>Temporary() bool</code>，它们返回一个布尔值，表示错误是由于超时还是临时的。</p> <p>让我们编写一个断言 <code>DNSError</code> 类型的程序，并调用这些方法来确定错误是临时的还是超时的。</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>  
+    <span class="token string">&quot;fmt&quot;</span>
+    <span class="token string">&quot;net&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+    addr<span class="token punctuation">,</span> err <span class="token operator">:=</span> net<span class="token punctuation">.</span><span class="token function">LookupHost</span><span class="token punctuation">(</span><span class="token string">&quot;golangbot123.com&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">// 断言错误类型</span>
+    <span class="token keyword">if</span> err<span class="token punctuation">,</span> ok <span class="token operator">:=</span> err<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>net<span class="token punctuation">.</span>DNSError<span class="token punctuation">)</span><span class="token punctuation">;</span> ok <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> err<span class="token punctuation">.</span><span class="token function">Timeout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;operation timed out&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> err<span class="token punctuation">.</span><span class="token function">Temporary</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;temporary error&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;generic error: &quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>addr<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>在上面的程序中，我们正在尝试获取一个无效域名的 IP 地址，这是一个无效的域名：golangbot123.com。</p> <p>在我们的例子中，错误既不是暂时的，也不是由于超时，因此程序会打印出来：</p> <div class="language-go extra-class"><pre class="language-go"><code>generic <span class="token builtin">error</span><span class="token punctuation">:</span>  lookup golangbot123<span class="token punctuation">.</span>com<span class="token punctuation">:</span> no such host  
+</code></pre></div><h2 id="二、golang-panic-recover"><a href="#二、golang-panic-recover" class="header-anchor">#</a> 二、Golang panic &amp; recover</h2> <p>Golang 中引入两个内置函数 <code>panic</code> 和 <code>recover</code> 来触发和终止异常处理流程，同时引入关键字 <code>defer</code> 来延迟执行 <code>defer</code> 后面的函数。</p> <h3 id="_1-panic-recover"><a href="#_1-panic-recover" class="header-anchor">#</a> 1. panic &amp; recover</h3> <p>当程序运行时，如果遇到引用空指针、下标越界或显式调用 <code>panic</code> 函数等情况，则先触发 <code>panic</code> 函数的执行，然后调用 <code>defer</code> 延迟函数。调用者继续传递 <code>panic</code>。因此该过程一直在调用栈中重复发生：<strong>函数停止执行，调用延迟执行函数等</strong>。如果一路在延迟函数中没有 <code>recover</code> 函数的调用，则会到达该协程的起点，该协程结束，然后终止其他所有协程，包括主协程（类似于 C 语言中的主线程，该协程 ID 为 1）。</p> <p><strong>panic</strong></p> <blockquote><ol><li>内建函数</li> <li>假如函数 F 中书写了 panic 语句，会终止其后要执行的代码，在 panic 所在函数F内如果存在要执行的 defer 函数列表，按照 defer 的逆序执行；</li> <li>返回函数 F 的调用者 G，在 G 中，调用函数 F 语句之后的代码不会执行，假如函数 G 中存在要执行的 defer 函数列表，按照 defer 的逆序执行，这里的 defer 有点类似 try-catch-finally 中的 finally；</li> <li>直到 goroutine 整个退出，并报告错误</li></ol></blockquote> <p><strong>recover</strong></p> <blockquote><ol><li>内建函数</li> <li>用来控制一个 goroutine 的 panicking 行为，捕获 anic，从而影响应用的行为</li> <li>一般的调用建议
+<ol><li>在 defer 函数中，通过 recever 来终止一个 goroutine 的 panicking 过程，从而恢复正常代码的执行</li> <li>可以获取通过 panic 传递的 error</li></ol></li></ol></blockquote> <p>Golang 错误和异常是可以互相转换的：</p> <ol><li>错误转异常：比如程序逻辑上尝试请求某个 URL，最多尝试三次，尝试三次的过程中请求失败是错误，尝试完第三次还不成功的话，失败就被提升为异常了。</li> <li>异常转错误：比如 panic 触发的异常被 recover 恢复后，将返回值中 error 类型的变量进行赋值，以便上层函数继续走错误处理流程。</li></ol> <p><strong>所以什么情况下用错误表达，什么情况下用异常表达，就得有一套规则，否则很容易出现一切皆错误或一切皆异常的情况。</strong></p> <p>以下给出异常处理的作用域（场景）：</p> <ol><li>空指针引用</li> <li>下标越界</li> <li>除数为0</li> <li>不应该出现的分支，比如 default</li> <li>输入不应该引起函数错误</li></ol> <p>其他场景我们使用错误处理，这使得我们的函数接口很精炼。对于异常，我们可以选择在一个合适的上游去 recover，并打印堆栈信息，使得部署后的程序不会终止。</p> <blockquote><p><strong>说明： Golang错误处理方式一直是很多人诟病的地方，有些人吐槽说一半的代码都是 &quot;if err != nil { / 打印 &amp;&amp; 错误处理 / }&quot;，严重影响正常的处理逻辑。当我们区分错误和异常，根据规则设计函数，就会大大提高可读性和可维护性。</strong></p></blockquote> <h3 id="_2-goroutine-与-panic、recover-的小问题"><a href="#_2-goroutine-与-panic、recover-的小问题" class="header-anchor">#</a> 2. goroutine 与 panic、recover 的小问题</h3> <blockquote><p>本小节选自：<strong>《Go语言编程之旅：一起用Go做项目》</strong>。</p></blockquote> <p>观察下面这段代码，思考一下其输出的结果是以下哪一个？</p> <ol><li>“Go 编程之旅：一起用 Go 做项目”</li> <li>因为“煎鱼焦了”而直接中断运行</li></ol> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">&quot;log&quot;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">&quot;煎鱼焦了&quot;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Go 编程之旅：一起用 Go 做项目&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>panic: 煎鱼焦了
+
+goroutine 18 [running]:
+main.main.func1()
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:7 +0x39
+created by main.main
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:6 +0x35
+</code></pre></div><p>程序因为“煎鱼焦了”而中断运行。</p> <p><strong>这时候经常会有人提出一个疑问，即 <code>panic</code> 语句是写在子协程里的，为何会影响外面的主协程呢？它们应该是相互隔离的，为何会互相影响呢？</strong></p> <h4 id="_2-1-如何解决上述问题"><a href="#_2-1-如何解决上述问题" class="header-anchor">#</a> 2.1 如何解决上述问题</h4> <p>对于 <code>panic</code> 事件，我们应使用组合方法 <code>recover</code> 来进行处理，代码如下：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">&quot;log&quot;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> e <span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> e <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+      log<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;recover: %v&quot;</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">&quot;煎鱼焦了&quot;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Go 编程之旅：一起用 Go 做项目&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>panic: 煎鱼焦了
+
+goroutine 6 [running]:
+main.main.func1()
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:10 +0xa5
+created by main.main
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:6 +0x35
+</code></pre></div><p>但是仅仅使用 recover，仍然会输出“煎鱼焦了”，并且程序中断。正确的写法如下：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">&quot;log&quot;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> e <span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> e <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        log<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;recover: %v&quot;</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">&quot;煎鱼焦了&quot;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+  log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">&quot;Go 编程之旅：一起用 Go 做项目&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>实际上，<code>recover</code> 要与 <code>defer</code> 联用，并且 <strong>不跨协程</strong> ，才能真正地拦截 <code>panic</code> 事件。其最终的输出结果如下：</p> <div class="language- extra-class"><pre class="language-text"><code>2021/07/22 16:32:37 Go 编程之旅：一起用 Go 做项目
+2021/07/22 16:32:37 recover: 煎鱼焦了
+</code></pre></div><h4 id="_2-2-为什么要先-defer-才能-recover"><a href="#_2-2-为什么要先-defer-才能-recover" class="header-anchor">#</a> 2.2 为什么要先 defer 才能 recover</h4> <p>从前文中我们知道，除 <code>panic</code> 和 <code>recover</code> 外，还必须要有 <code>defer</code> 关键字，三者缺一不可。为什么必须有 <code>defer</code>，<code>recover</code> 才能起作用呢？</p> <p><strong>2.2.1 快速了解 panic</strong></p> <p><code>panic</code> 是 Go 语言中的一个内置函数，可以停止程序的控制流，改变其流转，并且触发“恐慌”事件。</p> <p><code>recover</code> 也是一个内置函数，其功能与 <code>panic</code> 相反，<code>recover</code> 可以让程序重新获取“恐慌”事件后的程序控制权，但是 <code>recover</code> 必须在 <code>defer</code> 中才会生效。</p> <p><code>panic</code> 的一切都基于一个 <code>_panic</code> 基础单元，基本结构如下：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// A _panic holds information about an active panic.</span>
+<span class="token comment">//</span>
+<span class="token comment">// A _panic value must only ever live on the stack.</span>
+<span class="token comment">//</span>
+<span class="token comment">// The argp and link fields are stack pointers, but don't need special</span>
+<span class="token comment">// handling during stack growth: because they are pointer-typed and</span>
+<span class="token comment">// _panic values only live on the stack, regular stack pointer</span>
+<span class="token comment">// adjustment takes care of them.</span>
+<span class="token keyword">type</span> _panic <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	argp      unsafe<span class="token punctuation">.</span>Pointer <span class="token comment">// pointer to arguments of deferred call run during panic; cannot move - known to liblink</span>
+	arg       <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span>    <span class="token comment">// argument to panic</span>
+	link      <span class="token operator">*</span>_panic        <span class="token comment">// link to earlier panic</span>
+	pc        <span class="token builtin">uintptr</span>        <span class="token comment">// where to return to in runtime if this panic is bypassed</span>
+	sp        unsafe<span class="token punctuation">.</span>Pointer <span class="token comment">// where to return to in runtime if this panic is bypassed</span>
+	recovered <span class="token builtin">bool</span>           <span class="token comment">// whether this panic is over</span>
+	aborted   <span class="token builtin">bool</span>           <span class="token comment">// the panic was aborted</span>
+	goexit    <span class="token builtin">bool</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>我们每执行一次 <code>panic</code> 语句，就会创建一个 <code>_panic</code> 基础单元。它包含了一些基础的字段，用于存储当前的 <code>panic</code> 调用情况，涉及的字段如下：</p> <ul><li><code>argp</code>：指向 <code>defer</code> 延迟调用的参数的指针</li> <li><code>arg</code>：<code>panic</code> 的原因，即调用 <code>panic</code> 时传入的参数</li> <li><code>link</code>：指向上一个调用的 <code>_panic</code></li> <li><code>pc</code>：程序计数器，有时也称为指令指针（IP），线程利用它来跟踪下一个要执行的指令。在大多数处理器中，PC 指向的是下一条指令，而不是当前指令</li> <li><code>sp</code>：函数栈指针寄存器，一般指向当前函数栈的栈顶</li> <li><code>recovered</code>：<code>panic</code> 是否已经被处理，即是否被 <code>recover</code></li> <li><code>aborted</code>：<code>panic</code> 是否被中止</li> <li><code>goexit</code>：是否调用 <code>runtime.Goexit</code> 方法中止主 <code>goroutine</code> 及所属的 <code>goroutine</code></li></ul> <p>通过查看 <code>link</code> 字段，可以得知，<code>panic</code> 的基本单元是一个链表的数据结构，如下图：</p> <img src="https://i.loli.net/2021/07/22/OiSWuHlMzR269TZ.png" alt="image-20210722164109559" style="zoom:33%;"> <p><strong>2.2.2 快速了解 defer</strong></p> <p><code>defer</code> 是 Go 语言中的一个内置函数，<code>defer</code> 方法所注册的对应事件会在函数或方法结束后执行，常用于关闭各类资源以及“兜底”操作。</p> <p><code>defer</code> 的基础单元是 <code>_defer</code> 结构体，基本结构如下：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// A _defer holds an entry on the list of deferred calls.</span>
+<span class="token comment">// If you add a field here, add code to clear it in freedefer and deferProcStack</span>
+<span class="token comment">// This struct must match the code in cmd/compile/internal/reflectdata/reflect.go:deferstruct</span>
+<span class="token comment">// and cmd/compile/internal/gc/ssa.go:(*state).call.</span>
+<span class="token comment">// Some defers will be allocated on the stack and some on the heap.</span>
+<span class="token comment">// All defers are logically part of the stack, so write barriers to</span>
+<span class="token comment">// initialize them are not required. All defers must be manually scanned,</span>
+<span class="token comment">// and for heap defers, marked.</span>
+<span class="token keyword">type</span> _defer <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	siz     <span class="token builtin">int32</span> <span class="token comment">// includes both arguments and results</span>
+	started <span class="token builtin">bool</span>
+	heap    <span class="token builtin">bool</span>
+	<span class="token comment">// openDefer indicates that this _defer is for a frame with open-coded</span>
+	<span class="token comment">// defers. We have only one defer record for the entire frame (which may</span>
+	<span class="token comment">// currently have 0, 1, or more defers active).</span>
+	openDefer <span class="token builtin">bool</span>
+	sp        <span class="token builtin">uintptr</span>  <span class="token comment">// sp at time of defer</span>
+	pc        <span class="token builtin">uintptr</span>  <span class="token comment">// pc at time of defer</span>
+	fn        <span class="token operator">*</span>funcval <span class="token comment">// can be nil for open-coded defers</span>
+	_panic    <span class="token operator">*</span>_panic  <span class="token comment">// panic that is running defer</span>
+	link      <span class="token operator">*</span>_defer
+
+	<span class="token comment">// If openDefer is true, the fields below record values about the stack</span>
+	<span class="token comment">// frame and associated function that has the open-coded defer(s). sp</span>
+	<span class="token comment">// above will be the sp for the frame, and pc will be address of the</span>
+	<span class="token comment">// deferreturn call in the function.</span>
+	fd   unsafe<span class="token punctuation">.</span>Pointer <span class="token comment">// funcdata for the function associated with the frame</span>
+	varp <span class="token builtin">uintptr</span>        <span class="token comment">// value of varp for the stack frame</span>
+	<span class="token comment">// framepc is the current pc associated with the stack frame. Together,</span>
+	<span class="token comment">// with sp above (which is the sp associated with the stack frame),</span>
+	<span class="token comment">// framepc/sp can be used as pc/sp pair to continue a stack trace via</span>
+	<span class="token comment">// gentraceback().</span>
+	framepc <span class="token builtin">uintptr</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ul><li><code>siz</code>：所有传入参数的总大小</li> <li><code>started</code>：该 <code>defer</code> 是否已经执行过</li> <li><code>sp</code>：函数栈指针寄存器</li> <li><code>pc</code>：程序计数器</li> <li><code>fn</code>：指向传入的函数地址和参数</li> <li><code>_panic</code>：指向 <code>_panic</code> 链表</li> <li><code>link</code>：指向 <code>_defer</code> 链表</li></ul> <p>通过查看 <code>_panic</code> 和 <code>link</code> 字段可以得知，<code>defer</code> 同时挂载着 <code>panic</code> 信息，如下图：</p> <img src="https://tva1.sinaimg.cn/large/008i3skNly1gsptkbynk5j61a20qkmyp02.jpg" alt="image-20210722164356817" style="zoom:33%;"> <p><strong>2.2.3 recover 是如何和 defer 搭上关系的</strong></p> <p>通过前面的介绍我们知道，<code>defer</code> 和 <code>panic</code> 存在一定的关联关系，那么 <code>recover</code> 又是如何与它们产生关联关系的呢？为什么不用 <code>defer</code>，<code>recover</code> 就无法生效？</p> <p>为了解答这些问题，我们需要回到一切的起源 <code>panic</code> 才能知晓。<code>panic</code> 关键字的具体代码如下：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">gopanic</span><span class="token punctuation">(</span>e <span class="token keyword">interface</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 1. 获取指向当前 `goroutine` 的指针</span>
+	gp <span class="token operator">:=</span> <span class="token function">getg</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token operator">...</span>
+  <span class="token comment">// 2. 初始化一个 `panic` 的基本单位 `_panic` ，用作后续的操作；</span>
+	<span class="token keyword">var</span> p _panic
+ 	<span class="token operator">...</span>
+	<span class="token keyword">for</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 3. 获取当前 `goroutine` 上挂载的 `_defer`；</span>
+		d <span class="token operator">:=</span> gp<span class="token punctuation">.</span>_defer
+		<span class="token keyword">if</span> d <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+			<span class="token keyword">break</span>
+		<span class="token punctuation">}</span>
+		<span class="token operator">...</span>
+		<span class="token keyword">if</span> d<span class="token punctuation">.</span>openDefer <span class="token punctuation">{</span>
+			<span class="token operator">...</span>
+		<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+			<span class="token punctuation">.</span><span class="token punctuation">.</span>
+			<span class="token keyword">if</span> goexperiment<span class="token punctuation">.</span>RegabiDefer <span class="token punctuation">{</span>
+				<span class="token operator">...</span>
+			<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+				<span class="token comment">// 4. 若当前存在 `defer` 调用，则调用 `reflectcall` 方法执行先前 `defer` 中延迟执行的代码</span>
+        <span class="token comment">//		若在执行过程中需要运行 `recover` ，则调用 `gorecover` 方法；</span>
+				<span class="token keyword">var</span> regs abi<span class="token punctuation">.</span>RegArgs
+				<span class="token function">reflectcall</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">,</span> unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span>fn<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">deferArgs</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">uint32</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span>siz<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">uint32</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span>siz<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">uint32</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span>siz<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>regs<span class="token punctuation">)</span>
+			<span class="token punctuation">}</span>
+		<span class="token punctuation">}</span>
+		<span class="token operator">...</span>
+  <span class="token punctuation">}</span>
+	<span class="token comment">// 5. 调用 `preprintpanics` 方法打印所涉及的 `panic` 消息；</span>
+	<span class="token function">preprintpanics</span><span class="token punctuation">(</span>gp<span class="token punctuation">.</span>_panic<span class="token punctuation">)</span>
+	
+  <span class="token comment">// 6. 调用 `fatalpanic` 中止应用程序，实际上是通过执行 `exit(2)` 来退出的。</span>
+	<span class="token function">fatalpanic</span><span class="token punctuation">(</span>gp<span class="token punctuation">.</span>_panic<span class="token punctuation">)</span>
+	<span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span>  
+<span class="token punctuation">}</span>
+</code></pre></div><p>通过分析上述代码，可以大致了解其处理过程：</p> <ol><li>获取指向当前 <code>goroutine</code> 的指针；</li> <li>初始化一个 <code>panic</code> 的基本单位 <code>_panic</code> ，用作后续的操作；</li> <li>获取当前 <code>goroutine</code> 上挂载的 <code>_defer</code>；</li> <li>若当前存在 <code>defer</code> 调用，则调用 <code>reflectcall</code> 方法执行先前 <code>defer</code> 中延迟执行的代码。若在执行过程中需要运行 <code>recover</code> ，则调用 <code>gorecover</code> 方法；</li> <li>调用 <code>preprintpanics</code> 方法打印所涉及的 <code>panic</code> 消息；</li> <li>调用 <code>fatalpanic</code> 中止应用程序，实际上是通过执行 <code>exit(2)</code> 来退出的。</li></ol> <blockquote><p>recover 是如何和 defer 搭上关系的？</p> <p>在调用 panic 方法后，实际上 runtime.gopanic 方法处理的是当前 goroutine 上所挂载的 _panic 链表（所以无法响应其他 goroutine 的异常事件），然后对其所属的 defer 链表和 recover 进行检测并处理，最后调用退出命令中止应用程序。</p> <p>如图：</p> <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gspu2mfqu0j319c0lot9w.jpg" alt="image-20210722170133885"></p> <p>从代码实现来看，panic 会触发延迟调用（defer）。假设当前 goroutine 中不存在 defer，则会直接跳出，也就无法进行 recover 了。也就是说，在 panic 时，Go 只会在 defer 中对 reocver 进行检测。</p> <p>从设计实现来看，这是相对合理的，因为没有必要在程序中写若干个 recover，而很多错误是无法预料在哪里发生，又是如何发生的。</p></blockquote> <h4 id="_2-3-recover-是万能的吗"><a href="#_2-3-recover-是万能的吗" class="header-anchor">#</a> 2.3 recover 是万能的吗</h4> <p>事实上，即使有了 <code>recover</code>，也做不到捕获所有的错误。</p> <blockquote><p>假设某一天，程序正在线上环境（容器里）运行着，突然就“挂”了，即它反复地重启，且每次都是运行一段时间后才宕机，难道有泄露了？</p></blockquote> <p>这个程序非常的简短，就是一段简单的并发清洗、组装数据的程序，核心（伪）代码如下：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+  <span class="token string">&quot;log&quot;</span>
+  <span class="token string">&quot;time&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  m <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+  <span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+    <span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> e<span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> e <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+          log<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;recover: %v&quot;</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      m<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;Go 编程之旅：一起用 Go 做项目&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">5</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出：</p> <div class="language- extra-class"><pre class="language-text"><code>fatal error: concurrent map writes
+
+goroutine 19 [running]:
+runtime.throw(0x10ce7ac, 0x15)
+        /usr/local/go/src/runtime/panic.go:1117 +0x72 fp=0xc000044f50 sp=0xc000044f20 pc=0x10327f2
+runtime.mapassign_fast64(0x10b5ce0, 0xc000098180, 0x3, 0x0)
+        /usr/local/go/src/runtime/map_fast64.go:101 +0x33e fp=0xc000044f90 sp=0xc000044f50 pc=0x1010c3e
+main.main.func1(0xc000098180, 0xc0000b6008)
+</code></pre></div><p>通过错误信息我们可以得知，这是一个十分常见的问题，就是 <strong>并发写入 map</strong>  导致的致命错误。为什么 recover 没有捕获到呢？先来看看  <code>runtime.throw</code> 方法，代码如下：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">//go:nosplit</span>
+<span class="token keyword">func</span> <span class="token function">throw</span><span class="token punctuation">(</span>s <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token comment">// Everything throw does should be recursively nosplit so it</span>
+	<span class="token comment">// can be called even when it's unsafe to grow the stack.</span>
+	<span class="token function">systemstack</span><span class="token punctuation">(</span><span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;fatal error: &quot;</span><span class="token punctuation">,</span> s<span class="token punctuation">,</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span>
+	gp <span class="token operator">:=</span> <span class="token function">getg</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token keyword">if</span> gp<span class="token punctuation">.</span>m<span class="token punctuation">.</span>throwing <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">{</span>
+		gp<span class="token punctuation">.</span>m<span class="token punctuation">.</span>throwing <span class="token operator">=</span> <span class="token number">1</span>
+	<span class="token punctuation">}</span>
+	<span class="token function">fatalthrow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment">// not reached</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p><strong>//go:nosplit</strong></p> <p>nosplit 指令是用于指定文件中声明的下一个函数不得包含堆栈溢出检查（简单来讲，就是这个函数跳过堆栈溢出的检查。）。在不安全地抢占调用 goroutine 的时间调用的低级运行时源最常使用此方法。</p></blockquote> <p>关键的中断步骤在 <code>fatalthrow</code> 方法中，代码如下：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// fatalthrow implements an unrecoverable runtime throw. It freezes the</span>
+<span class="token comment">// system, prints stack traces starting from its caller, and terminates the</span>
+<span class="token comment">// process.</span>
+
+<span class="token comment">//go:nosplit</span>
+<span class="token keyword">func</span> <span class="token function">fatalthrow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	pc <span class="token operator">:=</span> <span class="token function">getcallerpc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	sp <span class="token operator">:=</span> <span class="token function">getcallersp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	gp <span class="token operator">:=</span> <span class="token function">getg</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token comment">// Switch to the system stack to avoid any stack growth, which</span>
+	<span class="token comment">// may make things worse if the runtime is in a bad state.</span>
+	<span class="token function">systemstack</span><span class="token punctuation">(</span><span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token function">startpanic_m</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+		<span class="token keyword">if</span> <span class="token function">dopanic_m</span><span class="token punctuation">(</span>gp<span class="token punctuation">,</span> pc<span class="token punctuation">,</span> sp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token comment">// crash uses a decent amount of nosplit stack and we're already</span>
+			<span class="token comment">// low on stack in throw, so crash on the system stack (unlike</span>
+			<span class="token comment">// fatalpanic).</span>
+			<span class="token function">crash</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		<span class="token punctuation">}</span>
+
+		<span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+	<span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment">// not reached</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>可以看到，该方法是直接通过调用 <code>exit</code> 方法进行中断的。实际上在 Go 语言中，是存在着一些无法恢复的“恐慌”事件的，如 <code>fatalthrow</code> 方法、<code>fatalpanic</code> 方法等。</p> <p><strong>由此可见，<code>recover</code> 并非万能的，它只对用户态下的 <code>panic</code> 关键字有效。</strong></p> <h3 id="_3-让-go-恐慌-的十种方法"><a href="#_3-让-go-恐慌-的十种方法" class="header-anchor">#</a> 3. 让 Go “恐慌”的十种方法</h3> <blockquote><p>本小节选自：<strong>《Go语言编程之旅：一起用Go做项目》</strong>。</p></blockquote> <p><strong>① 数组/切片越界访问</strong></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	names <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">{</span>
+		<span class="token string">&quot;煎鱼&quot;</span><span class="token punctuation">,</span>
+		<span class="token string">&quot;eddycjy&quot;</span><span class="token punctuation">,</span>
+		<span class="token string">&quot;Go编程之旅&quot;</span><span class="token punctuation">,</span>
+	<span class="token punctuation">}</span>
+	name <span class="token operator">:=</span> names<span class="token punctuation">[</span><span class="token function">len</span><span class="token punctuation">(</span>names<span class="token punctuation">)</span><span class="token punctuation">]</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;name: %s&quot;</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>panic: runtime error: index out of range [3] with length 3
+
+goroutine 1 [running]:
+main.main()
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:13 +0x1b
+</code></pre></div><p><strong>② 空指针调用</strong></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">type</span> User <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+	Name <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>u <span class="token operator">*</span>User<span class="token punctuation">)</span> <span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> u<span class="token punctuation">.</span>Name
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	s <span class="token operator">:=</span> <span class="token operator">&amp;</span>User<span class="token punctuation">{</span>Name<span class="token punctuation">:</span> <span class="token string">&quot;煎鱼&quot;</span><span class="token punctuation">}</span>
+	s <span class="token operator">=</span> <span class="token boolean">nil</span>
+	s<span class="token punctuation">.</span><span class="token function">GetName</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x105e262]
+
+goroutine 1 [running]:
+main.(*User).GetName(...)
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:8
+main.main()
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:14 +0x2
+</code></pre></div><p><strong>③ 过早关闭 HTTP 响应体</strong></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">&quot;https://xxx&quot;</span><span class="token punctuation">)</span>
+	<span class="token keyword">defer</span> resp<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+		log<span class="token punctuation">.</span><span class="token function">Fatalf</span><span class="token punctuation">(</span><span class="token string">&quot;http.Get err: %v&quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x40 pc=0x1233808]
+
+goroutine 1 [running]:
+main.main()
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:10 +0x68
+
+</code></pre></div><p><strong>④ 除以零</strong></p> <div class="language-go extra-class"><pre class="language-go"><code>unc <span class="token function">divide</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> a <span class="token operator">/</span> b
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token function">divide</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>panic: runtime error: integer divide by zero
+
+goroutine 1 [running]:
+main.divide(...)
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:4
+main.main()
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:8 +0x12
+</code></pre></div><p><strong>⑤ 向已关闭的通道发送消息</strong></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	ch <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+	ch <span class="token operator">&lt;-</span> <span class="token string">&quot;煎鱼&quot;</span>
+	<span class="token function">close</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span>
+	ch <span class="token operator">&lt;-</span> <span class="token string">&quot;Go编程之旅&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>panic: send on closed channel
+
+goroutine 1 [running]:
+main.main()
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:7 +0x7f
+</code></pre></div><p><strong>⑥ 重复关闭通道</strong></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	ch <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+	ch <span class="token operator">&lt;-</span> <span class="token string">&quot;Go编程之旅&quot;</span>
+	<span class="token function">close</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span>
+	<span class="token function">close</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>panic: close of closed channel
+
+goroutine 1 [running]:
+main.main()
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:7 +0x73
+</code></pre></div><p><strong>⑦ 关闭未初始化通道</strong></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> ch <span class="token keyword">chan</span> <span class="token builtin">string</span>
+	<span class="token function">close</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>panic: close of nil channel
+
+goroutine 1 [running]:
+main.main()
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:5 +0x2a
+</code></pre></div><p><strong>⑧ 未初始化 map</strong></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> m <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">string</span>
+	m<span class="token punctuation">[</span><span class="token string">&quot;Go编程之旅&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;一起用Go做项目&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>panic: assignment to entry in nil map
+
+goroutine 1 [running]:
+main.main()
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:5 +0x4b
+</code></pre></div><p><strong>⑨ 跨协程“恐慌”处理</strong></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token keyword">if</span> err <span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+				log<span class="token punctuation">.</span><span class="token function">Fatalf</span><span class="token punctuation">(</span><span class="token string">&quot;recover err: %v&quot;</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+			<span class="token punctuation">}</span>
+		<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		<span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+	time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">handle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">go</span> <span class="token function">divide</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">divide</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> a <span class="token operator">/</span> b
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>panic: runtime error: integer divide by zero
+
+goroutine 17 [running]:
+main.divide(0x1, 0x0, 0x0)
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:26 +0x46
+created by main.handle
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:22 +0x47
+</code></pre></div><p><strong>⑩ sync 计数为负数</strong></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	wg <span class="token operator">:=</span> sync<span class="token punctuation">.</span>WaitGroup<span class="token punctuation">{</span><span class="token punctuation">}</span>
+	wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+	wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>运行结果：</p> <div class="language- extra-class"><pre class="language-text"><code>panic: sync: negative WaitGroup counter
+
+goroutine 1 [running]:
+sync.(*WaitGroup).Add(0xc0000160c0, 0xffffffffffffffff)
+        /usr/local/go/src/sync/waitgroup.go:74 +0x147
+main.main()
+        /Users/bytedance/go/src/baiscstudy/learning/exception/error/error.go:9 +0x49
+</code></pre></div><h2 id="三、golang-错误和异常正确处理"><a href="#三、golang-错误和异常正确处理" class="header-anchor">#</a> 三、Golang 错误和异常正确处理</h2> <blockquote><p>本小节参考：https://studygolang.com/articles/11753</p></blockquote> <h3 id="_1-错误处理的正确姿势"><a href="#_1-错误处理的正确姿势" class="header-anchor">#</a> 1. 错误处理的正确姿势</h3> <p><strong>① 失败的原因只有一个时，不使用 error</strong></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token punctuation">(</span>self <span class="token operator">*</span>AgentContext<span class="token punctuation">)</span> CheckHostType <span class="token punctuation">(</span>host_type <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> host_type <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token string">&quot;virtual_machine&quot;</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token boolean">nil</span>
+    <span class="token keyword">case</span> <span class="token string">&quot;bare_metal&quot;</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token boolean">nil</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;CheckHostType ERROR:&quot;</span> <span class="token operator">+</span> host_type<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>我们可以看出，该函数失败的原因只有一个，所以返回值的类型应该为 bool，而不是 error，重构一下代码：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token punctuation">(</span>self <span class="token operator">*</span>AgentContext<span class="token punctuation">)</span> <span class="token function">IsValidHostType</span><span class="token punctuation">(</span>hostType <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> hostType <span class="token operator">==</span> <span class="token string">&quot;virtual_machine&quot;</span> <span class="token operator">||</span> hostType <span class="token operator">==</span> <span class="token string">&quot;bare_metal&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>大多数情况，导致失败的原因不止一种，尤其是对 I/O 操作而言，用户需要了解更多的错误信息，这时的返回值类型不再是简单的 bool，而是 error。</p></blockquote> <p><strong>② 错误值统一定义，而不是跟着感觉走</strong></p> <p>很多人写代码时，到处 return errors.New(value)，而错误 value 在表达同一个含义时也可能形式不同，比如“记录不存在”的错误 value 可能为：</p> <ol><li>&quot;record is not existed.&quot;</li> <li>&quot;record is not exist!&quot;</li> <li>&quot;###record is not existed！！！&quot;</li> <li>…</li></ol> <p>这使得相同的错误 value 撒在一大片代码里，当上层函数要对特定错误 value 进行统一处理时，需要漫游所有下层代码，以保证错误 value 统一，不幸的是有时会有漏网之鱼，而且这种方式严重阻碍了错误 value 的重构。</p> <p>于是，我们可以参考 C/C++ 的错误码定义文件，在 Golang 的每个包中增加一个错误对象定义文件，如下所示：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">var</span> ERR_EOF <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;EOF&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> ERR_CLOSED_PIPE <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;io: read/write on closed pipe&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> ERR_NO_PROGRESS <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;multiple Read calls return no data or error&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> ERR_SHORT_BUFFER <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;short buffer&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> ERR_SHORT_WRITE <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;short write&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> ERR_UNEXPECTED_EOF <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;unexpected EOF&quot;</span><span class="token punctuation">)</span>
+</code></pre></div><p><strong>③ error 应该放在返回列表的最后</strong></p> <p>对于返回值类型 error，用来传递错误信息，在 Golang 中通常放在最后一个：</p> <div class="language-go extra-class"><pre class="language-go"><code>resp<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> nill<span class="token punctuation">,</span> err
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>bool 作为返回值类型时也一样。</p></blockquote> <p><strong>④ 错误逐层递归时，层层都加日志</strong></p> <p>层层都加日志非常方便故障定位。</p> <blockquote><p>至于通过测试来发现故障，而不是日志，目前很多团队还很难做到。如果你或你的团队能做到，那么请忽略这个姿势。</p></blockquote> <p><strong>⑤ 当尝试几次可以避免失败时，不要立即返回错误</strong></p> <p>如果错误的发生是偶然性的，或由不可预知的问题导致。一个明智的选择是重新尝试失败的操作，有时第二次或第三次尝试时会成功。在重试时，我们需要限制重试的时间间隔或重试的次数，防止无限制的重试。</p> <p>两个案例：</p> <ol><li>我们平时上网时，尝试请求某个 URL，有时第一次没有响应，当我们再次刷新时，就有了惊喜。</li> <li>团队的一个 QA 曾经建议当 Neutron 的 attach 操作失败时，最好尝试三次，这在当时的环境下验证果然是有效的。</li></ol> <p><strong>⑥ 当上层函数不关系错误时，建议不返回 error</strong></p> <p>对于一些资源清理相关的函数（destroy/delete/clear），如果子函数出错，打印日志即可，而无需将错误进一步反馈到上层函数，因为一般情况下，上层函数是不关心执行结果的，或者即使关心也无能为力，于是我们建议将相关函数设计为不返回 error。</p> <p><strong>⑦ 当发生错误时，不忽略有用的返回值</strong></p> <p>通常，当函数返回 non-nil 的 error 时，其他的返回值是未定义的，这些未定义的返回值应该被忽略。然而，有少部分函数在发生错误时，仍然会返回一些有用的返回值。比如，当读取文件发生错误时，Read 函数会返回可以读取的字节数以及错误信息。对于这种情况，应该将读取到的字符串和错误信息一起打印出来。</p> <h3 id="_2-异常处理的正确姿势"><a href="#_2-异常处理的正确姿势" class="header-anchor">#</a> 2. 异常处理的正确姿势</h3> <p><strong>① 在程序开发阶段，坚持速错</strong></p> <p>速错，简单来讲就是“让它挂”，只有挂了你才会第一时间知道错误。在早期开发以及任何发布阶段之前，最简单的同时也可能是最好的方法是调用 panic 函数来中断程序的执行以强制发生错误，使得该错误不会被忽略，因而能够被尽快修复。</p> <p><strong>② 在程序部署后，应恢复异常，避免程序终止</strong></p> <p>在 Golang 中，某个 Goroutine 如果 panic 了，并且没有 recover，那么整个 Golang 进程就会异常退出。所以，一旦 Golang 程序部署后，在任何情况下发生的异常都不应该导致程序异常退出，我们在上层函数中加一个延迟执行的 recover 调用来达到这个目的，并且是否进行 recover 需要根据环境变量或配置文件来定，默认需要 recover。</p> <p>这个姿势类似于 C 语言中的断言，但还是有区别：一般在 Release 版本中，断言被定义为空而失效，但需要有 if 校验存在进行异常保护，尽管契约式设计中不建议这样做。在 Golang 中，recover 完全可以终止异常展开过程，省时省力。</p> <p>我们在调用 recover 的延迟函数中以最合理的方式响应该异常：</p> <ol><li>打印堆栈的异常调用信息和关键的业务信息，以便这些问题保留可见；</li> <li>将异常转换为错误，以便调用者让程序恢复到健康状态并继续安全运行。</li></ol> <p>我们看一个简单的例子：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+  <span class="token string">&quot;errors&quot;</span>
+  <span class="token string">&quot;fmt&quot;</span>
+  <span class="token string">&quot;runtime/debug&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  err <span class="token operator">:=</span> <span class="token function">funcA</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">if</span> err <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;err is nil\n&quot;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;err is %v\n&quot;</span><span class="token punctuation">,</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">funcA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
+  <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> p <span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> p <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+      fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;panic recover! p: %v&quot;</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+      debug<span class="token punctuation">.</span><span class="token function">PrintStack</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token function">funcB</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">funcB</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
+  <span class="token comment">// simulation</span>
+  <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">&quot;foo&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;success&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>我们期望 <code>test</code> 函数输出的是：</p> <div class="language- extra-class"><pre class="language-text"><code>err is foo
+</code></pre></div><p>实际上输出的是：</p> <div class="language-go extra-class"><pre class="language-go"><code>err is <span class="token boolean">nil</span>
+</code></pre></div><p>原因是 panic 异常处理机制不会自动将错误信息传递给 error，所以要在 <code>funcA</code> 函数中进行显式的传递，代码如下所示：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+  <span class="token string">&quot;errors&quot;</span>
+  <span class="token string">&quot;fmt&quot;</span>
+  <span class="token string">&quot;runtime/debug&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  err <span class="token operator">:=</span> <span class="token function">funcA</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">if</span> err <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;err is nil\n&quot;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;err is %v\n&quot;</span><span class="token punctuation">,</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">funcA</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>err <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> p <span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> p <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+      fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">&quot;panic recover! p: %v&quot;</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
+      str<span class="token punctuation">,</span> ok <span class="token operator">:=</span> p<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span>
+      <span class="token keyword">if</span> ok <span class="token punctuation">{</span>
+        err <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        err <span class="token operator">=</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;panic&quot;</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+      debug<span class="token punctuation">.</span><span class="token function">PrintStack</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token function">funcB</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token function">funcB</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">{</span>
+  <span class="token comment">// simulation</span>
+  <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">&quot;foo&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> errors<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token string">&quot;success&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><strong>③ 对于不应该出现的分支，使用异常处理</strong></p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">switch</span> s <span class="token operator">:=</span> <span class="token function">suit</span><span class="token punctuation">(</span><span class="token function">drawCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> s <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token string">&quot;Spades&quot;</span><span class="token punctuation">:</span>
+    <span class="token comment">// ...</span>
+    <span class="token keyword">case</span> <span class="token string">&quot;Hearts&quot;</span><span class="token punctuation">:</span>
+    <span class="token comment">// ...</span>
+    <span class="token keyword">case</span> <span class="token string">&quot;Diamonds&quot;</span><span class="token punctuation">:</span>
+    <span class="token comment">// ... </span>
+    <span class="token keyword">case</span> <span class="token string">&quot;Clubs&quot;</span><span class="token punctuation">:</span>
+    <span class="token comment">// ...</span>
+    <span class="token keyword">default</span><span class="token punctuation">:</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">&quot;invalid suit %v&quot;</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><strong>④ 针对入参不应该有问题的函数，使用 panic 设计</strong></p> <p>入参不应该有问题一般指的是硬编码，我们先看这两个函数（Compile 和 MustCompile），其中 MustCompile 函数是对 Compile 函数的包装：</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">func</span> <span class="token function">MustCompile</span><span class="token punctuation">(</span>str <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">*</span>Regexp <span class="token punctuation">{</span>
+    regexp<span class="token punctuation">,</span> <span class="token builtin">error</span> <span class="token operator">:=</span> <span class="token function">Compile</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token builtin">error</span> <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+        <span class="token function">panic</span><span class="token punctuation">(</span>regexp<span class="token punctuation">:</span> <span class="token function">Compile</span><span class="token punctuation">(</span> <span class="token operator">+</span> <span class="token function">quote</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token operator">+</span> <span class="token builtin">error</span><span class="token punctuation">.</span><span class="token function">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> regexp
+<span class="token punctuation">}</span>
+</code></pre></div><p>所以，对于同时支持用户输入场景和硬编码场景的情况，一般支持硬编码场景的函数是对支持用户输入场景函数的包装。
+对于只支持硬编码单一场景的情况，函数设计时直接使用 panic，即返回值类型列表中不会有 error，这使得函数的调用处理非常方便（没有了乏味的 &quot;if err != nil {/ 打印 &amp;&amp; 错误处理 /}&quot; 代码块）。</p> <h2 id="四、深究-panic"><a href="#四、深究-panic" class="header-anchor">#</a> 四、深究 panic</h2> <h2 id="五、深究-defer"><a href="#五、深究-defer" class="header-anchor">#</a> 五、深究 defer</h2> <!----></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">7/27/2021, 6:41:10 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/noteSite/backend/golang/02_grammar/type.html" class="prev">
+        Golang 关键字 type
+      </a></span> <span class="next"><a href="/noteSite/backend/golang/high/goroutine_channel.html">
+        Golang 并发编程
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/noteSite/assets/js/app.4a2b23d7.js" defer></script><script src="/noteSite/assets/js/2.691adf44.js" defer></script><script src="/noteSite/assets/js/15.637c455d.js" defer></script>
+  </body>
+</html>
