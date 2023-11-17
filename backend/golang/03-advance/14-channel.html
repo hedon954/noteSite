@@ -112,7 +112,7 @@ recvq    waitq  <span class="token comment">// 接受者等待队列</span>
 sendq    waitq  <span class="token comment">// 发送者等待队列</span>
 </code></pre></div><p>还有一个 <strong>锁</strong>：</p> <div class="language-go extra-class"><pre class="language-go"><code>lock mutex		<span class="token comment">// 保存 hchan 中的所有字段</span>
 </code></pre></div><ul><li>互斥锁并不是排队发送 / 接收数据，它保护的是 hchan 结构体本身。</li></ul> <p>还有一个 <strong>标记</strong>：</p> <div class="language-go extra-class"><pre class="language-go"><code>closed   <span class="token builtin">uint32</span>   <span class="token comment">// 标记 channel 是否已经关闭</span>
-</code></pre></div><p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h5fztbxrzej21ka0u0q62.jpg" alt="image-20220823000852833"></p> <h2 id="_14-2-发送"><a href="#_14-2-发送" class="header-anchor">#</a> 14.2 发送</h2> <ol><li>对整个 channel 上锁；</li> <li>检查 channel 是否已经关闭，若关系，这 panic；</li> <li>检查是否有正在等待中的协程：
+</code></pre></div><p><img src="https://cdn.cdnjson.com/tvax1.sinaimg.cn/large/e6c9d24egy1h5fztbxrzej21ka0u0q62.jpg" alt="image-20220823000852833"></p> <h2 id="_14-2-发送"><a href="#_14-2-发送" class="header-anchor">#</a> 14.2 发送</h2> <ol><li>对整个 channel 上锁；</li> <li>检查 channel 是否已经关闭，若关系，这 panic；</li> <li>检查是否有正在等待中的协程：
 <ol><li>有的话，直接将数据拷贝给它，然后唤醒它；</li> <li>没有，则检查缓存队列是否已满：
 <ol><li>没有满，则将数据塞入缓存队列中；</li> <li>已满，则把自己包装成 sudog 放入 sendq 队列，休眠并解锁，等待唤醒。被唤醒后数据已经被取走了，当下 sudog 负责维护其他的数据；</li></ol></li></ol></li> <li>解锁。</li></ol> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// entry point for c &lt;- x from compiled code</span>
 <span class="token comment">//go:nosplit</span>
