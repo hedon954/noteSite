@@ -92,7 +92,7 @@
     如果 A ping 的是另一网段的主机 C，那么发送的 ARP 广播包会到路由器，路由器会把原来的 MAC 头部换成自己的 MAC 地址，然后查找自己已经学习到的路由表，找到相应的出口转发出去。
 
     主机 C 学到了路由器一个端口的 MAC 地址，该端口转发给另一端口，而另一个端口学到了 A 的地址，这样就不需要再次做 ARP 解析了，直接将 ICMP 回显的请求回复过去。
-</code></pre></div><h2 id="_4-traceroute-原理"><a href="#_4-traceroute-原理" class="header-anchor">#</a> 4. Traceroute 原理</h2> <img src="https://cdn.cdnjson.com/tvax1.sinaimg.cn/large/00831rSTgy1gdncdulz7cj310i0hejvy.jpg" alt="image-20200409111324454" style="zoom:50%;"> <p>它利用 <strong>IP</strong> 数据报中的 <strong>TTL</strong> 字段和 <strong>ICMP</strong> 时间超时差错报告报文实现对从源点到终点的路径的跟踪。</p> <p><img src="https://cdn.cdnjson.com/tvax1.sinaimg.cn/large/008eGmZEly1gp9t8j29aij30hj0cw0te.jpg" alt="img"></p> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> traceroute 详细过程</span>
+</code></pre></div><h2 id="_4-traceroute-原理"><a href="#_4-traceroute-原理" class="header-anchor">#</a> 4. Traceroute 原理</h2> <img src="https://hedonspace.oss-cn-beijing.aliyuncs.com/img2/00831rSTgy1gdncdulz7cj310i0hejvy.jpg" alt="image-20200409111324454" style="zoom:50%;"> <p>它利用 <strong>IP</strong> 数据报中的 <strong>TTL</strong> 字段和 <strong>ICMP</strong> 时间超时差错报告报文实现对从源点到终点的路径的跟踪。</p> <p><img src="https://hedonspace.oss-cn-beijing.aliyuncs.com/img2/008eGmZEly1gp9t8j29aij30hj0cw0te.jpg" alt="img"></p> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> traceroute 详细过程</span>
 	客户端发送一个TTL为1的ICMP请求回显数据包，在第一跳的时候超时并返回一个ICMP超时数据包，得到第一跳的地址。
 	客户端发送一个TTL为2的ICMP请求回显数据包，得到第二跳的地址。
 	客户端发送一个TTL为3的ICMP请求回显数据包，到达目标主机，目标主机返回一个ICMP回显应答，traceroute结束。

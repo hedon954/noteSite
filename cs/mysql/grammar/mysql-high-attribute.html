@@ -123,7 +123,7 @@ cte_name <span class="token punctuation">[</span><span class="token punctuation"
     DENSE_RANK<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">OVER</span><span class="token punctuation">(</span><span class="token keyword">PARTITION</span> <span class="token keyword">BY</span> class_name <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> score <span class="token keyword">DESC</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> rdr
 <span class="token keyword">FROM</span> test
 <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> class_name<span class="token punctuation">,</span> rw<span class="token punctuation">;</span>
-</code></pre></div><p>结果：</p> <img src="https://cdn.cdnjson.com/tvax1.sinaimg.cn/large/008eGmZEly1gowchoegsgj313m07eaca.jpg" alt="image-20210325185051844" style="zoom:50%;"> <p>示例2：</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment"># 按学生人数对课程进行排名</span>
+</code></pre></div><p>结果：</p> <img src="https://hedonspace.oss-cn-beijing.aliyuncs.com/img2/008eGmZEly1gowchoegsgj313m07eaca.jpg" alt="image-20210325185051844" style="zoom:50%;"> <p>示例2：</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment"># 按学生人数对课程进行排名</span>
 <span class="token comment"># 并列出每类课程学习人数排名前3的课程名称、学习人数以及名词</span>
 <span class="token keyword">WITH</span> <span class="token keyword">temp</span> <span class="token keyword">AS</span><span class="token punctuation">(</span>
 	<span class="token keyword">SELECT</span> b<span class="token punctuation">.</span>class_name<span class="token punctuation">,</span> 
@@ -135,7 +135,7 @@ cte_name <span class="token punctuation">[</span><span class="token punctuation"
 <span class="token punctuation">)</span>
 <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token keyword">temp</span>
 <span class="token keyword">WHERE</span> cnt <span class="token operator">&lt;=</span> <span class="token number">3</span><span class="token punctuation">;</span>
-</code></pre></div><p>结果：</p> <p><img src="https://cdn.cdnjson.com/tvax1.sinaimg.cn/large/008eGmZEgy1gowctf3i1zj31400bigon.jpg" alt="image-20210325190208844"></p> <p>示例3：</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment"># 查询出每门课程学习人数占本类课程总学习人数的百分比</span>
+</code></pre></div><p>结果：</p> <p><img src="https://hedonspace.oss-cn-beijing.aliyuncs.com/img2/008eGmZEgy1gowctf3i1zj31400bigon.jpg" alt="image-20210325190208844"></p> <p>示例3：</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment"># 查询出每门课程学习人数占本类课程总学习人数的百分比</span>
 <span class="token keyword">WITH</span> tmp <span class="token keyword">AS</span><span class="token punctuation">(</span>
 	<span class="token keyword">SELECT</span> class_name<span class="token punctuation">,</span> 
 			title<span class="token punctuation">,</span> 
@@ -147,7 +147,7 @@ cte_name <span class="token punctuation">[</span><span class="token punctuation"
 <span class="token keyword">SELECT</span> class_name<span class="token punctuation">,</span> title<span class="token punctuation">,</span> CONCAT<span class="token punctuation">(</span>study_cnt<span class="token operator">/</span>class_total_cnt <span class="token operator">*</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token string">'%'</span><span class="token punctuation">)</span>
 <span class="token keyword">FROM</span> tmp
 <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> class_name<span class="token punctuation">;</span>
-</code></pre></div><img src="https://cdn.cdnjson.com/tvax1.sinaimg.cn/large/008eGmZEgy1gowcxas0z0j313e0fgqb4.jpg" alt="image-20210325190552199" style="zoom:50%;"> <!----></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">8/5/2021, 9:08:33 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre></div><img src="https://hedonspace.oss-cn-beijing.aliyuncs.com/img2/008eGmZEgy1gowcxas0z0j313e0fgqb4.jpg" alt="image-20210325190552199" style="zoom:50%;"> <!----></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">8/5/2021, 9:08:33 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
       ←
       <a href="/noteSite/cs/mysql/grammar/mysql-grammar.html" class="prev">
         3. 语法

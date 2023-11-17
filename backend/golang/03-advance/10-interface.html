@@ -93,7 +93,7 @@
 	fun   <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token builtin">uintptr</span> 					<span class="token comment">// 记录当前值所指向的类型，实现了哪些方法；长度会在编译的时候变化，并非为1</span>
   													<span class="token comment">// fun 字段是用来做【类型断言】的</span>
 <span class="token punctuation">}</span>
-</code></pre></div><h2 id="_10-2-结构体和其指针实现接口的问题"><a href="#_10-2-结构体和其指针实现接口的问题" class="header-anchor">#</a> 10.2 结构体和其指针实现接口的问题</h2> <img src="https://cdn.cdnjson.com/tvax1.sinaimg.cn/large/e6c9d24egy1h55aadc8m7j21r40bitbm.jpg" alt="image-20220813175004083" style="zoom:25%;"> <ul><li><p>如果是用结构体类型去实现接口，Go 在编译的时候，会自动再为其对应的指针类型实现接口；</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// 手动写</span>
+</code></pre></div><h2 id="_10-2-结构体和其指针实现接口的问题"><a href="#_10-2-结构体和其指针实现接口的问题" class="header-anchor">#</a> 10.2 结构体和其指针实现接口的问题</h2> <img src="https://hedonspace.oss-cn-beijing.aliyuncs.com/img2/e6c9d24egy1h55aadc8m7j21r40bitbm.jpg" alt="image-20220813175004083" style="zoom:25%;"> <ul><li><p>如果是用结构体类型去实现接口，Go 在编译的时候，会自动再为其对应的指针类型实现接口；</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token comment">// 手动写</span>
 <span class="token keyword">func</span> <span class="token punctuation">(</span>t Truck<span class="token punctuation">)</span> <span class="token function">Drive</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   
 <span class="token punctuation">}</span>

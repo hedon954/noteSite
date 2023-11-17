@@ -125,7 +125,7 @@
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;message = &quot;</span> <span class="token operator">+</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre></div><h3 id="_7-1-5-测试"><a href="#_7-1-5-测试" class="header-anchor">#</a> 7.1.5 测试</h3> <p>运行生产者所在的单元测试方法 testHelloWorld()，观察消费者是否接收到消息。</p> <p><img src="https://cdn.cdnjson.com/tvax1.sinaimg.cn/large/007S8ZIlgy1gj1svd4amaj31xc0cwdjy.jpg" alt="image-20200924160320272"></p> <hr> <h2 id="_7-2-work-queues-模型"><a href="#_7-2-work-queues-模型" class="header-anchor">#</a> 7.2 Work Queues 模型</h2> <h3 id="_7-2-1-平均消费"><a href="#_7-2-1-平均消费" class="header-anchor">#</a> 7.2.1 平均消费</h3> <blockquote><p>默认就是平均消费的。</p></blockquote> <h4 id="_7-2-1-1-生产者"><a href="#_7-2-1-1-生产者" class="header-anchor">#</a> 7.2.1.1 生产者</h4> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">/**
+</code></pre></div><h3 id="_7-1-5-测试"><a href="#_7-1-5-测试" class="header-anchor">#</a> 7.1.5 测试</h3> <p>运行生产者所在的单元测试方法 testHelloWorld()，观察消费者是否接收到消息。</p> <p><img src="https://hedonspace.oss-cn-beijing.aliyuncs.com/img2/007S8ZIlgy1gj1svd4amaj31xc0cwdjy.jpg" alt="image-20200924160320272"></p> <hr> <h2 id="_7-2-work-queues-模型"><a href="#_7-2-work-queues-模型" class="header-anchor">#</a> 7.2 Work Queues 模型</h2> <h3 id="_7-2-1-平均消费"><a href="#_7-2-1-平均消费" class="header-anchor">#</a> 7.2.1 平均消费</h3> <blockquote><p>默认就是平均消费的。</p></blockquote> <h4 id="_7-2-1-1-生产者"><a href="#_7-2-1-1-生产者" class="header-anchor">#</a> 7.2.1.1 生产者</h4> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">/**
  * ② Work Queues 模型
  */</span>
 <span class="token annotation punctuation">@Test</span>
@@ -151,7 +151,7 @@
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;这是 work 模型的消息者2得到的 message = &quot;</span> <span class="token operator">+</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre></div><h4 id="_7-2-1-3-测试"><a href="#_7-2-1-3-测试" class="header-anchor">#</a> 7.2.1.3 测试</h4> <p><img src="https://cdn.cdnjson.com/tvax1.sinaimg.cn/large/e6c9d24egy1h5mx2ulrwdj221w0g2dka.jpg" alt="image-20200924161119662"></p> <h3 id="_7-2-2-能者多劳"><a href="#_7-2-2-能者多劳" class="header-anchor">#</a> 7.2.2 能者多劳</h3> <p>待补。</p> <hr> <h2 id="_7-3-fanout-模型"><a href="#_7-3-fanout-模型" class="header-anchor">#</a> 7.3 Fanout 模型</h2> <h3 id="_7-3-1-生产者"><a href="#_7-3-1-生产者" class="header-anchor">#</a> 7.3.1 生产者</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">/**
+</code></pre></div><h4 id="_7-2-1-3-测试"><a href="#_7-2-1-3-测试" class="header-anchor">#</a> 7.2.1.3 测试</h4> <p><img src="https://hedonspace.oss-cn-beijing.aliyuncs.com/img2/e6c9d24egy1h5mx2ulrwdj221w0g2dka.jpg" alt="image-20200924161119662"></p> <h3 id="_7-2-2-能者多劳"><a href="#_7-2-2-能者多劳" class="header-anchor">#</a> 7.2.2 能者多劳</h3> <p>待补。</p> <hr> <h2 id="_7-3-fanout-模型"><a href="#_7-3-fanout-模型" class="header-anchor">#</a> 7.3 Fanout 模型</h2> <h3 id="_7-3-1-生产者"><a href="#_7-3-1-生产者" class="header-anchor">#</a> 7.3.1 生产者</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">/**
  * ③ Fanout 模型
  */</span>
 <span class="token annotation punctuation">@Test</span>
@@ -184,7 +184,7 @@
     <span class="token punctuation">}</span>
 
 <span class="token punctuation">}</span>
-</code></pre></div><h3 id="_7-3-3-测试"><a href="#_7-3-3-测试" class="header-anchor">#</a> 7.3.3 测试</h3> <p><img src="https://cdn.cdnjson.com/tvax1.sinaimg.cn/large/007S8ZIlgy1gj1u15uaq5j31w409agou.jpg" alt="image-20200924164335169"></p> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> 掉坑记录</span>
+</code></pre></div><h3 id="_7-3-3-测试"><a href="#_7-3-3-测试" class="header-anchor">#</a> 7.3.3 测试</h3> <p><img src="https://hedonspace.oss-cn-beijing.aliyuncs.com/img2/007S8ZIlgy1gj1u15uaq5j31w409agou.jpg" alt="image-20200924164335169"></p> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> 掉坑记录</span>
 这里笔者遇到了一个报错： ……………… received 'true' but current is 'false'。
 <span class="token title important"><span class="token punctuation">#</span> 报错原因</span>
 报错的原因其实是 queue 前后两次声明是不一样的，比如第一次声明的 queue 是要持久化的，第二次不想持久化了，这样就会报错。
@@ -224,7 +224,7 @@
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;消费者2 接受到的消息 message = &quot;</span><span class="token operator">+</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre></div><h3 id="_7-4-3-测试"><a href="#_7-4-3-测试" class="header-anchor">#</a> 7.4.3 测试</h3> <p><img src="https://cdn.cdnjson.com/tvax1.sinaimg.cn/large/007S8ZIlgy1gj1ud70s71j31rw0cewjc.jpg" alt="image-20200924165509444"></p> <hr> <h2 id="_7-5-topics-模型"><a href="#_7-5-topics-模型" class="header-anchor">#</a> 7.5 Topics 模型</h2> <p>Topics 模型其实就是 Routing 模型将交换机的类型从 direct 改成 ==topic==，然后支持通配符。</p> <h3 id="_7-5-1-生产者"><a href="#_7-5-1-生产者" class="header-anchor">#</a> 7.5.1 生产者</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">/**
+</code></pre></div><h3 id="_7-4-3-测试"><a href="#_7-4-3-测试" class="header-anchor">#</a> 7.4.3 测试</h3> <p><img src="https://hedonspace.oss-cn-beijing.aliyuncs.com/img2/007S8ZIlgy1gj1ud70s71j31rw0cewjc.jpg" alt="image-20200924165509444"></p> <hr> <h2 id="_7-5-topics-模型"><a href="#_7-5-topics-模型" class="header-anchor">#</a> 7.5 Topics 模型</h2> <p>Topics 模型其实就是 Routing 模型将交换机的类型从 direct 改成 ==topic==，然后支持通配符。</p> <h3 id="_7-5-1-生产者"><a href="#_7-5-1-生产者" class="header-anchor">#</a> 7.5.1 生产者</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">/**
  * ⑤ Topics 模型
  */</span>
 <span class="token annotation punctuation">@Test</span>
@@ -261,7 +261,7 @@
     <span class="token punctuation">}</span>
 
 <span class="token punctuation">}</span>
-</code></pre></div><h3 id="_7-5-3-测试"><a href="#_7-5-3-测试" class="header-anchor">#</a> 7.5.3 测试</h3> <p><img src="https://cdn.cdnjson.com/tvax1.sinaimg.cn/large/007S8ZIlly1gj1uqouehfj31p409oju5.jpg" alt="image-20200924170806479"></p> <hr> <h2 id="_7-6-rpc-模型"><a href="#_7-6-rpc-模型" class="header-anchor">#</a> 7.6 RPC 模型</h2> <p>待补。</p> <h2 id="_7-7-publisher-confirms-模型"><a href="#_7-7-publisher-confirms-模型" class="header-anchor">#</a> 7.7 Publisher Confirms 模型</h2> <p>待补。</p> <hr> <!----></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">8/29/2022, 12:17:25 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre></div><h3 id="_7-5-3-测试"><a href="#_7-5-3-测试" class="header-anchor">#</a> 7.5.3 测试</h3> <p><img src="https://hedonspace.oss-cn-beijing.aliyuncs.com/img2/007S8ZIlly1gj1uqouehfj31p409oju5.jpg" alt="image-20200924170806479"></p> <hr> <h2 id="_7-6-rpc-模型"><a href="#_7-6-rpc-模型" class="header-anchor">#</a> 7.6 RPC 模型</h2> <p>待补。</p> <h2 id="_7-7-publisher-confirms-模型"><a href="#_7-7-publisher-confirms-模型" class="header-anchor">#</a> 7.7 Publisher Confirms 模型</h2> <p>待补。</p> <hr> <!----></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">8/29/2022, 12:17:25 AM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
       ←
       <a href="/noteSite/backend/middleware/rabbitmq/06-model.html" class="prev">
         6. RabbitMQ 支持的消息模型
